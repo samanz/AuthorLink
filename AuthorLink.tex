@@ -50,7 +50,7 @@
 \else
 \usepackage{graphicx}
 \fi
-\title{Database Project Proposal: Multi-Relational Author Linkage in Records using Temporal Information}
+\title{Database Project Proposal: Author Linkage in Records using Temporal Information and Conditional Random Fields}
 \author{Sam Anzaroot, Jiaping Zheng}
 
 \date{2012-10-05}
@@ -65,11 +65,10 @@
 
 \maketitle
 
-
-\begin{abstract}
-\end{abstract}
-
-\section{Introduction}
+\section{Motivation} % (fold)
+\label{sec:motivation}
+Record Linking is the task of clustering records in a database that such that elements in the same cluster refer the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. This task is not a solved one, and we will attempt to build methods that achieve better results.
+% section motivation (end)
 
 \bibliographystyle{plain}
 \bibliography{}
