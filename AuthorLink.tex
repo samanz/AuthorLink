@@ -12,6 +12,8 @@
 % Setup for fullpage use
 \usepackage{fullpage}
 
+\usepackage{color}
+
 % Uncomment some of the following if you use the features
 %
 % Running Headers and footers
@@ -67,18 +69,18 @@
 
 \section{Motivation} % (fold)
 \label{sec:motivation}
-Record Linking is the task of clustering records in a database that such that elements in the same cluster refer the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. This task is not a solved one, and we will attempt to build methods that achieve better results.
+Record Linking is the task of clustering records in a database such that elements in the same cluster refer the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. This task is not a solved one, and we will attempt to build methods that achieve better results.
 % section motivation (end)
 
 \section{Methodology} % (fold)
 \label{sec:methodology}
-First, we will build a dataset based on the DBLP dataset that have been annotated to include information on the author clustering. This will contain both training and testing data. We will also extract author affiliation information from either homepage information or paper titles. 
+First, we will build a dataset based on the DBLP dataset that have been annotated to include ({\color{red}possibly incomplete and inaccurate???}) information on the author clustering. This will contain both training and testing data. We will also extract author affiliation information from either homepage information or paper titles.
 
-We will then design a conditional random field in which the latent variables include the pairwise decision whether each publication's author is the same. This will lead to a clustering by using the transitive closure when complete inference is done. We intend that this CRF also contains latent variable for the compatibility of the other subfields in the publication given that the publication was authored by the same individual. This is similar to the CRF that was used to perform record linking over publication on the CORA dataset. [REF]
+We will then design a conditional random field in which the latent variables include the pairwise decision whether authors of two publications are the same. To make the network size manageable, only authors that are spelled similarly are candidates for the pairwise decision variables. This will lead to a clustering by using the transitive closure when complete inference is done. We intend that this CRF also contains latent variable for the compatibility of the other subfields in the publication given that the publication was authored by the same individual. This is similar to the CRF that was used to perform record linking over publication on the CORA dataset \cite{Domingos04multi}.
 
-We will design a number of compatibility functions as observations in the CRF. These will include the compatibility between titles, venues, and affiliations with the addition of temporal information in the latter. It has been shown that including temporal information specifically for affiliation information improves performance in authorship clustering for publications. [REF] For example, we can determine [TOTODODOO people move.] novel to include as compatibility in crf.
+We will design a number of similarity functions as observations in the CRF. These will include the similarities between titles, venues, and affiliations with the addition of temporal information in the latter. It has been shown that including temporal information specifically for affiliation information improves performance in authorship clustering for publications. [REF] For example, we can determine [TOTODODOO people move.] novel to include as compatibility in crf.
 
-We will test on the dataset using an f1, prec rekal.
+We will test on the dataset using the precision, recall and F1 metrics.
 % section methodology (end)
 
 \section{Resources} % (fold)
@@ -87,5 +89,5 @@ We will be using the dblp dataset as well as the papers that they link to. We wi
 % section resources (end)
 
 \bibliographystyle{plain}
-\bibliography{}
+\bibliography{refs}
 \end{document}
