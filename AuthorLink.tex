@@ -74,18 +74,22 @@ Record Linking is the task of clustering records in a database such that element
 
 \section{Methodology} % (fold)
 \label{sec:methodology}
-First, we will build a dataset based on the DBLP dataset that have been annotated to include ({\color{red}possibly incomplete and inaccurate???}) information on the author clustering. This will contain both training and testing data. We will also extract author affiliation information from either homepage information or paper titles.
+First, we will build a dataset based on the DBLP dataset that we will annotate to include accutate information on the author clustering. This will contain both training and testing data. We will also extract author affiliation information from either homepage information or paper titles.
+This will be done by October 20th.
 
 We will then design a conditional random field in which the latent variables include the pairwise decision whether authors of two publications are the same. To make the network size manageable, only authors that are spelled similarly are candidates for the pairwise decision variables. This will lead to a clustering by using the transitive closure when complete inference is done. We intend that this CRF also contains latent variable for the compatibility of the other subfields in the publication given that the publication was authored by the same individual. This is similar to the CRF that was used to perform record linking over publication on the CORA dataset \cite{Domingos04multi}.
+This will be done by Nov 10th.
 
-We will design a number of similarity functions as observations in the CRF. These will include the similarities between titles, venues, and affiliations with the addition of temporal information in the latter. It has been shown that including temporal information specifically for affiliation information improves performance in authorship clustering for publications. [REF] For example, we can determine [TOTODODOO people move.] novel to include as compatibility in crf.
+We will design a number of similarity functions as observations in the CRF. These will include the similarities between titles, venues, and affiliations with the addition of temporal information in the latter. It has been shown that including temporal information specifically for affiliation information improves performance in authorship clustering for publications \cite{DBLP:journals/fcsc/LiDMS12}. For example, it may be the case that two authors have the same affiliation information, but since much time has elapsed, it is not a good indicatior that they are the same author.
+This will be done by Nov 20th.
 
-We will test on the dataset using the precision, recall and F1 metrics.
+We will test on the dataset using the precision, recall and F1 metrics. {\color{red} Describe how defined } 
+This will be done by Dec 1st.
 % section methodology (end)
 
 \section{Resources} % (fold)
 \label{sec:resources}
-We will be using the dblp dataset as well as the papers that they link to. We will be using the FACTORIE system in out lab. and not much else.
+We will be using the dblp dataset as well as the papers that they link to \cite{ley2002dblp}. We will be using the FACTORIE system in our lab \cite{mccallum2009factorie}. 
 % section resources (end)
 
 \bibliographystyle{plain}
