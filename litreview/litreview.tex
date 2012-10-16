@@ -93,6 +93,8 @@ One approach to record linking matching has been to create a hierarchical graphi
 Contains connections and differences between them, and relationship to our work.
 % section appropriate_papers (end)
 
+``A Conditional Model of Deduplication for Multi-Type Relational Data'' proposed a conditional random field based system that jointly deduplicates publications and venues.  The model extends (cite Domingos) model in that by making the ``information nodes'' first-class variables in the model.  Binary latent variables that indicate record duplication (both paper and venue) are connected in the CRF to capture the interdependencies between the deduplication results of publications and venues.  For example, equivalent venue records that are merged should result in weights in CRF that also encourage merging of paper records.  To perform inference of finding optimal configurations of the latent variables, the authors converted the model into a weighted undirect graph to find a optimal partitioning.  Learning is approximated by maximizing the product of local marginals using limited-memory BFGS.  Their experiments show that up to a 30\% error reduction in venue deduplication and 20\% in paper deduplication.
+
 \section{Why previous is insufficient} % (fold)
 \label{sec:why_previous_is_insufficient}
 
