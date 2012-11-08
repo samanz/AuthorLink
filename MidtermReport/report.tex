@@ -1,0 +1,82 @@
+%
+%  untitled
+%
+%  Created by Sam Anzaroot on 2012-10-05.
+%  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+%
+\documentclass[twocolumn]{article}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Setup for fullpage use
+\usepackage{fullpage}
+
+% Multipart figures
+\usepackage{subfigure}
+
+% More symbols
+\usepackage{amsmath}
+
+% Package for including code in the document
+\usepackage{listings}
+
+\usepackage{ifpdf}
+
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\else
+\usepackage{graphicx}
+\fi
+\title{Author Linkage in Records using Temporal Information and Conditional Random Fields : A midterm report}
+\author{Sam Anzaroot, Jiaping Zheng}
+
+\date{}
+
+\begin{document}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\maketitle
+
+
+\section{Introduction} % (fold)
+\label{sec:introduction}
+Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. This task requires a classifer to determine the matchings between two records. This task is not a solved one, and we will attempt to build methods that achieve better results.
+% section introduction (end)
+
+\section{Related Work} % (fold)
+\label{sec:related_work}
+In addition, the paper ``Linking Temporal Records'' \cite{DBLP:journals/fcsc/LiDMS12} described additional information that can be added into similarity metrics for fields. These metrics add temporal information by using the realization that over time, the fact that two fields are similar or different matters less to the task at hand. An example of such a case is affiliation information in the task of author linking in papers. Different affiliation information for authors matters more when the papers were published close together in time in comparison to when the papers where published farther apart in time. We will also be using such similarity metrics in our framework, but will be adding it as features in a CRF rather than simply using a threshold on manually weighted similarities. This should allow for better weights as well as the ability for more expressiveness in defining dependencies in our model.
+
+``Multi-Relational Record Linkage'' \cite{Domingos04multi} modeled the record linking problem as a conditional random field to address the shortcoming of the pairwise similarity comparison methods that the decisions of the pairs are independent.  In their CRF model, each pair of the publication record has a binary latent variable to model whether they are duplicates or not.  The observations are modeled using similarity functions.  There are also ``information nodes'' that connect the binary duplication variables and the observation nodes, and model whether the fields of the publication, including author, paper title, and venue in two records are the same.  Fields that have the same value in a record pair are shared, and the corresponding information node is also shared.  This important property enables the decision of duplication status in one variable to propagate to other parts of the network.  As common with many record linking systems, the authors employed a canopy method to first cluster records to reduce the number of pairs to compare.  Their experiments showed a gain of F1 measure of 6\% compared to methods that consider each pair independently.  This approach is very similar to ours, except we make the binary latent variables for the author coreference at the center of our model.  However, instead of similarity functions between attributes, we need to capture the relatedness of the publication title and venues to guide the decision of author coreference.  Thus, similarity functions based on character or token different are not sufficient.
+
+``A Conditional Model of Deduplication for Multi-Type Relational Data'' \cite{Culotta05aconditional} proposed a conditional random field based system that jointly deduplicates publications and venues.  The model extends the model presented in \cite{Domingos04multi} by making the ``information nodes'' first-class variables in the model.  Binary latent variables that indicate record duplication (both paper and venue) are connected in the CRF to capture the interdependencies between the deduplication results of publications and venues.  For example, equivalent venue records that are merged should result in weights in CRF that also encourage merging of paper records.  To perform inference of finding optimal configurations of the latent variables, the authors converted the model into a weighted undirected graph to find a optimal partitioning.  Learning is approximated by maximizing the product of local marginals using limited-memory BFGS.  Their experiments show that up to a 30\% error reduction in venue deduplication and 20\% in paper deduplication.  This method differs with ours in that they consider record (paper in this case) deduplication and attribute (venue in this case) deduplication at the same time.  In our task, since the publication records come from a single source, record duplication is less common than author duplication.  We will take advantage of this property to simplify our CRF structure so that inference and learning can be easier.
+
+``Collective Entity Resolution in Relational Data''  \cite{Bhattacharya2007} described a clustering algorithm that utilizes both the attribute and relational information to resolve author names.  Database records of publications are mapped into graphs, in which the nodes correspond to the author mentions, and the hyperedges link the author mentions that appear in the same paper.  After a high-precision bootstrapping step to create the initial clusters of the author mentions, the algorithm iteratively merges clusters together using a similarity measure between two clusters.  The similarity measure is a weighted average of the similarity between the two author mention strings and the relational similarity between two clusters.  The latter is defined as commonalities among the neighbors of the clusters.  Their experiments show that the performance of this collective approach outperform approaches that only compare the author name strings and approaches that independently compare pairs of author names with additional information from the publication.  This method extends the common pairwise similarities to accommodate for a cluster of strings so that the algorithm can make linkage decisions on a set of records.  The disadvantage of their agglomerative clustering approach is that once a linkage decision is made, it cannot be reversed if further evidence proves it wrong.  In our model, the latent variables allow the linkage decision to propagate and flow in the network.
+
+One approach to record linking matching has been to create a hierarchical graphical model \cite{ravikumar2012hierarchical}. This is an improvement on the standard method probabilistic approach that builds a classifier over pairwise records in the database. In this model, there exist latent variables that determine the matching between each field in the record which each has a shared parent variable that determines the matching between the entire record. In this paper, after building the graphical model, they train it as a generative model in an unsupervised manner. The hierarchical graphical model approach is similar to our own approach, but instead of the middle layer containing variables about their own matching, they containing variables dictating the compatibility of their values between the two records given that the author of the publication is the same.
+% section related_work (end)
+
+\section{Methodology} % (fold)
+\label{sec:methodology}
+
+% section methodology (end)
+
+\section{Proposed Experiments} % (fold)
+\label{sec:proposed_experiments}
+
+% section proposed_experiments (end)
+
+\section{Evaluation Plan} % (fold)
+\label{sec:evaluation}
+
+% section evaluation (end)
+
+\bibliographystyle{plain}
+\bibliography{refs}
+\end{document}
