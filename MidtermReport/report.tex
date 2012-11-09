@@ -13,7 +13,7 @@
 \usepackage{fullpage}
 
 % Multipart figures
-\usepackage{subfigure}
+%\usepackage{subfigure}
 
 % More symbols
 \usepackage{amsmath}
@@ -50,7 +50,7 @@
 
 \section{Introduction} % (fold)
 \label{sec:introduction}
-Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. This task requires a classifer to determine the matchings between two records. This task is not a solved one, and we will attempt to build a more robust classifier that achieves better results.
+Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. This task requires a classifer to determine the matchings between two records. This task is not a solved one, and we will attempt to build a more robust classifier.
 % section introduction (end)
 
 \section{Related Work} % (fold)
@@ -106,17 +106,6 @@ of time. The model is shown in Figure \ref{fig:crf}.
 
 \todo{inference, learning, and canopy}
 
-Unlike the model proposed in Culotta and McCallum
-\cite{Culotta05aconditional}, which deduplicates publication title and
-venues jointly, our model focuses on author coreference resolution.
-Learning and inference in such a complicated model is intractable.
-However, since the DBLP data are generated directly from entire
-conference proceedings and journals, the publication records are less
-likely to be noisy.  Our model takes advantage of this reliability of
-the source and disambiguates the more ambiguous author information.
-Therefore, our model can scale more easily to a large amount of data
-than their approach.
-
 \begin{figure}
 \centering
 \includegraphics[height=.5\textheight]{coauthor}
@@ -127,6 +116,16 @@ than their approach.
 \label{fig:coauthor}
 \end{figure}
 
+Unlike the model proposed in Culotta and
+McCallum\cite{Culotta05aconditional}, which deduplicates publication
+title and venues jointly, our model focuses on author coreference
+resolution.  Learning and inference in such a complicated model is
+intractable.  However, since the DBLP data is generated directly from
+entire conference proceedings and journals, the publication records
+are less noisy.  Our model takes advantage of the
+reliability of the source data and disambiguates only ambiguous author
+information.  Therefore, our model is more scalable one.
+
 Linking pairs of author names is only the first step in the author
 linkage problem.  To generate clusters of author names that refer to
 the same person, we take the transitive closure of the pairwise
@@ -135,12 +134,16 @@ predictions from the CRF model.
 
 \section{Proposed Experiments} % (fold)
 \label{sec:proposed_experiments}
+In order to show that the model that we propose is better than alternatives, we plan on running numerous experiments. We will compare our completed model with various alternatives. The first is the clustering available already in the DBLP dataset. Those in the DBLP community have tackled the problem by incoperating various heuristics, heavily using coauthorship graphs. They also manually split and combine authors based on human request. We will compare our results to DBLP on some subsection of the DBLP dataset. 
 
+In order to determine the advantages of our model, we will also compare our results with a simple thresholding of our independant similiary functions, and niave combinations thereof. We will generate ROC curves by varying the thresholds. We will compare the best scores of the similarity thesholding for classification with our model.
+
+We will also compare our model with two alternative versions of our model. One will not include any temporal information. One will incoperate temrporal information in our model by performing a simple concatenation of the change in time between the two records and our similarity features. The final model will contain our proposed method of incorperating temporal information. This form of evaluation will inform us of the utitlity of temporal information this domain.
 % section proposed_experiments (end)
 
 \section{Evaluation Plan} % (fold)
 \label{sec:evaluation}
-An easy and obvious evaluation metric for our system is the accuracy
+A simple evaluation metric for our system is the accuracy
 of the pairwise prediction from the CRF model.  However, it cannot
 reflect the actual performance of the system.  For example, suppose
 the system compares the three authors $a_1$, $a_2$, and $a_3$, and the
