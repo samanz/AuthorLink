@@ -29,6 +29,10 @@
 \usepackage{graphicx}
 \fi
 
+\usepackage{todonotes}
+
+\setlength{\marginparwidth}{2cm}
+
 \title{Author Linkage in Records using Temporal Information and Conditional Random Fields : A midterm report}
 \author{Sam Anzaroot, Jiaping Zheng}
 
@@ -65,7 +69,7 @@ Various numbers of people have attempted to build classifiers using graphical mo
 
 \section{Methodology} % (fold)
 \label{sec:methodology}
-We model the author linkage problem in a conditional random field.  
+We model the author linkage problem in a conditional random field.
 
 Conditional random fields (CRFs) are undirected graphical models that encode the conditional probability of a set of unobserved random variables $Y$ given a set of observed variables $X$.  Usually the probability can be factored using independence assumptions.  It can be represented in a graph $G$, where the vertices correspond to the variables $X$ and $Y$.  A potential function $\phi_c$ is defined for every clique $c$ in the graph.  The conditional probability $p(y|x)$ can be expressed as
 $$p(y|x)=\frac{1}{Z}\prod_c \phi_c(x_c,y_c),$$
@@ -86,17 +90,24 @@ incorporate temporal information for the publication venue and author
 affiliation compatibility variables.  Intuitively dissimilar
 affiliations over a long period of time should have a less influence
 on the author linkage dicision than that over a short period of time.
-The model is shown in Figure CITE.
+The model is shown in Figure \ref{fig:crf}.
 
-Unlike the model proposed in CITE CULOTTA, which deduplicates
-publication title and venues jointly, our model focuses on author
-coreference resolution.  Learning and inference in such a complicated
-model is intractable.  However, since the DBLP data are generated
-directly from entire conference proceedings and journals, the
-publication records are less likely to be noisy.  Our model takes
-advantage of this reliability of the source and disambiguates the more
-ambiguous author information.  Therefore, our model can scale more
-easily to a large amount of data than their approach.
+\begin{figure*}
+\missingfigure{CRF model}
+\caption{Our CRF model for the author linkage problem}
+\label{fig:crf}
+\end{figure*}
+
+Unlike the model proposed in Culotta and
+McCallum\cite{Culotta05aconditional}, which deduplicates publication
+title and venues jointly, our model focuses on author coreference
+resolution.  Learning and inference in such a complicated model is
+intractable.  However, since the DBLP data are generated directly from
+entire conference proceedings and journals, the publication records
+are less likely to be noisy.  Our model takes advantage of this
+reliability of the source and disambiguates the more ambiguous author
+information.  Therefore, our model can scale more easily to a large
+amount of data than their approach.
 
 Linking pairs of author names is only the first step in the author
 linkage problem.  To generate clusters of author names that refer to
@@ -111,7 +122,42 @@ predictions from the CRF model.
 
 \section{Evaluation Plan} % (fold)
 \label{sec:evaluation}
+An easy and obvious evaluation metric for our system is the accuracy
+of the pairwise prediction from the CRF model.  However, it cannot
+reflect the actual performance of the system.  For example, suppose
+the system compares the three authors $a_1$, $a_2$, and $a_3$, and the
+model predicts that $a_1$ and $a_2$ refer to the same person, $a_2$
+and $a_3$ refer to the same person, but $a_2$ and $a_3$ refer to
+different people.  The accuracy score would be $2/3$.  However,
+computing the transitive closure corrects the wrong classification
+prediction.
 
+The author linkage problem is, at its core, a partition of the author
+names into clusters, whose members all refer to the same person.  The
+coreference resolution problem in natural language processing has the
+same character in which textual mentions of real world entities in
+documents are clustered into groups that all refer to the same entity.
+The community has developed several evaluation metrics that overcome
+the problem described above.  These metrics measure how different the
+true and predicted partitions are.
+
+We will evaluate our system's performance with two metrics from the
+coreference resolution community.  The first is the MUC score
+\cite{Vilain95} developed for a coreference resolution shared task.
+This metric considers the minimal number of ``links'' between author
+strings required to group a set of authors together.
+
+The other metric that we will use is the $B^3$ score \cite{Bagga98b}.
+This metric addresses two shortcomings of the MUC score.  MUC score
+does not give any credit for separating out singletons (author names
+that no other strings refer to), and it treats different errors
+indiscriminately (merging two large partitions is equally penalized as
+merging smaller partitions).
+
+Evaluating the system on these two metrics provides a balanced view of
+the performance.  The MUC score tends to favor larger clusters while
+the $B^3$ gives higher penalty to such behavior.  Publications on the
+coreference resolution also present multiple scores for this reason.
 % section evaluation (end)
 
 \bibliographystyle{plain}
