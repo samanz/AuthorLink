@@ -50,7 +50,7 @@
 
 \section{Introduction} % (fold)
 \label{sec:introduction}
-Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. This task requires a classifer to determine the matchings between two records. This task is not a solved one, and we will attempt to build a more robust classifier.
+Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. Strings of author names are called author mentions, and cluster of author mentions refering to the same person are called entities. The goal of the task is to cluster all mentions into the appropriate entities. This task requires a classifer to determine the matchings between two mentions. This task is not a solved one, and we will attempt to build a more robust classifier.
 % section introduction (end)
 
 \section{Related Work} % (fold)
@@ -132,8 +132,10 @@ No additional data is required to train the model.
 \includegraphics[height=.55\textheight]{coauthor}
 \caption{A coauthorship network.  The nodes represent author strings
   in the database.  An edge between two nodes means that the two
-  authors coauthored a paper.  $S$ and $T$ are the two author strings
-  that the model is predicting to be the same.}
+  authors coauthored a paper.  $S$ and $T$ are the two author mentions
+  that the model is classifying. Edges between $S$,$T$ and other nodes 
+  mean that the other node is a coauthor mention in the publication containing
+  the mentions $S$ and $T$}
 \label{fig:coauthor}
 \end{figure}
 
@@ -183,6 +185,10 @@ and Jaro-Winkler is defined as:
 \end{center}
 
 For SoftTFIDF we need a function $CLOSE(\theta; s; s)$ which is defined as the set of words such that there is some $v \in t$ in which $dist(w; v) > \theta$. SoftTFIDF modifys regular cosine similary by summing over all words in $CLOSE(\theta; s; t)$ the product of regular TFIDF of $s_w$, $t_w$, and $dist(w;t)$. Jaro-Winkler SoftTFIDF is implemented by using Jaro-Winkler as the distance function. 
+
+For other fields, such as publication name, venue compatibility, and coauthorship compatibilty, more involved similarity features are neccisary. For coauthorship compatibility we intend to make use of coauthorship graphs. An example coauthorship graph is displayed in Figure \ref{fig:coauthor}. Given an undirected graph $G=(N \cup M,E)$ where $M$ are the entity mentions of a publication, $N$ are the entities assumed to be correctly disambugated based on identical string name, and each $e \in E$ implies coauthorship between the entities. The edges between the mentions being classified are coauthor mentions in the publication. There cannot be any edges between the two entities. We define distance in this graph between the two entites as the shortest path in graph $G$ between the two verticies in $M$. To make such computation efficient, we will set the distance above a certain threshold to be infinity.
+
+We can also define similariy in venues given a herieicary of venues in the field of computer science. The distance will be how far up in the heriecicay one needs to travel to reach a category both venues belong to. 
  
 In addition, the paper “Linking Temporal Records” [4] described additional information that be added into similarity metrics for fields. These metrics add temporal information by using the realization that over time, the fact that two fields are similar or different matters less to the task at hand. An example of such a case is affiliation information in the task of author linking in papers. Different affiliation information for authors matters more when the papers were published close togather in time in comparision to when the papers where published farther apart in time. We will also be using such similarity metrics in our framework, but will be adding it as features in a CRF rather than simply a using a threshold on manually weighted similarities. This should allow for better weights as well as the ability for more expressiveness in defining dependencies in our model.
 % paragraph similarity_features (end)
