@@ -75,7 +75,17 @@ Conditional random fields (CRFs) are undirected graphical models that encode the
 $$p(y|x)=\frac{1}{Z}\prod_c \phi_c(x_c,y_c),$$
 where $Z=\sum_y\prod_c \phi_c(x_c,y_c)$ is a normalization factor.  We assume $\phi_c$ is a log-linear combination of feature functions of the variables in clique $c$, thus
 $$\phi_c(x_c,y_c)=\exp\left(\sum_k \lambda_k f_k(x_c,y_c)\right).$$
-The model parameters $\{\lambda_k\}$ are learned from training data by maximum likelihood estimation.
+
+The model parameters $\{\lambda_k\}$ are learned from training data by
+maximum likelihood estimation.  In a CRF model, the log likelihood
+function is optimized using numerical optimization methods, such
+limited-memory BFGS or conjugate gradient method.
+
+Inference corresponds to finding the optimal assignment to the $Y$
+variables such that $p(y|x)$ is maximized.  Belief propogation is an
+exact inference algorithm on tree-structured models.  Approximate
+algorithms on models with cycles include loopy belief propogation and
+MCMC methods.
 
 Specifically, our CRF structure models the conditional probability of
 two author strings referring to the same person given the publication
@@ -104,8 +114,6 @@ of time. The model is shown in Figure \ref{fig:crf}.
 \label{fig:crf}
 \end{figure*}
 
-\todo{inference, learning, and canopy}
-
 \begin{figure}
 \centering
 \includegraphics[height=.5\textheight]{coauthor}
@@ -116,20 +124,32 @@ of time. The model is shown in Figure \ref{fig:crf}.
 \label{fig:coauthor}
 \end{figure}
 
-Unlike the model proposed in Culotta and
-McCallum\cite{Culotta05aconditional}, which deduplicates publication
-title and venues jointly, our model focuses on author coreference
-resolution.  Learning and inference in such a complicated model is
-intractable.  However, since the DBLP data is generated directly from
-entire conference proceedings and journals, the publication records
-are less noisy.  Our model takes advantage of the
-reliability of the source data and disambiguates only ambiguous author
-information.  Therefore, our model is more scalable one.
+Unlike the model proposed in Culotta and McCallum
+\cite{Culotta05aconditional}, which deduplicates publication title and
+venues jointly, our model focuses on author coreference resolution.
+Learning and inference in such a complicated model is intractable.
+However, since the DBLP data is generated directly from entire
+conference proceedings and journals, the publication records are less
+noisy.  Our model takes advantage of the reliability of the source
+data and disambiguates only ambiguous author information.  Therefore,
+our model is more scalable one.
 
 Linking pairs of author names is only the first step in the author
 linkage problem.  To generate clusters of author names that refer to
 the same person, we take the transitive closure of the pairwise
 predictions from the CRF model.
+
+Since we are comparing pairs of author strings, it's impractical to
+consider all the $O(n^2)$ pairs in the dataset.  We'll also be wasting
+effort because most of the pairs clearly do not refer to the same
+author.  We follow the method in \todo{cite canopy} to first cluster
+the author strings into ``canopies'' and only compare pairs within the
+same canopy.  Canopies are soft clusters that author strings can be
+shared with more than one canopies.  This approach can significantly
+reduce the number of pairs we need to compare, and the soft nature of
+the clusters help mitigate the problem that the clustering algorithm
+may have inaccurately partitioned the data set.
+
 
 \paragraph{Similarity Features} % (fold)
 \label{par:similarity_features}
