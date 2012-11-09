@@ -50,7 +50,7 @@
 
 \section{Introduction} % (fold)
 \label{sec:introduction}
-Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. This task requires a classifer to determine the matchings between two records. This task is not a solved one, and we will attempt to build a more robust classifier.
+Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. Strings of author names are called author mentions, and cluster of author mentions refering to the same person are called entities. The goal of the task is to cluster all mentions into the appropriate entities. This task requires a classifer to determine the matchings between two mentions. This task is not a solved one, and we will attempt to build a more robust classifier.
 % section introduction (end)
 
 \section{Related Work} % (fold)
@@ -119,8 +119,10 @@ of time. The model is shown in Figure \ref{fig:crf}.
 \includegraphics[height=.5\textheight]{coauthor}
 \caption{A coauthorship network.  The nodes represent author strings
   in the database.  An edge between two nodes means that the two
-  authors coauthored a paper.  $S$ and $T$ are the two author strings
-  that the model is predicting to be the same.}
+  authors coauthored a paper.  $S$ and $T$ are the two author mentions
+  that the model is classifying. Edges between $S$,$T$ and other nodes 
+  mean that the other node is a coauthor mention in the publication containing
+  the mentions $S$ and $T$}
 \label{fig:coauthor}
 \end{figure}
 
