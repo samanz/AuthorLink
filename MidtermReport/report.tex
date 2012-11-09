@@ -4,7 +4,7 @@
 %  Created by Sam Anzaroot on 2012-10-05.
 %  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 %
-\documentclass[twocolumn]{article}
+\documentclass[twocolumn,letterpaper]{article}
 
 % Use utf-8 encoding for foreign characters
 \usepackage[utf8]{inputenc}
@@ -114,15 +114,31 @@ Linking pairs of author names is only the first step in the author
 linkage problem.  To generate clusters of author names that refer to
 the same person, we take the transitive closure of the pairwise
 predictions from the CRF model.
+
+\paragraph{Similarity Features} % (fold)
+\label{par:similarity_features}
+In order to perform classification we will make use of various similarity and compatability metrics. One useful metric is string similarity. Simple Levenstien edit distance is often works poorly in many of the applications in this domain, such as name comparison, since names are often represented differently, with the ordering switched, abbreviated etc. Hybrid methods, which combine string-edit distance with token based methods, often are the best performing distance metric withen similar tasks (cite wcohen). One such metric is SoftTFIDF. SoftTFIDF works like TFIDF, but on similar tokens instead of just matching tokens. It uses the Jaro-Winkler metric as the similarity metric for tokens. 
+
+The Jaro similarity metric for s and t is given $s= s_1,s_2,s_3...$ and $t= t_1,t_2,t_3...$ $s_i$  
+A variant of this due to Winkler (1999) also uses the length
+P of the longest common preﬁx ofs and t. Letting P
+
+Token-based distance functions
+
+ur implementation measures all document frequency statistics from
+the complete corpus of names to be matched.
+
+In addition, the paper “Linking Temporal Records” [4] described additional information that be added into similarity metrics for fields. These metrics add temporal information by using the realization that over time, the fact that two fields are similar or different matters less to the task at hand. An example of such a case is affiliation information in the task of author linking in papers. Different affiliation information for authors matters more when the papers were published close togather in time in comparision to when the papers where published farther apart in time. We will also be using such similarity metrics in our framework, but will be adding it as features in a CRF rather than simply a using a threshold on manually weighted similarities. This should allow for better weights as well as the ability for more expressiveness in defining dependencies in our model.
+% paragraph similarity_features (end)
 % section methodology (end)
 
 \section{Proposed Experiments} % (fold)
 \label{sec:proposed_experiments}
-In order to show that the model that we propose is better than alternatives, we plan on running numerous experiments. We will compare our completed model with various alternatives. The first is the clustering available already in the DBLP dataset. Those in the DBLP community have tackled the problem by incoperating various heuristics, heavily using coauthorship graphs. They also manually split and combine authors based on human request. We will compare our results to DBLP on some subsection of the DBLP dataset. 
+We will compare our completed model with various alternatives. The first is the clustering available already in the DBLP dataset. Those in the DBLP community have tackled the problem by incoperating various heuristics, heavily using coauthorship graphs. They also manually split and combine authors based on human request. We will compare our results to DBLP on some subsection of the DBLP dataset. 
 
-In order to determine the advantages of our model, we will also compare our results with a simple thresholding of our independant similiary functions, and niave combinations thereof. We will generate ROC curves by varying the thresholds. We will compare the best scores of the similarity thesholding for classification with our model.
+In order to determine the advantages of our model, we will also compare our results with a simple thresholding of our independent similiary functions, and naive combinations thereof. We will generate ROC curves by varying the thresholds. We will compare the best scores of the similarity thtesholding for classification with our model.
 
-We will also compare our model with two alternative versions of our model. One will not include any temporal information. One will incoperate temrporal information in our model by performing a simple concatenation of the change in time between the two records and our similarity features. The final model will contain our proposed method of incorperating temporal information. This form of evaluation will inform us of the utitlity of temporal information this domain.
+We will also compare our model with two alternative versions of our model. One will not include any temporal information. One will incorperate temporal information in our model by performing a simple concatenation of the change in time between the two records and our similarity features. The final model will contain our proposed method of incorperating temporal information. This form of evaluation will inform us of the utitlity of temporal information this domain.
 % section proposed_experiments (end)
 
 \section{Evaluation Plan} % (fold)
