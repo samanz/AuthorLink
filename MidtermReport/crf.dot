@@ -10,9 +10,9 @@ digraph CRF {
 	fvenue[label="SimFeatures",shape="box"];
 	faff[label="SimFeatures",shape="box"];
 	fcoa[label="SimFeatures",shape="box"];
-	tvenue[label="time",shape="box"];
-	taff[label="time",shape="box"];
-	tcoa[label="time",shape="box"];
+	tvenue[label="TimeDiff",shape="box"];
+	taff[label="TimeDiff",shape="box"];
+	tcoa[label="TimeDiff",shape="box"];
 	A -> name -> fname;
 	A -> venue -> fvenue;
 	A -> aff -> faff;
