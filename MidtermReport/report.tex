@@ -50,21 +50,21 @@
 
 \section{Introduction} % (fold)
 \label{sec:introduction}
-Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. Strings of author names are called author mentions, and cluster of author mentions referring to the same person are called entities. The goal of the task is to cluster all mentions into the appropriate entities. This task requires a classifier to determine the matchings between two mentions. This task is not a solved one, and we will attempt to build a more robust classifier.
+Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. In this report, we define strings of author names as author mentions, and clusters of author mentions referring to the same person as entities. The goal of the task is to cluster all mentions into the appropriate entities. This task requires a classifier to determine the matchings between two mentions. This task is not a solved one, and we will attempt to build a more robust classifier.
 % section introduction (end)
 
 \section{Related Work} % (fold)
 \label{sec:related_work}
 \paragraph{Survey of Related work} % (fold)
 \label{par:survey_of_related_work}
-The research field of record clustering is a very active one. This task is a important one for many different applications, and as such there are many different names for this task. Names include: record clustering, record deduplication, record linking, entity resolution, etc. There are many components to a record linking system. The first are methods of paring down which records are of in need of clustering for efficiency, called blocking methods. The task also requires a system for classifying whether or not a set of records match. In addition, methods of effectively clustering supersets of records independently classified are necessary. In order to classify records, effective similarity and/or compatibility measures are needed as features in a classifier. In this report, we are focusing in on building a better classifier for disambiguating authors in DBLP, and generating better features. 
+The research field of record clustering is a very active one. This task is important for many different applications, and as such there are many different names for this task. Names include: record clustering, record deduplication, record linking, entity resolution, etc. There are many components to a record linking system. The first are methods of paring down which records are of in need of clustering for efficiency, called blocking methods. The task also requires a system for classifying whether or not a set of records match. In addition, methods of effectively clustering supersets of records independently classified are necessary. In order to classify records, effective similarity and/or compatibility measures are needed as features in a classifier. In this report, we are focusing in on building a better classifier for disambiguating authors in DBLP, and generating better features. 
 % paragraph survey_of_related_work (end)
 
 Similarity metrics are important for classification as they provide information in which a classifier can make a decision on. Others have shown that adding temporal information into metrics can enhance the quality of classification \cite{DBLP:journals/fcsc/LiDMS12}. These metrics are weighted by how relevant the metrics are given the distance in time between the two records. This weighting is learned from a set of annotated data.
 
-Various numbers of people have attempted to build classifiers using graphical models that include complex dependencies. For example, ``Multi-Relational Record Linkage'' \cite{Domingos04multi} modeled the record linking problem as a conditional random field which improved f1 performance on a publication deduplication task. In this CRF model, each pair of publication records has a binary latent variable to model whether the records are duplicates.  The observations are modeled using similarity functions.  ``Information nodes'' connect the binary duplication variables and the observation nodes which represent whether the fields of the publication in two records match.
+Various numbers of people have attempted to build classifiers using graphical models that include complex dependencies. For example, ``Multi-Relational Record Linkage'' \cite{Domingos04multi} modeled the record linking problem as a conditional random field which improved F1 performance on a publication deduplication task. In this CRF model, each pair of publication records has a binary latent variable to model whether the records are duplicates.  The observations are modeled using similarity functions.  ``Information nodes'' connect the binary duplication variables and the observation nodes which represent whether the fields of the publication in two records match.
 
-``A Conditional Model of Deduplication for Multi-Type Relational Data'' \cite{Culotta05aconditional} extends the model previously stated by making the ``information nodes'' first-class variables in the model.  Binary latent variables that indicate record duplication (both paper and venue) are connected in the CRF to capture the interdependencies between the deduplication results of publications and venues.  For example, equivalent venue records that are merged should result in weights in CRF that also encourage merging of paper records.  To perform inference of finding optimal configurations of the latent variables, the authors converted the model into a weighted undirected graph to find a optimal partitioning.  Learning is approximated by maximizing the product of local marginals using limited-memory BFGS.  Their experiments show that up to a 30\% error reduction in venue deduplication and 20\% in paper deduplication. 
+``A Conditional Model of Deduplication for Multi-Type Relational Data'' \cite{Culotta05aconditional} extends the model previously stated by making the ``information nodes'' first-class variables in the model.  Binary latent variables that indicate record duplication (both paper and venue) are connected in the CRF to capture the interdependencies between the deduplication results of publications and venues.  For example, equivalent venue records that are merged should result in weights in CRF that also encourage merging of paper records.  To perform inference of finding optimal configurations of the latent variables, the authors converted the model into a weighted undirected graph to find a optimal partitioning.  Learning is approximated by maximizing the product of local marginals using limited-memory BFGS.  Their experiments show an up to a 30\% error reduction in venue deduplication and 20\% in paper deduplication. 
 % section related_work (end)
 
 \section{Methodology} % (fold)
@@ -78,10 +78,10 @@ $$\phi_c(x_c,y_c)=\exp\left(\sum_k \lambda_k f_k(x_c,y_c)\right).$$
 
 The model parameters $\{\lambda_k\}$ are learned from training data by
 maximum likelihood estimation.  In a CRF model, the log likelihood
-function is optimized using numerical optimization methods, such
+function is optimized using numerical optimization methods, such as
 limited-memory BFGS or conjugate gradient method.
 
-Inference corresponds to finding the optimal assignment to the $Y$
+Inference corresponds to finding the optimal assignments to the $Y$
 variables such that $p(y|x)$ is maximized.  Belief propagation is an
 exact inference algorithm on tree-structured models.  Approximate
 algorithms on models with cycles include loopy belief propagation and
@@ -90,31 +90,17 @@ MCMC methods.
 
 
 Specifically, our CRF structure models the conditional probability of
-two author strings referring to the same person given the publication
+two author mentions referring to the same entity given the publication
 information.  The unobserved random variables in our model include one
-binary variable for each pair of author that indicates whether they
-refer to the same person.  We also define latent random variables that
-represent the compatibility between the names of the authors, between
-the publication venues, between their affiliations, and between their
-coauthors.  The observed variables are similarity features between
-author names, venues, affiliations, and coauthors.  Author name and
-affiliation similarity features can be derived from string similarity
-functions.  The model is shown in Figure \ref{fig:crf}.
-
-We compute venue compatibility features by first clustering the venues
-into different areas.  We incorporate temporal information for the
-publication venue and author affiliation compatibility variables.
-Intuitively dissimilar affiliations over a long period of time should
-have a less influence on the author linkage decision than that over a
-short period of time.  The difference in time of the two venues or
-affiliations can be considered as a weight on the similarity features.
-In Li et al. \cite{DBLP:journals/fcsc/LiDMS12}, this information is
-represented as the probability of an attribute (affiliation, for
-example) changes over a time interval.  The disadvantage of this
-approach is that labeled data is needed to learn these values.  In our
-model, the time difference is an observed variable that together with
-the similarity features control the compatibility of the attributes.
-No additional data is required to train the model.
+binary variable for each pair of author mentions that indicates
+whether they refer to the same person.  We also define latent random
+variables that represent the compatibility between the names of the
+authors, between the publication venues, between their affiliations,
+and between their coauthors.  The observed variables are similarity
+features between author names, venues, affiliations, and coauthors.
+Author name and affiliation similarity features can be derived from
+string similarity functions.  The model is shown in Figure
+\ref{fig:crf}.
 
 \begin{figure*}
 \centering
@@ -129,13 +115,13 @@ No additional data is required to train the model.
 
 \begin{figure}
 \centering
-\includegraphics[height=.45\textheight]{coauthor}
+\includegraphics[height=.5\textheight]{coauthor}
 \caption{A coauthorship network.  The nodes represent author strings
   in the database.  An edge between two nodes means that the two
   authors coauthored a paper.  $S$ and $T$ are the two author mentions
-  that the model is classifying. Edges between $S$,$T$ and other nodes 
-  mean that the other node is a coauthor mention in the publication containing
-  the mentions $S$ and $T$}
+  that the model is classifying. Edges between $S$, $T$ and other
+  nodes mean that the other node is a coauthor mention in the
+  publication containing the mentions $S$ and $T$.}
 \label{fig:coauthor}
 \end{figure}
 
@@ -147,30 +133,30 @@ However, since the DBLP data is generated directly from entire
 conference proceedings and journals, the publication records are less
 noisy.  Our model takes advantage of the reliability of the source
 data and disambiguates only ambiguous author information.  Therefore,
-our model is more scalable one.
+our model is more scalable.
 
 Linking pairs of author names is only the first step in the author
 linkage problem.  To generate clusters of author names that refer to
 the same person, we take the transitive closure of the pairwise
 predictions from the CRF model.
 
-Since we are comparing pairs of author strings, it's impractical to
+Since we are comparing pairs of author mentions, it's impractical to
 consider all the $O(n^2)$ pairs in the dataset.  We'll also be wasting
 effort because most of the pairs clearly do not refer to the same
 author.  We follow the method in \cite{McCallum00} to first cluster
 the author strings into ``canopies'' and only compare pairs within the
-same canopy.  Canopies are soft clusters that author strings can be
-shared with more than one canopies.  This approach can significantly
-reduce the number of pairs we need to compare, and the soft nature of
-the clusters help mitigate the problem that the clustering algorithm
-may have inaccurately partitioned the data set.
+same canopy.  Canopies are soft clusters that can have overlapping
+author mentions.  This approach can significantly reduce the number of
+pairs we need to compare, and the soft nature of the clusters help
+mitigate the problem that the clustering algorithm may have
+inaccurately partitioned the data set.
 
 
 \paragraph{Similarity Features} % (fold)
 \label{par:similarity_features}
-In order to perform classification we will make use of various similarity and compatibility metrics. One useful metric is string similarity. Simple Levenstien edit distance often works poorly in many of the applications in this domain such as name comparison, since names are often represented in different formats, with the ordering switched, abbreviated etc. Hybrid methods, which combine string-edit distance with token based methods, often are the best performing distance metric in similar tasks \cite{cohen2003comparison}. One such metric is SoftTFIDF. SoftTFIDF works like TFIDF, but on similar tokens instead of just matching tokens. It uses the Jaro-Winkler metric as the similarity metric for tokens. 
+In order to perform classification we will make use of various similarity and compatibility metrics. One useful metric is string similarity. Simple Levenstein edit distance often works poorly in many of the applications in this domain such as name comparison, since names are often represented in different formats, with the ordering switched, abbreviated etc. Hybrid methods, which combine string-edit distance with token based methods, often are the best performing distance metric in similar tasks \cite{cohen2003comparison}. One such metric is SoftTFIDF. SoftTFIDF works like TFIDF, but on similar tokens instead of just matching tokens. It uses the Jaro-Winkler metric as the similarity metric for tokens. 
 
-The Jaro similarity metric for s and t given $s= s_1,s_2,s_3...$ and $t= t_1,t_2,t_3...$ defines a match of $s_i$ to a character $t_j$ if $s_i=t_j$ and j is $\frac{min(s,t)}{2} < |i-j|$. Define $s'$ as the characters that match in $s$ and $t'$ are the characters that match in t. Additionaly, define $T$ as half the number of elements that are not exactly matched in position and character in $s$ and in $t$ and $P$ as the maxiumum of the longest common prefix of $s$ and $t$ or 4. Jaro is then defined as:
+The Jaro similarity metric for $s$ and $t$ given $s= s_1,s_2,s_3...$ and $t= t_1,t_2,t_3...$ defines a match of $s_i$ to a character $t_j$ if $s_i=t_j$ and j is $\frac{min(s,t)}{2} < |i-j|$. Define $s'$ as the characters that match in $s$ and $t'$ are the characters that match in t. Additionaly, define $T$ as half the number of elements that are not exactly matched in position and character in $s$ and in $t$ and $P$ as the maxiumum of the longest common prefix of $s$ and $t$ or 4. Jaro is then defined as:
 \begin{center}
 \[
 	JARO(s,t) = \frac{1}{3}\left(\frac{|s'|}{|s|}+\frac{|t'|}{|t|}+\frac{|s'|-T}{|s'|}\right)
@@ -189,8 +175,9 @@ For SoftTFIDF we need a function $CLOSE(\theta; s; s)$ which is defined as the s
 For other fields more involved similarity features are necessary. Such fields include publication name, venue compatibility, and coauthorship compatibility.  For coauthorship compatibility we intend to make use of coauthorship graphs. An example coauthorship graph is displayed in Figure \ref{fig:coauthor}. Given an undirected graph $G=(N \cup M,E)$ where $M$ are the entity mentions of a publication, $N$ are the entities assumed to be correctly disambugated based on identical string name, each $e \in E$ implies coauthorship between the entities. The edges between the mentions being classified are coauthor mentions in the publication. There cannot be any edges between the two mentions. We define distance in this graph between the two mentions as the shortest path in graph $G$ between the two vertices in $M$. To make such computation efficient, we will set the distance above a certain threshold to be infinity.
 
 We can also define similarity in venues given a hierarchy of venues in the field of computer science. The distance will be how far up in the hierarchy one needs to travel to reach a category both venues belong to. 
- 
-In addition, the paper “Linking Temporal Records” [4] described additional information that be added into similarity metrics for fields. These metrics add temporal information by using the realization that over time, the fact that two fields are similar or different matters less to the task at hand. An example of such a case is affiliation information in the task of author linking in papers. Different affiliation information for authors matters more when the papers were published close together in time in comparison to when the papers where published farther apart in time. We will also be using such similarity metrics in our framework, but will be adding it as features in a CRF rather than simply a using a threshold on manually weighted similarities. This should allow for better weights as well as the ability for more expressiveness in defining dependencies in our model.
+
+In addition, the paper ``Linking Temporal Records'' \cite{DBLP:journals/fcsc/LiDMS12} described additional information that be added into similarity metrics for fields. These metrics add temporal information by using the realization that over time, the fact that two fields are similar or different matters less to the task at hand. An example of such a case is affiliation information in the task of author linking in papers. Intuitively, different affiliation information for authors matters more when the papers were published close together in time in comparison to when the papers where published farther apart in time. This information is
+represented as the probability of an attribute (affiliation, for example) changes over a time interval. The disadvantage of this approach is that labeled data is needed to learn these values.  We will also be using such similarity metrics in our framework, but will be adding it as features in a CRF rather than simply a using a threshold on manually weighted similarities. This should allow for better weights as well as the ability for more expressiveness in defining dependencies in our model.
 % paragraph similarity_features (end)
 % section methodology (end)
 
@@ -200,7 +187,7 @@ We will compare our completed model with various alternatives. The first is the 
 
 In order to determine the advantages of our model, we will also compare our results with a simple thresholding of our independent similarity functions, and naive combinations thereof. We will generate ROC curves by varying the thresholds. We will compare the best scores of the similarity thresholding for classification with our model.
 
-We will also compare our model with two alternative versions of our model. Another will not include any temporal information. One will incorporate temporal information in our model by performing a simple concatenation of the change in time between the two records and our similarity features. The final model will contain our proposed method of incorporating temporal information. This form of evaluation will inform us of the utility of temporal information this domain.
+We will also compare our model with two alternative versions. One will not include any temporal information. Another will incorporate temporal information in our model by performing a simple concatenation of the change in time between the two records and our similarity features. The final model will contain our proposed method of incorporating temporal information. This form of evaluation will inform us of the utility of temporal information in this domain.
 % section proposed_experiments (end)
 
 \section{Evaluation Plan} % (fold)
@@ -232,10 +219,10 @@ strings required to group a set of authors together.
 
 The other metric that we will use is the $B^3$ score \cite{Bagga98b}.
 This metric addresses two shortcomings of the MUC score.  MUC score
-does not give any credit for separating out singletons (author names
-that no other strings refer to), and it treats different errors
-indiscriminately (merging two large partitions is equally penalized as
-merging smaller partitions).
+does not give any credit for separating out singletons (author
+mentions that no other strings refer to), and it treats different
+errors indiscriminately (merging two large partitions is equally
+penalized as merging smaller partitions).
 
 Evaluating the system on these two metrics provides a balanced view of
 the performance.  The MUC score tends to favor larger clusters while
