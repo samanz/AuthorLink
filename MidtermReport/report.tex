@@ -28,6 +28,7 @@
 \else
 \usepackage{graphicx}
 \fi
+
 \title{Author Linkage in Records using Temporal Information and Conditional Random Fields : A midterm report}
 \author{Sam Anzaroot, Jiaping Zheng}
 
@@ -42,7 +43,6 @@
 \fi
 
 \maketitle
-
 
 \section{Introduction} % (fold)
 \label{sec:introduction}
@@ -65,7 +65,43 @@ Various numbers of people have attempted to build classifiers using graphical mo
 
 \section{Methodology} % (fold)
 \label{sec:methodology}
+We model the author linkage problem in a conditional random field.  
 
+Conditional random fields (CRFs) are undirected graphical models that encode the conditional probability of a set of unobserved random variables $Y$ given a set of observed variables $X$.  Usually the probability can be factored using independence assumptions.  It can be represented in a graph $G$, where the vertices correspond to the variables $X$ and $Y$.  A potential function $\phi_c$ is defined for every clique $c$ in the graph.  The conditional probability $p(y|x)$ can be expressed as
+$$p(y|x)=\frac{1}{Z}\prod_c \phi_c(x_c,y_c),$$
+where $Z=\sum_y\prod_c \phi_c(x_c,y_c)$ is a normalization factor.  We assume $\phi_c$ is a log-linear combination of feature functions of the variables in clique $c$, thus
+$$\phi_c(x_c,y_c)=\exp\left(\sum_k \lambda_k f_k(x_c,y_c)\right).$$
+The model parameters $\{\lambda_k\}$ are learned from training data by maximum likelihood estimation.
+
+Specifically, our CRF structure models the conditional probability of
+two author strings referring to the same person given the publication
+information.  The unobserved random variables in our model include one
+binary variable for each pair of author that indicates whether they
+refer to the same person.  We also define latent random variables that
+represent the compatibility between the names of the authors, the
+compatibility between the publication venues, and the compatibility
+between their affiliations.  The observed variables are similarity
+features between author names, venues, and affiliations.  We
+incorporate temporal information for the publication venue and author
+affiliation compatibility variables.  Intuitively dissimilar
+affiliations over a long period of time should have a less influence
+on the author linkage dicision than that over a short period of time.
+The model is shown in Figure CITE.
+
+Unlike the model proposed in CITE CULOTTA, which deduplicates
+publication title and venues jointly, our model focuses on author
+coreference resolution.  Learning and inference in such a complicated
+model is intractable.  However, since the DBLP data are generated
+directly from entire conference proceedings and journals, the
+publication records are less likely to be noisy.  Our model takes
+advantage of this reliability of the source and disambiguates the more
+ambiguous author information.  Therefore, our model can scale more
+easily to a large amount of data than their approach.
+
+Linking pairs of author names is only the first step in the author
+linkage problem.  To generate clusters of author names that refer to
+the same person, we take the transitive closure of the pairwise
+predictions from the CRF model.
 % section methodology (end)
 
 \section{Proposed Experiments} % (fold)
