@@ -1,0 +1,23 @@
+digraph coauthor {
+	edge[arrowhead="none"];
+
+	subgraph clusterD {
+		node[style="filled",color="white",fillcolor="white"];
+		color="lightgrey";
+		style="filled";
+		S -> T[style="invis"];
+        }
+
+	A -> S;
+	B -> S;
+	C -> S;
+	D -> B;
+	D -> C;
+	T -> U;
+	T -> V;
+	T -> W;
+	U -> V;
+	W -> V;
+	W -> X;
+	C -> W;
+}

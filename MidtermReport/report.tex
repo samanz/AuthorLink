@@ -4,7 +4,7 @@
 %  Created by Sam Anzaroot on 2012-10-05.
 %  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 %
-\documentclass[twocolumn]{article}
+\documentclass[twocolumn,letterpaper]{article}
 
 % Use utf-8 encoding for foreign characters
 \usepackage[utf8]{inputenc}
@@ -84,32 +84,48 @@ binary variable for each pair of author that indicates whether they
 refer to the same person.  We also define latent random variables that
 represent the compatibility between the names of the authors, between
 the publication venues, between their affiliations, and between their
-coauthors.  The observed variables are similarity features between
-author names, venues, affiliations, and coauthors.  We incorporate
-temporal information for the publication venue and author affiliation
+coauthors.  The observed variables are similarity features
+\todo{detail} between author names, venues, affiliations, and
+coauthors.  We incorporate temporal information \todo {add decay
+  figure} for the publication venue and author affiliation
 compatibility variables.  \todo{flesh out, add figure} Intuitively
 dissimilar affiliations over a long period of time should have a less
 influence on the author linkage dicision than that over a short period
 of time. The model is shown in Figure \ref{fig:crf}.
 
 \begin{figure*}
+\centering
 \includegraphics[width=\textwidth]{crf}
 \caption{Our CRF model for the author linkage problem.  $A_i$ denotes
-  the $i$th author string.  The oval nodes are unobserved random
-  variables, and the box-shaped ones are observed variables.}
+  the $i$th author string.  $A_i.n$, $A_i.v$, $A_i.aff$, and $A_i.ca$
+  denote the name, venue, affiliation, and coauthors of $A_i$.  The
+  oval nodes are unobserved random variables, and the box-shaped ones
+  are observed variables.}
 \label{fig:crf}
 \end{figure*}
 
-Unlike the model proposed in Culotta and
-McCallum\cite{Culotta05aconditional}, which deduplicates publication
-title and venues jointly, our model focuses on author coreference
-resolution.  Learning and inference in such a complicated model is
-intractable.  However, since the DBLP data are generated directly from
-entire conference proceedings and journals, the publication records
-are less likely to be noisy.  Our model takes advantage of this
-reliability of the source and disambiguates the more ambiguous author
-information.  Therefore, our model can scale more easily to a large
-amount of data than their approach.
+\todo{inference, learning, and canopy}
+
+Unlike the model proposed in Culotta and McCallum
+\cite{Culotta05aconditional}, which deduplicates publication title and
+venues jointly, our model focuses on author coreference resolution.
+Learning and inference in such a complicated model is intractable.
+However, since the DBLP data are generated directly from entire
+conference proceedings and journals, the publication records are less
+likely to be noisy.  Our model takes advantage of this reliability of
+the source and disambiguates the more ambiguous author information.
+Therefore, our model can scale more easily to a large amount of data
+than their approach.
+
+\begin{figure}
+\centering
+\includegraphics[height=.5\textheight]{coauthor}
+\caption{A coauthorship network.  The nodes represent author strings
+  in the database.  An edge between two nodes means that the two
+  authors coauthored a paper.  $S$ and $T$ are the two author strings
+  that the model is predicting to be the same.}
+\label{fig:coauthor}
+\end{figure}
 
 Linking pairs of author names is only the first step in the author
 linkage problem.  To generate clusters of author names that refer to

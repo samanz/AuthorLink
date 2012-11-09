@@ -2,14 +2,14 @@ digraph CRF {
 	edge[arrowhead="none"];
 
 	A[label="Ai=Aj"];
-	name[label="Ai.name ~ Aj.name"];
-	venue[label="Ai.venue ~ Aj.venue"];
-	aff[label="Ai.affiliation ~ Aj.affiliation"];
-	coa[label="Ai.coauthors ~ Aj.coauthors"];
-	fname[label="Similarity",shape="box"];
-	fvenue[label="Similarity",shape="box"];
-	faff[label="Similarity",shape="box"];
-	fcoa[label="Similarity",shape="box"];
+	name[label="Ai.n ~ Aj.n"];
+	venue[label="Ai.v ~ Aj.v"];
+	aff[label="Ai.aff ~ Aj.aff"];
+	coa[label="Ai.ca ~ Aj.ca"];
+	fname[label="SimFeatures",shape="box"];
+	fvenue[label="SimFeatures",shape="box"];
+	faff[label="SimFeatures",shape="box"];
+	fcoa[label="SimFeatures",shape="box"];
 	tvenue[label="time",shape="box"];
 	taff[label="time",shape="box"];
 	tcoa[label="time",shape="box"];
