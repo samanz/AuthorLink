@@ -1,7 +1,46 @@
-John Smith
-John A. Smith
-John H. Smith
-John B. Smith
+#John Smith (homepages/96/3481)
+conf/interspeech/GarnierWHS08	1	University of New South Wales, Australia
+conf/elpub/2001
+conf/elpub/2000
+conf/elpub/1999
+conf/elpub/1998
+conf/interspeech/EppsDSW97	1	School of Physics, The University of New South Wales, Sydney, Australia
+conf/elpub/1997
+conf/dl/DewanJSSO95	2	Computer Science Department\nUniversity of North Carolina\nChapel Hill, NC 27599-3175
+conf/ht/BairdEKSS89	3	University of North Carolina
+conf/dac/ThompsonKRRSB80	4	Comprehensive Computing Systems\nand Services, Inc.\n8403 Shoal Creek Blvd.\nAustin, Texas 78758
+
+#John A. Smith (homepages/72/1096)
+journals/jbi/Tarczy-HornochMSH07	1	Department of Pathology, University of Alabama at Birmingham, USA
+conf/ieaaie/SmithB89	2	Air Ops Information Services\nFederal Express Corporation\nP.O. Box 727\nMemphis, TN 38194
+
+#John H. Smith (homepages/79/4777)
+journals/jct/Smith11	1	29 Aldridge Road Needham, MA 02492, United States
+journals/jct/Smith99	1	Boston College, Chestnut Hill, Massachusetts, 02167-3806
+conf/hci/SmithBSA97	2
+
+#John B. Smith (homepages/s/JohnBSmith)
+conf/ht/AshmanBHSBN97	1	University of North Carolina	conf/ht/BairdEKSS89
+conf/ht/Smith97	1	Department of Computer Science, The University of North Carolina, Chapel Hill, NC
+conf/ht/BernsteinLMS96	1	University of North Carolina, Chapel Hill
+conf/cscw/1994	1	Univ. of North Carolina
+journals/jasis/GauchS93	1	Department of Computer Science, University of North Carolina, Chapel Hill, NC 27599-3175
+conf/ht/ShackelfordSS93	1	Department of Computer Science, University of North Carolina, Chapel Hill, North Carolina
+conf/chi/SmithL92	1	Department of Computer Science\nUniversity of North Carolina\nChapel Hill, NC 27599-3175
+conf/cscw/JeffayLMSS92	1	University of North Carolina at Chapel Hill\nDepartment of Computer Science\nChapel Hill, NC, USA 27599-3175
+journals/tois/GauchS91	1	Univ. of North Carolina
+conf/ht/SmithS91	1	Department of Computer Science, CB#3175, Sitterson Hall, University of North, Chapel Hill, NC
+conf/echt/SchulerS90	1	(unc)
+journals/ipm/GauchS89	1	Department of Computer Science, University of North Carolina, Chapel Hill, NC 27599-3175, U.S.A.
+journals/cacm/SmithW88	1	(unc)
+conf/riao/GauchS88	1	(unc)
+journals/spe/SmithW87	1	Department of Computer Science, The University of North Carolina, Chapel Hill, North Carolina 27514, U.S.A.
+conf/ht/SmithWF87	1	Department of Computer Science, University of North Carolina, Chapel Hill, NC
+conf/sigir/SmithWF87	1	Department of Computer Science, The Univesity of North Carolina, Chapel Hill, North Carolina
+conf/ht/87	1	(unc)
+conf/ifip/Smith74	1	(unc)
+conf/ifip/Smith71	1?
+
 James Johnson
 Robert Williams
 Michael Jackson
