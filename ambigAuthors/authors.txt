@@ -41,8 +41,24 @@ conf/ht/87	1	(unc)
 conf/ifip/Smith74	1	(unc)
 conf/ifip/Smith71	1?
 
-James Johnson
+#James Johnson
+conf/csedu/ColemanBPJFM11	1	Marist College, Poughkeepsie, New York, United States
+journals/jdfp/ManesJBHDH08	2	University of Tulsa, Computer Science, Tulsa, OK
+reference/wiley/Johnson08	3	Western Washington University, Bellingham, Washington
+journals/fgcs/FerschaJT01	4	BEKO, Modecenter Strasse 22/A1, A-1030 Vienna, Austria
+journals/fgcs/FerschaJ00	4	Universität Wien, Institut für Angewandte Informatik und Informationssysteme, Lenaugasse 2/8, A-1080 Wien, Austria
+conf/dsrt/FerschaJ99	4	University of Vienna
+conf/mascots/FerschaJKA98	4	Universitat Wien, Austria
+conf/webnet/RowleyCJ98	5
+conf/ichim/Johnson97
+conf/wsc/FerschaJ96	4	Institut für Angewandte Informatik, Universität Wien, Lenaugasse 2/8, A-1080 Vienna, Austria
+conf/hicss/FerschaJ95	4	Inst. fur Angewandte Inf., Wien Univ., Austria
+conf/conpar/FerschaJ94	4	Inst. fur Angewandte Inf., Wien Univ., Austria
+conf/hpts/Johnson93	6
+
 Robert Williams
+
+
 Michael Jackson
 John Johnson
 Wang Chen
