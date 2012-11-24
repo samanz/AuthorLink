@@ -57,9 +57,21 @@ conf/conpar/FerschaJ94	4	Inst. fur Angewandte Inf., Wien Univ., Austria
 conf/hpts/Johnson93	6
 
 Robert Williams
-
+journals/ijea/WilliamsPTT09	1	NEO, United Kingdom
+journals/ijet/ChangGKW09	2	Curtin University, Perth, Australia
+conf/ista/WilliamsN09	2	Curtin University, Perth, Australia
+conf/fqas/DreherW06	2	Curtin University, Perth, Australia
+conf/wsc/GuruSW00	3	University of Nebraska, Lincoln, NE
+conf/ieaaie/WilliamsL96	4
+conf/muc/LehnertCFRW91	5	University of Massachusetts
+conf/muc/LehnertCFRW91a	5	University of Massachusetts
 
 Michael Jackson
+journals/sosym/Jackson12	1	The Open University, Milton Keynes, UK
+conf/birthday/Jackson11	1	Newcastle University
+conf/birthday/Jackson10	1	The Open University, Milton Keynes, UK
+journals/spe/TunTJLN09	1	Department of Computing, The Open University, Milton Keynes 
+
 John Johnson
 Wang Chen
 Wei Chen
