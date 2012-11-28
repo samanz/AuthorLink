@@ -20,7 +20,7 @@ class CoAuthors(string : String) extends Field(string) {
 }
 class Venue(string : String) extends Field(string)
 class Affiliation(string : String) extends Field(string)
-class Publication(val title : Title, val coAuthors :  CoAuthors, val venue : Venue, val affiliation : Affiliation, val block : String) extends Attr {
+class Publication(val title : Title, val coAuthors :  CoAuthors, val venue : Venue, val affiliation : Affiliation, val block : String, val year : Int = 1999, val ty : String = "", val pubkey : String = "") extends Attr {
 	override def toString : String = {
 		title.string + " : " + coAuthors.string + " " + venue.string + " "
 	}
@@ -49,7 +49,7 @@ object Publication {
 	}
 }
 
-class Pair(val fields : Seq[FieldPair]) extends Attr
+class Pair(val fields : Seq[FieldPair], val publication1 : Publication, val publication2 : Publication) extends Attr
 class FieldPair(val field1 : Field, val field2 : Field, val pair : Pair) extends Attr
 
 object TitleFeaturesDomain extends CategoricalTensorDomain[String]
@@ -172,6 +172,8 @@ class AuthorLink {
 		val testPublications = LoadDBLPCoref.fromFile(testFile)
 
 		trainPublications.foreach{ println(_) }
+
+		println("Train Publications Size " + trainPublications.length)
 
 		val trainingPairs = pairAndInitFeatures(trainPublications)
 		val testingPairs = pairAndInitFeatures(testPublications) 
