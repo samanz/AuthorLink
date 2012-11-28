@@ -10,7 +10,7 @@ abstract class PairLabel(initialValue:String) extends LabeledCategoricalVariable
 class FieldPairLabel(val field:FieldPair, initialValue:String) extends PairLabel(initialValue)
 class PubPairLabel(val pair:Pair, initialValue:String) extends PairLabel(initialValue)
 
-class ClusterId(val id : Int)
+class ClusterId(val id : Int, val target : Int)
 
 // Field of the Document
 class Field(val string : String) extends Attr
@@ -20,7 +20,35 @@ class CoAuthors(string : String) extends Field(string) {
 }
 class Venue(string : String) extends Field(string)
 class Affiliation(string : String) extends Field(string)
-class Publication(val title : Title, val coAuthors :  CoAuthors, val venue : Venue, val affiliation : Affiliation)
+class Publication(val title : Title, val coAuthors :  CoAuthors, val venue : Venue, val affiliation : Affiliation, val block : String) extends Attr {
+	override def toString : String = {
+		title.string + " : " + coAuthors.string + " " + venue.string + " "
+	}
+}
+
+object Publication {
+	def fromFields(fields : Seq[Field], block : String) : Publication = {
+		var title : Title = null
+		var venue : Venue = null
+		var affil : Affiliation = null
+		var coaut : CoAuthors = null
+
+		for(field <- fields) {
+			if(field.isInstanceOf[Title]) {
+				title = field.asInstanceOf[Title]
+			} else if (field.isInstanceOf[Venue]) {
+				venue = field.asInstanceOf[Venue]
+			} else if (field.isInstanceOf[Affiliation]) {
+				affil = field.asInstanceOf[Affiliation]
+			} else if (field.isInstanceOf[CoAuthors]) {
+				coaut = field.asInstanceOf[CoAuthors]
+			}
+		}
+		if(affil == null) affil = new Affiliation("")
+		new Publication(title, coaut, venue, affil, block)
+	}
+}
+
 class Pair(val fields : Seq[FieldPair]) extends Attr
 class FieldPair(val field1 : Field, val field2 : Field, val pair : Pair) extends Attr
 
@@ -143,6 +171,8 @@ class AuthorLink {
 		val trainPublications = LoadDBLPCoref.fromFile(trainFile)
 		val testPublications = LoadDBLPCoref.fromFile(testFile)
 
+		trainPublications.foreach{ println(_) }
+
 		val trainingPairs = pairAndInitFeatures(trainPublications)
 		val testingPairs = pairAndInitFeatures(testPublications) 
       	
@@ -192,7 +222,7 @@ object AuthorLink extends AuthorLink {
     		test(opts.testFile.value)
     	} else {
     		train(opts.trainFile.value, opts.testFile.value)
-    		model.save(opts.modelDir.value)
+    		//model.save(opts.modelDir.value)
     	}
 	}
 }

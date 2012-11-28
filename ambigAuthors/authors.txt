@@ -56,7 +56,7 @@ conf/hicss/FerschaJ95	4	Inst. fur Angewandte Inf., Wien Univ., Austria
 conf/conpar/FerschaJ94	4	Inst. fur Angewandte Inf., Wien Univ., Austria
 conf/hpts/Johnson93	6
 
-Robert Williams
+#Robert Williams
 journals/ijea/WilliamsPTT09	1	NEO, United Kingdom
 journals/ijet/ChangGKW09	2	Curtin University, Perth, Australia
 conf/ista/WilliamsN09	2	Curtin University, Perth, Australia
@@ -66,7 +66,7 @@ conf/ieaaie/WilliamsL96	4
 conf/muc/LehnertCFRW91	5	University of Massachusetts
 conf/muc/LehnertCFRW91a	5	University of Massachusetts
 
-Michael Jackson
+#Michael Jackson
 journals/sosym/Jackson12	1	The Open University, Milton Keynes, UK
 conf/birthday/Jackson11	1	Newcastle University
 conf/birthday/Jackson10	1	The Open University, Milton Keynes, UK
