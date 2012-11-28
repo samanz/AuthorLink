@@ -56,7 +56,7 @@ conf/hicss/FerschaJ95	4	Inst. fur Angewandte Inf., Wien Univ., Austria
 conf/conpar/FerschaJ94	4	Inst. fur Angewandte Inf., Wien Univ., Austria
 conf/hpts/Johnson93	6
 
-Robert Williams
+#Robert Williams
 journals/ijea/WilliamsPTT09	1	NEO, United Kingdom
 journals/ijet/ChangGKW09	2	Curtin University, Perth, Australia
 conf/ista/WilliamsN09	2	Curtin University, Perth, Australia
@@ -66,7 +66,7 @@ conf/ieaaie/WilliamsL96	4
 conf/muc/LehnertCFRW91	5	University of Massachusetts
 conf/muc/LehnertCFRW91a	5	University of Massachusetts
 
-Michael Jackson
+#Michael Jackson
 journals/sosym/Jackson12	1	The Open University, Milton Keynes, UK
 conf/birthday/Jackson11	1	Newcastle University
 conf/birthday/Jackson10	1	The Open University, Milton Keynes, UK
@@ -87,7 +87,7 @@ journals/isci/ChenSTLH10	3	School of Mechanical Engineering, Dalian University o
 conf/aici/JiangDXCC10	4	School of Art Layout, Hunan University of Commerce, Changsha 410205, China
 conf/iwomp/WongBSWMLC10	1	IBM Corporation
 conf/lsms/ShiQCL10	5	China North Vehicle Research Institute Beijing, P.R. China 100072
-conf/cw/ChenXXZ08	2	
+conf/cw/ChenXXZ08	2	National University of Defense Technology, School of Information System and Management, ChangSha, China
 conf/icic/ChenST08	3	School of Mechanical Engineering, Dalian University of Technology, Dalian, P.R. China 116024
 conf/icic/ChenST08a	3	School of Mechanical Engineering, Dalian University of Technology, Dalian, P.R. China 116024
 conf/icat/BaoZC06	2	Department of Systems and Engineering, National University of Defense Technology, Changsha 410073, Hunan, P.R. China
@@ -100,256 +100,257 @@ journals/jpdc/RajasekaranCY97	11	Department of CIS, University of Pennsylvania, 
 conf/isaac/RajasekaranCY94	11	Dept. of CIS, Univ. of Pennsylvania\nPhiladelphia, PA 19104
 
 #Wei Chen (homepages/c/WeiChen)
-journals/cad/LiuGCDL13
-journals/eswa/HsiehLC13
-journals/lgrs/ChenG13
-journals/appml/ShenQC12
-journals/cbm/ChenL12
-journals/coap/CensorCCDH12
-journals/concurrency/WuCLH12
-journals/datamine/WangCW12
-journals/eaai/SunCFWX12
-journals/jam/ShenC12
-journals/jcp/MengWC12
-journals/jcp/XuLC12
-journals/jms/ChenS12
-journals/kybernetes/ChenLST12
-journals/lgrs/ChenMGW12
-journals/neuroimage/ZhuQDXLZUC12
-journals/tcbb/JacklinDCC12
-journals/tcom/LiuCCZ12
-journals/tgrs/Chen12
-journals/tmc/LiuCCZ12
-journals/ton/ChenLC12
-conf/IEEEcloud/ChenQWH12
-conf/IEEEscc/QiaoCW12
-conf/aaai/ChenLZ12
-conf/aina/ChenC12
-conf/apvis/PengLCP12
-conf/apvis/HuangPWCCB12
-conf/cts/ChenGL12
-conf/geoinformatics/MaoHLCL12
-conf/icira/LuC12
-conf/icnc/ChenZS12
-conf/iconip/TianWZC12
-conf/icpp/MaLCZW12
-conf/igarss/KuangPCXLZ12
-conf/igarss/ChenSCMK12
-conf/igarss/LiuCZMCXS12
-conf/sdm/HeSCJ12
-conf/sigir/ZhaoLHC12
-conf/uic/ChenQWH12
-conf/vinci/YuLC12
-journals/corr/abs-1201-1717
-journals/corr/abs-1203-4324
-journals/corr/abs-1204-3074
-journals/amcs/ChenKAD11
-journals/cgf/WangZCZC11
-journals/chb/YeLGC11
-journals/games/ChenLCL11
-journals/gpb/DengTHCLYZZ11
-journals/gsta/ChenMS11
-journals/ieicet/ChenWJ11
-journals/ijwa/ChenF11
-journals/jcam/ChenL11
-journals/kbs/ZhouJYC11
-journals/mcm/QiZXFCZ11
-journals/neuroimage/LiuZC11
-journals/ploscb/ChenLHSHZ11
-journals/tvcg/ChenCB11
-conf/cadgraphics/PanCGCP11
-conf/cdc/ChenQ11
-conf/emeit/WangCY11
-conf/emeit/ShiLSCZ11
-conf/emeit/ChenZTM11
-conf/emeit/WangLC11
-conf/fpt/ChenZYN11
-conf/icaic/WangNLC11
-conf/icaic/JinCNL11
-conf/icca/ChenQG11
-conf/icdm/ChenSF11
-conf/icebe/ChenLWW11
+# Notes:  There are two Wei Chen in Microsoft Research Asia.  DBLP has an author page for Wei Chen at MSRA
+journals/cad/LiuGCDL13	1	Department of Mechanical Engineering, Northwestern University, Evanston, IL, 60208, USA
+journals/eswa/HsiehLC13	2	Department of Applied Informatics and Multimedia, Asia University, Taiwan, ROC
+journals/lgrs/ChenG13	3	Remote Sensing Div., Naval Res. Lab., Washington, DC, USA
+journals/appml/ShenQC12	4	School of Information, Capital University of Economics and Business, Beijing, 100070, PR China
+journals/cbm/ChenL12	5	Department of Physics, College of Sciences, Hebei United University, Tangshan 063000, China
+journals/coap/CensorCCDH12	6	Department of Computer Science, The Graduate Center, City University of New York
+journals/concurrency/WuCLH12	7	College of Computer Science and Technology of Jilin University, Jilin Province, People's Republic of China
+journals/datamine/WangCW12	8	Microsoft Research Asia, Beijing, China
+journals/eaai/SunCFWX12	9	Key Laboratory of Advanced Process Control for Light Industry (Ministry of Education), Department of Computer Science and Technology, Jiangnan University, No. 1800, Lihu Avenue, Wuxi, Jiangsu 214122, PR China
+journals/jam/ShenC12	4	School of Information, Capital University of Economics and Business, Beijing 100070,  China
+journals/jcp/MengWC12	10	School of Computer, South-Center University for Nationalities, Wuhan, China
+journals/jcp/XuLC12	11	College of Mathematics, Physics & Information Engineering, Zhejiang Normal University, Jinhua, Zhejiang, 321004, China
+journals/jms/ChenS12	2	Department of Applied Informatics and Multimedia, Asia University, Taichung, Taiwan 413
+journals/kybernetes/ChenLST12	12	Department of Information Management, Nanjing Audit University, Nanjing, China
+journals/lgrs/ChenMGW12	13	Remote Sensing Div., Naval Res. Lab., Washington, DC, USA
+journals/neuroimage/ZhuQDXLZUC12	14	Center for Magnetic Resonance Research, Department of Radiology, University of Minnesota Medical School, Minneapolis, MN 55455, USA
+journals/tcbb/JacklinDCC12	15	The University of Hong Kong, Hong Kong
+journals/tcom/LiuCCZ12	16	Department of Electronic Engineering, Tsinghua University, Beijing, China
+journals/tgrs/Chen12	13	Remote Sensing Div., Naval Res. Lab., Washington, DC, USA
+journals/tmc/LiuCCZ12	16	Tsinghua University, Beijing
+journals/ton/ChenLC12	16	Dept. of Electron. Eng., Tsinghua Univ., Beijing, China
+conf/IEEEcloud/ChenQWH12	17	Institute of Software, Chinese Academy of Sciences, Beijing, China
+conf/IEEEscc/QiaoCW12	17	Technology Center of Software Engineering, Institute of Software, Chinese Academy of Sciences, Beijing, China
+conf/aaai/ChenLZ12	8	Microsoft Research Asia, Beijing, China
+conf/aina/ChenC12	2	Department of Applied Informatics and Multimedia, Asia University, Taichung, Taiwan 413
+conf/apvis/PengLCP12	18	State Key Lab of CAD&CG, Zhejiang University, Hangzhou, China
+conf/apvis/HuangPWCCB12	18	State Key Lab of CAD&CG, Zhejiang University, Hangzhou, China
+conf/cts/ChenGL12	19	Intelligent Automation, Inc., 15400 Calhoun Drive, Suite 400, Rockville, MD, United States
+conf/geoinformatics/MaoHLCL12	20	Key Laboratory of Geographical Information Science, School of Geographic & Oceanographic Sciences, Nanjing University, Nanjing 210093, China
+conf/icira/LuC12	21	Department of Automatic Control, Northwestern Polytechnical University, Xi'an, Shaanxi, 710072, China
+conf/icnc/ChenZS12	22	Key Laboratory of Behavioral Science, Institute of Psychology, Chinese Academy of Sciences, Beijing, China
+conf/iconip/TianWZC12	23	School of Computer Science and Technology, China University of Mining and Technology, Xuzhou, China
+conf/icpp/MaLCZW12	24	Department of Electrical and Computer Engineering, The Ohio State University, Columbus, OH 43210
+conf/igarss/KuangPCXLZ12	25	Wuhan University of Technology, China
+conf/igarss/ChenSCMK12	26	Kyoto University
+conf/igarss/LiuCZMCXS12	26	Kyoto University
+conf/sdm/HeSCJ12	8	Microsoft Research Asia, China
+conf/sigir/ZhaoLHC12	27	National University of Singapore, Singapore, Singapore
+conf/uic/ChenQWH12	17	Institute of Software, Chinese Academy of Sciences, Beijing, China
+conf/vinci/YuLC12	18	State Key Lab of CAD&CG, Zhejiang University, Hangzhou, Zhejiang, China
+journals/corr/abs-1201-1717	8	Microsoft Research Asia
+journals/corr/abs-1203-4324	8	Microsoft Research Asia
+journals/corr/abs-1204-3074	8	Microsoft Research Asia, Beijing, China
+journals/amcs/ChenKAD11	28	Institute of Automatic Control and Complex Systems, University of Duisburg-Essen, Bismarckstr, 81, 47057 Duisburg, Germany
+journals/cgf/WangZCZC11	18	State Key Lab of CAD&CG, Zhejiang University, China
+journals/chb/YeLGC11	29	Rady School of Management, The University of California, San Diego, CA 92093, USA
+journals/games/ChenLCL11	30	Department of Economics, National Taiwan University, No.21 Hsu-Chow Rd., Taipei, Taiwan
+journals/gpb/DengTHCLYZZ11	31	Beijing Institute of Genomics, Chinese Academy of Sciences, Beijing 100029, China
+journals/gsta/ChenMS11	12	Department of Information Management, Nanjing Audit University, Jiangsu, China
+journals/ieicet/ChenWJ11	30	School of Computer Science and Engineering, University of Electronic Science and Technology, Chengdu, China
+journals/ijwa/ChenF11	31	Department of Computer and Information Science, University of Macau, Macau SAR
+journals/jcam/ChenL11	32	School of Mathematics and Information, Shanghai Lixin University of Commerce, Shanghai 201620, PR China
+journals/kbs/ZhouJYC11	33	Department of Automation, Xiamen University, 361005 Xiamen, China
+journals/mcm/QiZXFCZ11	34	China Agricultural University, Beijing, 100083, PR China
+journals/neuroimage/LiuZC11	14	Center for Magnetic Resonance Research, Department of Radiology, University of Minnesota, Minneapolis, MN, USA
+journals/ploscb/ChenLHSHZ11	35	Woodruff School of Mechanical Engineering, Georgia Institute of Technology, Atlanta, Georgia, United States of America
+journals/tvcg/ChenCB11	18	State Key Lab of CAD&CG, Zhejiang University, China
+conf/cadgraphics/PanCGCP11	18	State Key Lab of CAD&CG, Zhejiang University, China
+conf/cdc/ChenQ11	36	Department of Electronic and Computer Engineering, The Hong Kong University of Science and Technology, Hong Kong
+conf/emeit/WangCY11	37	College of Mechanic Science and Engineering, Jilin University, Changchun, China
+conf/emeit/ShiLSCZ11	38	College of Mechanic Science and Engineering, Jilin University, Changchun, China
+conf/emeit/ChenZTM11	39	Beijing Institute of Technology
+conf/emeit/WangLC11	38	College of Mechanic Science and Engineering, Jilin University, Changchun, China
+conf/fpt/ChenZYN11	40	Graduate School of Information, Production and System, Waseda University, Kitakyushu-Shi, Japan
+conf/icaic/WangNLC11	41	School Electrical Engineering, Wuhan University, Wuhan, Hubei Province, China
+conf/icaic/JinCNL11	41	School Electrical Engineering, Wuhan University, Wuhan, Hubei Province, China
+conf/icca/ChenQG11	36	Department of Electronic and Computer Engineering, The Hong Kong University of Science and Technology, Hong Kong
+conf/icdm/ChenSF11	42	Department of Computer Science and Engineering, SUNY at Buffalo, USA
+conf/icebe/ChenLWW11	17	Institute of Software, Chinese Academy of Sciences, Beijing, China
 conf/iceis/YangZC11
-conf/icic/ZhaoCZHZL11
-conf/icmlc/ChenZ11
-conf/icmlc/ZhangCY11
-conf/icwl/GuNCC11
-conf/icwl/LiNCZ11
-conf/igarss/ChenCZJJXGNZZTL11
-conf/igarss/ZhaoCZZJJGXNCTLL11
-conf/igarss/ZhengCCWZJJXGZNCTLL11
-conf/intenv/AnsemsCB11
-conf/iwqos/ChenWCL11
-conf/sigir/WeiHL11
-conf/smc/ChenST11
-conf/swarm/ZhangLCZ11
-conf/vcip/ChenYLWH11
-conf/wcnc/XiaoGCSC11
-journals/corr/abs-1103-2952
-journals/corr/abs-1109-0213
-journals/corr/abs-1111-4729
-journals/corr/abs-1111-4795
-journals/gpb/DengTCLLLZ10
-journals/itpro/RauHLCJ10
-journals/jgo/ChenZ10
-journals/jsea/ZhangFQC10
-journals/mcm/ChenZCP10
-journals/neuroimage/LiuRZYCH10
-journals/neuroimage/ZhangZZPC10
-journals/ploscb/XuHLXLFYYMLSHCPK10
-journals/tc/SanyalRCK10
-journals/tgrs/Chen10a
-journals/toms/ChenH10
-conf/aici/JiangDXCC10
-conf/airs/ChenZ10
-conf/bibm/ChenZCP10
-conf/bibm/XiaZCC10
-conf/cicc/CheMCCWYXTYM10
-conf/cts/ChenTMTDD10
-conf/fskd/ZhaoLZC10
-conf/fskd/ZhouCF10
-conf/gcb/Gogol-DoringC10
-conf/geoinformatics/GaoCDHLG10
-conf/geoinformatics/GuoHCLDG10
-conf/globecom/ChenWLL10
-conf/globecom/LiuLCWW10
-conf/grid/ChenFL10
-conf/icdim/ChenF10
-conf/icee/ZengC10
-conf/icee/ZengQC10
-conf/icic/YuanLC10
-conf/icic/ChenZTF10
-conf/icmlc/ChenGL10
-conf/icmlc/ChenYC10
-conf/icnc/SunCH10
-conf/icnc/ChenC10
-conf/icwl/FengXPCS10
-conf/isqed/ShenCCLZH10
-conf/isvc/Chen10
-conf/mvhi/GaoCYF10
-conf/nips/ChenLM10
-conf/pimrc/XieZHCS10
-conf/smc/ChenSL10
-conf/smc/YuanLC10
-conf/smc/HuFLCY10
-conf/vtc/ChuahC10
-conf/vinci/2010
-journals/bioinformatics/ChenLA09
-journals/ejwcn/ZhangCZWZ09
-journals/ijbra/ChenLZL09
-journals/neuroimage/LiuZCH09
-journals/neuroimage/ZhangYZUC09
-journals/tbe/DingZCH09
-journals/tcsv/ChenSH09
-conf/ACISicis/ChenZLG09
-conf/bmei/SuiTLCLR09
-conf/bmei/XiaWGZWLCBL09
-conf/cdc/KhanACD09
-conf/cdc/WangWHZC09
-conf/cnsr/ChenHXZ09
-conf/cso/Chen09
-conf/cts/ChenDD09
-conf/dbta/LiuLC09
-conf/dbta/LiCWCG09
-conf/esiat/ChenJBQSKLM09
-conf/esiat/ChenYW09
-conf/gcc/JiangZCP09
-conf/grc/ChenCJC09
-conf/grc/GuoCW09
-conf/grc/YangCW09
-conf/grc/ZhangCW09
-conf/iccms/ChenL09
-conf/icfie/Chen09a
-conf/icip/BoulosCPC09
-conf/icnc/ChenF09a
-conf/icnc/ZhaoCX09
-conf/igarss/JiangWZCZTW09
-conf/isit/ZhangZCS09
-conf/jcai/ChenZ09
-conf/jcai/LinLGC09
-conf/jcai/LiuCG09
-conf/mass/LiCZ09
-conf/nems/YinLCCZ09
-conf/nips/ChenLLML09
-conf/nss/ChenZCG09
-conf/otm/ChenFGJ09
-conf/smc/LiuC09
-conf/wism/CheCFZ09
-conf/wkdd/ChenCYCL09
-series/sci/LiuC09
-journals/chinaf/ChenZ08
-journals/neuroimage/ZhangZZC08
-journals/neuroimage/ZhangZC08
-journals/prl/ChenZ08
-journals/tgrs/ChubbMSCEK08
-conf/bmei/ZhuRLC08
-conf/cscwd/ZhengDTC08
-conf/csse/XiongWZZJ08
-conf/csse/XiongWJZZ08
-conf/icira/LiCZW08
-conf/icis/YeGCL08
-conf/icpads/ChenZW08
-conf/icwn/ChenMG08
-conf/ieaaie/ChenSDFX08
-conf/igarss/BachmannNMLWFCMKMMKKMBSGSPST08
-conf/igarss/ChenMS08
-conf/isecs/CaiC08
-conf/medbiometrics/ZhangCZCP08
-conf/otm/ChenWWQ08
-conf/paciia/YuCL08
-journals/adcm/ChenL07
-journals/ieicet/ChenBOQV07
-conf/atc/ChenCSZ07
-conf/cec/YinCL07
-conf/compsac/TongGCL07
-conf/dac/RastogiCK07
-conf/ecumn/LvKCL07
-conf/fskd/LiHCWC07
-conf/gcc/ShenYCLW07
-conf/i3e/ChenZJ07
-conf/icfie/ChenZZC07
-conf/icppw/WeiXYX07
-conf/snpd/XuCY07
-conf/snpd/ChenSLL07
-conf/vlsid/RastogiCSK07
-journals/telsys/ChenY06
-conf/fskd/Chen06
-conf/icip/XieRSC06
-conf/icn/ChenY06
-conf/icpads/QuYC06
-conf/iptps/ChenL06
-conf/iros/ZhangSZC06
-journals/bmcbi/SheddenCKGMCGGFTH05
-journals/bmcbi/ChenERLU05
-journals/ieicet/ChenGT05
-journals/tbe/ZhangUSC05
-conf/interspeech/ChenKS05
-conf/ispw/ChenYXZ05
-conf/sosp/YuRC05
-journals/dt/LouC04
-journals/ieiceee/BauwelinckCVMOQV04
-journals/jcisd/ChenHG04
-conf/gcc/ZhaoCQS04
-conf/globecom/ChenZ04
-conf/aspdac/LouC03
-conf/rsfdgrc/ZhouQZZCL03
-journals/stvr/ChenURER02
-conf/bildmed/ChenF02
-conf/bildmed/WangKC02
-conf/vlsid/ChenPB02
-journals/jise/ChiangCWH01
-conf/iscas/ChenKMC01
-journals/cai/ChiangCWH00
-journals/tcad/ChenHP00
-conf/iccad/ChenHP00
-journals/jei/SegallCA99
-conf/iccad/LouCP99
-conf/ispd/ChenHP99
-journals/cai/ChiangWC98
-journals/mp/ArmstrongCGJ98
-journals/mp/GoldfarbC97
-conf/wdag/InoueC94
-journals/scp/ChenU90
-conf/acm/Chen90
-conf/mpc/ChenUV89
-conf/mpc/ChenU89
+conf/icic/ZhaoCZHZL11	43	New Start Research Institute of Applied Technology, Hefei 230031 China
+conf/icmlc/ChenZ11	44	College of Economics and Management, Hebei University of Science and Technology, Shijiazhuang 050018, China
+conf/icmlc/ZhangCY11	44	College of Economics and Management, Hebei University of Science and Technology, Shijiazhuang 050018, China
+conf/icwl/GuNCC11	39	Beijing Institute of Technology
+conf/icwl/LiNCZ11	39	Beijing Institute of Technology
+conf/igarss/ChenCZJJXGNZZTL11	45	State Key Laboratory of Remote Sensing Science, Institute of Remote Sensing Applications of Chinese Academy of Sciences, Beijing, 100101, P.R. China
+conf/igarss/ZhaoCZZJJGXNCTLL11	45	State Key Laboratory of Remote Sensing Science, Institute of Remote Sensing Applications of Chinese Academy of Sciences, Beijing, 100101, P.R. China
+conf/igarss/ZhengCCWZJJXGZNCTLL11	45	State Key Laboratory of Remote Sensing Science, Institute of Remote Sensing Applications of Chinese Academy of Sciences, Beijing, 100101, P.R. China
+conf/intenv/AnsemsCB11	46	Department of Industrial Design, Eindhoven University of Technology, Den Dolech 2, 5612 AZ, Eindhoven, The Netherlands
+conf/iwqos/ChenWCL11	47	Department of Information Engineering, The Chinese University of Hong Kong, Hong Kong, China
+conf/sigir/WeiHL11	27	National University of Singapore, Singapore, Singapore
+conf/smc/ChenST11	12	Department of Information Management, Nanjing Audit University, Jiangsu, China
+conf/swarm/ZhangLCZ11	48	Huazhong University of Sciences & Technology, Wuhan, Hubei, China
+conf/vcip/ChenYLWH11	49	Department of Electrical Engineering, National Tsing Hua University, Hsin-Chu, Taiwan
+conf/wcnc/XiaoGCSC11	50	Department of Computer and Information Sciences, University of Delaware, USA
+journals/corr/abs-1103-2952	51	Department of Radiation Oncology, Massachusetts General Hospital and Harvard Medical School, Boston, MA 02114, USA
+journals/corr/abs-1109-0213	52	Fujian Key Laboratory of Microelectronics & Integrated Circuits, Fuzhou University, Fujian Province, 350002, China PRC
+journals/corr/abs-1111-4729	8	Microsoft Research Asia, Beijing, China
+journals/corr/abs-1111-4795	8	Microsoft Research Asia, Beijing, China
+journals/gpb/DengTCLLLZ10	
+journals/itpro/RauHLCJ10	
+journals/jgo/ChenZ10	
+journals/jsea/ZhangFQC10	
+journals/mcm/ChenZCP10	
+journals/neuroimage/LiuRZYCH10	
+journals/neuroimage/ZhangZZPC10	
+journals/ploscb/XuHLXLFYYMLSHCPK10	
+journals/tc/SanyalRCK10	
+journals/tgrs/Chen10a	
+journals/toms/ChenH10	
+conf/aici/JiangDXCC10	
+conf/airs/ChenZ10	
+conf/bibm/ChenZCP10	
+conf/bibm/XiaZCC10	
+conf/cicc/CheMCCWYXTYM10	
+conf/cts/ChenTMTDD10	
+conf/fskd/ZhaoLZC10	
+conf/fskd/ZhouCF10	
+conf/gcb/Gogol-DoringC10	
+conf/geoinformatics/GaoCDHLG10	
+conf/geoinformatics/GuoHCLDG10	
+conf/globecom/ChenWLL10	
+conf/globecom/LiuLCWW10	
+conf/grid/ChenFL10	
+conf/icdim/ChenF10	
+conf/icee/ZengC10	
+conf/icee/ZengQC10	
+conf/icic/YuanLC10	
+conf/icic/ChenZTF10	
+conf/icmlc/ChenGL10	
+conf/icmlc/ChenYC10	
+conf/icnc/SunCH10	
+conf/icnc/ChenC10	
+conf/icwl/FengXPCS10	
+conf/isqed/ShenCCLZH10	
+conf/isvc/Chen10	
+conf/mvhi/GaoCYF10	
+conf/nips/ChenLM10	
+conf/pimrc/XieZHCS10	
+conf/smc/ChenSL10	
+conf/smc/YuanLC10	
+conf/smc/HuFLCY10	
+conf/vtc/ChuahC10	
+conf/vinci/2010	
+journals/bioinformatics/ChenLA09	
+journals/ejwcn/ZhangCZWZ09	
+journals/ijbra/ChenLZL09	
+journals/neuroimage/LiuZCH09	
+journals/neuroimage/ZhangYZUC09	
+journals/tbe/DingZCH09	
+journals/tcsv/ChenSH09	
+conf/ACISicis/ChenZLG09	
+conf/bmei/SuiTLCLR09	
+conf/bmei/XiaWGZWLCBL09	
+conf/cdc/KhanACD09	
+conf/cdc/WangWHZC09	
+conf/cnsr/ChenHXZ09	
+conf/cso/Chen09	
+conf/cts/ChenDD09	
+conf/dbta/LiuLC09	
+conf/dbta/LiCWCG09	
+conf/esiat/ChenJBQSKLM09	
+conf/esiat/ChenYW09	
+conf/gcc/JiangZCP09	
+conf/grc/ChenCJC09	
+conf/grc/GuoCW09	
+conf/grc/YangCW09	
+conf/grc/ZhangCW09	
+conf/iccms/ChenL09	
+conf/icfie/Chen09a	
+conf/icip/BoulosCPC09	
+conf/icnc/ChenF09a	
+conf/icnc/ZhaoCX09	
+conf/igarss/JiangWZCZTW09	
+conf/isit/ZhangZCS09	
+conf/jcai/ChenZ09	
+conf/jcai/LinLGC09	
+conf/jcai/LiuCG09	
+conf/mass/LiCZ09	
+conf/nems/YinLCCZ09	
+conf/nips/ChenLLML09	
+conf/nss/ChenZCG09	
+conf/otm/ChenFGJ09	
+conf/smc/LiuC09	
+conf/wism/CheCFZ09	
+conf/wkdd/ChenCYCL09	
+series/sci/LiuC09	
+journals/chinaf/ChenZ08	
+journals/neuroimage/ZhangZZC08	
+journals/neuroimage/ZhangZC08	
+journals/prl/ChenZ08	
+journals/tgrs/ChubbMSCEK08	
+conf/bmei/ZhuRLC08	
+conf/cscwd/ZhengDTC08	
+conf/csse/XiongWZZJ08	
+conf/csse/XiongWJZZ08	
+conf/icira/LiCZW08	
+conf/icis/YeGCL08	
+conf/icpads/ChenZW08	
+conf/icwn/ChenMG08	
+conf/ieaaie/ChenSDFX08	
+conf/igarss/BachmannNMLWFCMKMMKKMBSGSPST08	
+conf/igarss/ChenMS08	
+conf/isecs/CaiC08	
+conf/medbiometrics/ZhangCZCP08	
+conf/otm/ChenWWQ08	
+conf/paciia/YuCL08	
+journals/adcm/ChenL07	
+journals/ieicet/ChenBOQV07	
+conf/atc/ChenCSZ07	
+conf/cec/YinCL07	
+conf/compsac/TongGCL07	
+conf/dac/RastogiCK07	
+conf/ecumn/LvKCL07	
+conf/fskd/LiHCWC07	
+conf/gcc/ShenYCLW07	
+conf/i3e/ChenZJ07	
+conf/icfie/ChenZZC07	
+conf/icppw/WeiXYX07	
+conf/snpd/XuCY07	
+conf/snpd/ChenSLL07	
+conf/vlsid/RastogiCSK07	
+journals/telsys/ChenY06	
+conf/fskd/Chen06	
+conf/icip/XieRSC06	
+conf/icn/ChenY06	
+conf/icpads/QuYC06	
+conf/iptps/ChenL06	
+conf/iros/ZhangSZC06	
+journals/bmcbi/SheddenCKGMCGGFTH05	
+journals/bmcbi/ChenERLU05	
+journals/ieicet/ChenGT05	
+journals/tbe/ZhangUSC05	
+conf/interspeech/ChenKS05	
+conf/ispw/ChenYXZ05	
+conf/sosp/YuRC05	
+journals/dt/LouC04	
+journals/ieiceee/BauwelinckCVMOQV04	
+journals/jcisd/ChenHG04	
+conf/gcc/ZhaoCQS04	
+conf/globecom/ChenZ04	
+conf/aspdac/LouC03	
+conf/rsfdgrc/ZhouQZZCL03	
+journals/stvr/ChenURER02	
+conf/bildmed/ChenF02	
+conf/bildmed/WangKC02	
+conf/vlsid/ChenPB02	
+journals/jise/ChiangCWH01	
+conf/iscas/ChenKMC01	
+journals/cai/ChiangCWH00	
+journals/tcad/ChenHP00	
+conf/iccad/ChenHP00	
+journals/jei/SegallCA99	
+conf/iccad/LouCP99	
+conf/ispd/ChenHP99	
+journals/cai/ChiangWC98	
+journals/mp/ArmstrongCGJ98	
+journals/mp/GoldfarbC97	
+conf/wdag/InoueC94	
+journals/scp/ChenU90	
+conf/acm/Chen90	
+conf/mpc/ChenUV89	
+conf/mpc/ChenU89	
