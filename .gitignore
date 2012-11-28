@@ -1,4 +1,4 @@
-ompiled source #
+# Compiled source #
 ###################
 *.com
 *.class
@@ -6,6 +6,9 @@ ompiled source #
 *.exe
 *.o
 *.so
+*.aux
+*.bbl
+*.blg
 
 # Packages #
 ############
