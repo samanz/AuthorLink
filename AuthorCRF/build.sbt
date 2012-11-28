@@ -12,6 +12,8 @@ libraryDependencies +=  "edu.umass.cs.iesl" %% "scalacommons" % "0.1-SNAPSHOT"  
 
 libraryDependencies +=  "cc.factorie" % "factorie" % "1.0-SNAPSHOT"  changing()
 
+libraryDependencies +=  "postgresql" % "postgresql" % "8.4-702.jdbc4"
+
 resolvers += "IESL Repo" at "https://dev-iesl.cs.umass.edu/nexus/content/repositories/releases"
 
 resolvers += "IESL ThirdParty Repo" at "https://dev-iesl.cs.umass.edu/nexus/content/repositories/thirdparty"
