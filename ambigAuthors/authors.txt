@@ -17,7 +17,6 @@ conf/hci/SmithBSA97	8
 #John B. Smith (homepages/s/JohnBSmith)
 conf/ht/Smith97	3	Department of Computer Science, The University of North Carolina, Chapel Hill, NC
 conf/ht/BernsteinLMS96	3	University of North Carolina, Chapel Hill
-conf/cscw/1994	3	Univ. of North Carolina
 journals/jasis/GauchS93	3	Department of Computer Science, University of North Carolina, Chapel Hill, NC 27599-3175
 conf/ht/ShackelfordSS93	3	Department of Computer Science, University of North Carolina, Chapel Hill, North Carolina
 conf/chi/SmithL92	3	Department of Computer Science, University of North Carolina, Chapel Hill, NC 27599-3175
@@ -31,7 +30,6 @@ conf/riao/GauchS88	3	Department of Computer Science, The Univesity of North Caro
 journals/spe/SmithW87	3	Department of Computer Science, The University of North Carolina, Chapel Hill, North Carolina 27514, U.S.A.
 conf/ht/SmithWF87	3	Department of Computer Science, University of North Carolina, Chapel Hill, NC
 conf/sigir/SmithWF87	3	Department of Computer Science, The Univesity of North Carolina, Chapel Hill, North Carolina
-conf/ht/87	3	Department of Computer Science, The Univesity of North Carolina, Chapel Hill, North Carolina
 conf/ifip/Smith74	3	Pennsylvania State University
 conf/ifip/Smith71	3	Pennsylvania State University
 
