@@ -2,6 +2,7 @@ package authorcrf
 
 import cc.factorie._
 import cc.factorie.optimize._
+import scala.collection.mutable.ArrayBuffer
 
 object PairLabelDomain extends CategoricalDomain[String]
 abstract class PairLabel(initialValue:String) extends LabeledCategoricalVariable(initialValue) {
@@ -49,7 +50,23 @@ object Publication {
 	}
 }
 
-class Pair(val fields : Seq[FieldPair], val publication1 : Publication, val publication2 : Publication) extends Attr
+class Pair(val publication1 : Publication, val publication2 : Publication) extends Attr {
+	var fields : Seq[FieldPair] = null
+	def setFields(f : Seq[FieldPair]) { fields = f }
+}
+object Pair {
+	def apply(p1 : Publication, p2 :Publication) : Pair = {
+		val f1 = Array[Field](p1.title,p1.coAuthors,p1.venue,p1.affiliation)
+		val f2 = Array[Field](p2.title,p2.coAuthors,p2.venue,p2.affiliation)
+		val pair = new Pair(p1, p2)
+		val fp = (0 until f1.length).map(i => new FieldPair(f1(i),f2(i),pair))
+		pair.setFields(fp)
+		val same = (p1.attr[ClusterId].target==p2.attr[ClusterId].target)
+		val ppl = new PubPairLabel(pair, if(same) "YES" else "NO")
+		pair.attr += ppl
+		pair
+	} 
+}
 class FieldPair(val field1 : Field, val field2 : Field, val pair : Pair) extends Attr
 
 object TitleFeaturesDomain extends CategoricalTensorDomain[String]
@@ -57,20 +74,20 @@ object CoAuthorsFeaturesDomain extends CategoricalTensorDomain[String]
 object AffiliationFeaturesDomain extends CategoricalTensorDomain[String]
 object VenueFeaturesDomain extends CategoricalTensorDomain[String]
 
-abstract class AuthorFeatures(val field : Field) extends BinaryFeatureVectorVariable[String] {
+abstract class AuthorFeatures(val field : FieldPair) extends BinaryFeatureVectorVariable[String] {
   def domain : CategoricalTensorDomain[String] 
   override def skipNonCategories = true
 }
-class TitleFeatures(field : Field) extends AuthorFeatures(field) {
+class TitleFeatures(field : FieldPair) extends AuthorFeatures(field) {
 	def domain = TitleFeaturesDomain
 }
-class CoAuthorsFeatures(field : Field) extends AuthorFeatures(field) {
+class CoAuthorsFeatures(field : FieldPair) extends AuthorFeatures(field) {
 	def domain = CoAuthorsFeaturesDomain
 }
-class AffiliationFeatures(field : Field) extends AuthorFeatures(field) {
+class AffiliationFeatures(field : FieldPair) extends AuthorFeatures(field) {
 	def domain = AffiliationFeaturesDomain
 }
-class VenueFeatures(field : Field) extends AuthorFeatures(field) {
+class VenueFeatures(field : FieldPair) extends AuthorFeatures(field) {
 	def domain = VenueFeaturesDomain
 }
 
@@ -143,6 +160,47 @@ class AuthorLink {
 	val model = new AuthorLinkModel
 	val objective = new AuthorLinkObjective
 
+	def similar(p1 : Publication, p2 : Publication) : Boolean = { true }
+
+	def initTitleFeatures(fp : FieldPair) {
+		fp.attr += new TitleFeatures(fp)
+	}
+
+	def initCoAuthorsFeatures(fp : FieldPair) {
+		fp.attr += new CoAuthorsFeatures(fp)
+	}
+
+	def initAffiliationFeatures(fp : FieldPair) {
+		fp.attr += new AffiliationFeatures(fp)
+	}
+
+	def initVenueFeatures(fp : FieldPair) {
+		fp.attr += new VenueFeatures(fp)
+	}
+
+	def pairAndInitFeatures(pubs : Seq[Publication]) : Seq[Pair] = {
+		var pairs = ArrayBuffer[Pair]()
+		for(p1 <- 0 until pubs.length) {
+			val p1l = pubs(p1)
+			for(p2 <- p1+1 until pubs.length) {
+				val p2l = pubs(p2)
+				if(similar(p1l,p2l)) pairs += Pair(p1l, p2l)
+			}
+		}
+		for(pair <- pairs) {
+			for(fp <- pair.fields) {
+				fp.attr += new FieldPairLabel(fp, pair.attr[PairLabel].targetCategory)
+				fp.field1 match {
+					case title : Title => initTitleFeatures(fp)
+					case venue : Venue => initVenueFeatures(fp)
+					case affil : Affiliation => initAffiliationFeatures(fp)
+					case coauth : CoAuthors => initCoAuthorsFeatures(fp)
+				}
+			}
+		}
+		pairs.toSeq
+	} 
+
 	def test(testFile : String) {
 		val testPublications = LoadDBLPCoref.fromFile(testFile)
 		val testingPairs = pairAndInitFeatures(testPublications) 
@@ -163,11 +221,6 @@ class AuthorLink {
 
       	EvaluatePairs.evaluation(testingPairs)
 	}
-
-	def pairAndInitFeatures(pairs : Seq[Publication]) : Seq[Pair] = {
-		Array[Pair]()
-	} 
-
 
 	def train(trainFile : String, testFile : String ) {
 		val trainPublications = LoadDBLPCoref.fromFile(trainFile)
