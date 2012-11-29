@@ -52,8 +52,8 @@ object UpdateDBLP {
   } 
 
   def main(args : Array[String]) : Unit = {
-    val author = args.mkString(" ")
-    dumpAuthorsWithNote(author, author.replaceAll(" ", "_")+".ann", 100)
+    val author = args.tail.mkString(" ")
+    dumpAuthorsWithNote(author, author.replaceAll(" ", "_")+".ann", args(0).toInt)
   }
 
 	def updateFromKey(pubkey: String) : (String, String) = {
