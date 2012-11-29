@@ -8,7 +8,7 @@ object EvaluatePairs {
 
   def cluster(pairs: Seq[Pair]) {
     if (predMap == null) predMap = build(pairs, false)
-    trueMap.entities.foreach(e => {
+    predMap.entities.foreach(e => {
       println("=============")
       e._2.foreach(p => println(p.toString))
     })
