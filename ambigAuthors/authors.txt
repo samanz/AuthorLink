@@ -195,13 +195,13 @@ conf/aici/JiangDXCC10	43	School of Art Layout, Hunan University of Commerce, Cha
 conf/airs/ChenZ10	97	MOE-MS Key Laboratory for Intelligent Computing and Intelligent Systems, Shanghai Jiao Tong University
 conf/bibm/ChenZCP10	60	College of Automation, Northwestern Polytechnical University, 710072, Xi'an, China
 conf/bibm/XiaZCC10	54	Department of Electrical and Electronic Engineering, The University of Hong Kong, Hong Kong, PR China
-conf/cicc/CheMCCWYXTYM10	
-conf/cts/ChenTMTDD10	
-conf/fskd/ZhaoLZC10	
-conf/fskd/ZhouCF10	
-conf/gcb/Gogol-DoringC10	
-conf/geoinformatics/GaoCDHLG10	
-conf/geoinformatics/GuoHCLDG10	
+conf/cicc/CheMCCWYXTYM10	98	State Key Lab of ASIC and System, Fudan University, Shanghai, China, 201203
+conf/cts/ChenTMTDD10	58	Intelligent Automation, Inc.
+conf/fskd/ZhaoLZC10	99	State Key Laboratory of Estuarine and Coastal Research, East China Normal University, Shanghai, 200062, China
+conf/fskd/ZhouCF10	100	Coll. of Inf. Sci. & Eng., Wuhan Univ. of Sci. & Technol., Wuhan, China
+conf/gcb/Gogol-DoringC10	95	Berlin Institute for Medical Systems Biology, Max Delbruck Center for Molecular Medicine, Berlin, Germany
+conf/geoinformatics/GaoCDHLG10	101	Department of Urban Forest, Institute of Applied Ecology, Chinese Academy of Sciences, Shenyang (110016), China
+conf/geoinformatics/GuoHCLDG10	101	Department of Urban Forest, Institute of Applied Ecology, Chinese Academy of Sciences, Shenyang (110016), China
 conf/globecom/ChenWLL10	
 conf/globecom/LiuLCWW10	
 conf/grid/ChenFL10	
