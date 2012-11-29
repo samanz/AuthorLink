@@ -1,0 +1,372 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: article; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE article (
+    pubid integer NOT NULL,
+    journal text,
+    month text,
+    volume text,
+    number text
+);
+
+
+ALTER TABLE public.article OWNER TO postgres;
+
+--
+-- Name: author_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE author_id_seq
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.author_id_seq OWNER TO postgres;
+
+--
+-- Name: author; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE author (
+    id integer DEFAULT nextval('author_id_seq'::regclass) NOT NULL,
+    name text,
+    homepage text
+);
+
+
+ALTER TABLE public.author OWNER TO postgres;
+
+--
+-- Name: author_pub; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE author_pub (
+    published bigint,
+    count bigint
+);
+
+
+ALTER TABLE public.author_pub OWNER TO postgres;
+
+--
+-- Name: authored; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE authored (
+    id integer NOT NULL,
+    pubid integer NOT NULL
+);
+
+
+ALTER TABLE public.authored OWNER TO postgres;
+
+--
+-- Name: book; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE book (
+    pubid integer NOT NULL,
+    publisher text,
+    isbn text
+);
+
+
+ALTER TABLE public.book OWNER TO postgres;
+
+--
+-- Name: coauthor; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE coauthor (
+    authorid integer,
+    coauthorid integer
+);
+
+
+ALTER TABLE public.coauthor OWNER TO postgres;
+
+--
+-- Name: coauthored; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE coauthored (
+    author integer,
+    coauthor integer
+);
+
+
+ALTER TABLE public.coauthored OWNER TO postgres;
+
+--
+-- Name: counts; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE counts (
+    name text,
+    count bigint
+);
+
+
+ALTER TABLE public.counts OWNER TO postgres;
+
+--
+-- Name: counts_authors; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE counts_authors (
+    coauthorship bigint,
+    count bigint
+);
+
+
+ALTER TABLE public.counts_authors OWNER TO postgres;
+
+
+
+--
+-- Name: incollection; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE incollection (
+    pubid integer NOT NULL,
+    booktitle text,
+    publisher text,
+    isbn text
+);
+
+
+ALTER TABLE public.incollection OWNER TO postgres;
+
+--
+-- Name: inproceedings; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE inproceedings (
+    pubid integer NOT NULL,
+    booktitle text,
+    publisher text
+);
+
+
+ALTER TABLE public.inproceedings OWNER TO postgres;
+
+
+--
+-- Name: pubid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE pubid_seq
+    INCREMENT BY 1
+    MINVALUE 1947379
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.pubid_seq OWNER TO postgres;
+
+--
+-- Name: publication; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE publication (
+    pubid integer DEFAULT nextval('pubid_seq'::regclass) NOT NULL,
+    pubkey text,
+    title text,
+    year integer
+);
+
+
+ALTER TABLE public.publication OWNER TO postgres;
+
+--
+-- Name: article_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY article
+    ADD CONSTRAINT article_pkey PRIMARY KEY (pubid);
+
+
+--
+-- Name: author_pkey1; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY author
+    ADD CONSTRAINT author_pkey1 PRIMARY KEY (id);
+
+
+--
+-- Name: book_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY book
+    ADD CONSTRAINT book_pkey PRIMARY KEY (pubid);
+
+
+--
+-- Name: pubkey_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY publication
+    ADD CONSTRAINT pubkey_key UNIQUE (pubkey);
+
+
+--
+-- Name: publication_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY publication
+    ADD CONSTRAINT publication_pkey PRIMARY KEY (pubid);
+
+
+--
+-- Name: auna_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auna_idx ON author USING btree (name);
+
+
+--
+-- Name: booktitle_inx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX booktitle_inx ON inproceedings USING btree (booktitle);
+
+
+--
+-- Name: bpubid_inx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX bpubid_inx ON book USING btree (pubid);
+
+
+--
+-- Name: id_inx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX id_inx ON authored USING btree (id);
+
+
+--
+-- Name: pubid_inx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX pubid_inx ON authored USING btree (pubid);
+
+
+--
+-- Name: pubkey_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX pubkey_idx ON publication USING btree (pubkey);
+
+
+--
+-- Name: qnpubid_inx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX qnpubid_inx ON incollection USING btree (pubid);
+
+
+--
+-- Name: qnpubidd_inx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX qnpubidd_inx ON inproceedings USING btree (pubid);
+
+
+--
+-- Name: qpubid_inx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX qpubid_inx ON article USING btree (pubid);
+
+
+--
+-- Name: year_idx; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX year_idx ON publication USING btree (year);
+
+
+--
+-- Name: distfk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY book
+    ADD CONSTRAINT distfk FOREIGN KEY (pubid) REFERENCES publication(pubid) MATCH FULL;
+
+
+--
+-- Name: distfk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY incollection
+    ADD CONSTRAINT distfk FOREIGN KEY (pubid) REFERENCES publication(pubid) MATCH FULL;
+
+
+--
+-- Name: distfk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY inproceedings
+    ADD CONSTRAINT distfk FOREIGN KEY (pubid) REFERENCES publication(pubid) MATCH FULL;
+
+
+--
+-- Name: distfk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY article
+    ADD CONSTRAINT distfk FOREIGN KEY (pubid) REFERENCES publication(pubid) MATCH FULL;
+
+
+--
+-- Name: distfk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY authored
+    ADD CONSTRAINT distfk FOREIGN KEY (pubid) REFERENCES publication(pubid) MATCH FULL;
+
+
+--
+-- Name: distfk1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY authored
+    ADD CONSTRAINT distfk1 FOREIGN KEY (id) REFERENCES author(id) MATCH FULL;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
