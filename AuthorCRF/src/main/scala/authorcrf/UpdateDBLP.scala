@@ -1,12 +1,60 @@
 package authorcrf
 
 import java.sql.{Connection, DriverManager, ResultSet, Statement}
+import java.io._
 import scala.xml._
 
 object UpdateDBLP {
-    classOf[org.postgresql.Driver]
-    val db = DriverManager.getConnection("jdbc:postgresql://localhost/dblp","postgres","")
-    val st = db.createStatement
+  classOf[org.postgresql.Driver]
+  val db = DriverManager.getConnection("jdbc:postgresql://localhost/dblp","postgres","")
+  val st = db.createStatement
+  var note = ""
+  
+  def hasNote(node : Node) : Boolean = {
+    val personRec = XML.load("http://dblp.uni-trier.de/rec/bibtex/" + node.child.head.toString + ".xml")
+    if((personRec \ "www" \ "note").length > 0) {
+       note = (personRec \ "www" \ "note").head.child.head.toString
+       true
+    } else false
+  }
+
+  def getNote : String = note
+
+  def dumpAuthorsWithNote(name : String, file : String, start : Int = 0) {
+    var ids = start
+    val bw = new BufferedWriter(new FileWriter(new File(file)))
+    val split = name.split(" ")
+    val url = "/" + name(0).toLowerCase + "/" + split(0) + ":" + split(1)
+    val per = XML.load("http://dblp.uni-trier.de/pers/xk" + url +".xml")
+    val homonyms = (per \ "homonym")
+    val pubs = (per \ "dblpkey")
+    bw.write("#" + name + "\n")
+    if(hasNote(pubs.head)) {
+      val affil = getNote
+      for(i <- 1 until pubs.length) {
+        val pub = pubs(i)
+        bw.write(pub.child.head.toString + "\t" + ids + "\t" + affil + "\n")
+      }
+    }
+    for(homonym <- homonyms) {
+      val hom = XML.load("http://dblp.uni-trier.de/pers/xk/" + homonym.head.child.head.toString +".xml")
+      val pubs = (hom \ "dblpkey")
+      if(hasNote(pubs.head)) {
+        val affil = getNote
+        for(i <- 1 until pubs.length) {
+          val pub = pubs(i)
+          bw.write(pub.child.head.toString + "\t" + ids + "\t" + affil + "\n")
+        }
+      }
+      bw.flush()
+      ids += 1
+    }
+  } 
+
+  def main(args : Array[String]) : Unit = {
+    val author = args.mkString(" ")
+    dumpAuthorsWithNote(author, author.replaceAll(" ", "_")+".ann", 100)
+  }
 
 	def updateFromKey(pubkey: String) : (String, String) = {
 		val doc = XML.load("http://dblp.uni-trier.de/rec/bibtex/" + pubkey + ".xml")
