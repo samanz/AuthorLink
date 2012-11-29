@@ -43,3 +43,8 @@ Thumbs.db
 # backup files #
 ################
 *~
+
+# other files #
+###############
+.ensime
+.ensime_lucene

@@ -14,6 +14,8 @@ libraryDependencies +=  "cc.factorie" % "factorie" % "1.0-SNAPSHOT"  changing()
 
 libraryDependencies +=  "postgresql" % "postgresql" % "8.4-702.jdbc4"
 
+libraryDependencies += "cc.refectorie.user.sameer" % "util" % "1.1-SNAPSHOT"
+
 resolvers += "IESL Repo" at "https://dev-iesl.cs.umass.edu/nexus/content/repositories/releases"
 
 resolvers += "IESL ThirdParty Repo" at "https://dev-iesl.cs.umass.edu/nexus/content/repositories/thirdparty"
@@ -25,8 +27,6 @@ resolvers += "David Soergel Repo" at "http://dev.davidsoergel.com/nexus/content/
 resolvers += "David Soergel Snapshot Repo" at "http://dev.davidsoergel.com/nexus/content/repositories/snapshots"
 
 resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
-
-
 
 seq(assemblySettings: _*)
 
