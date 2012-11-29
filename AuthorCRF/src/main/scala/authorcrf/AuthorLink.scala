@@ -157,9 +157,11 @@ class AuthorLink {
       	for (i <- 0 until 3; label <- testFieldLabels) predictor.process(label)
       	for (i <- 0 until 3; label <- testPairLabels) predictor.process(label)
 
+
+      	EvaluatePairs.clearMaps()
       	EvaluatePairs.cluster(testingPairs)
 
-      	EvaluatePairs.evaluation(testPublications)
+      	EvaluatePairs.evaluation(testingPairs)
 	}
 
 	def pairAndInitFeatures(pairs : Seq[Publication]) : Seq[Pair] = {
@@ -197,11 +199,12 @@ class AuthorLink {
       	for (i <- 0 until 3; label <- testFieldLabels) predictor.process(label)
       	for (i <- 0 until 3; label <- testPairLabels) predictor.process(label)
 
+      	EvaluatePairs.clearMaps()
       	EvaluatePairs.cluster(trainingPairs)
       	EvaluatePairs.cluster(testingPairs)
 
-      	EvaluatePairs.evaluation(trainPublications)
-      	EvaluatePairs.evaluation(testPublications)
+      	EvaluatePairs.evaluation(trainingPairs)
+      	EvaluatePairs.evaluation(testingPairs)
 
 	}
 
