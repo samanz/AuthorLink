@@ -32,7 +32,7 @@ object LoadDBLPCoref {
     			venue = res.getString(3)
     		}
     		if(title == "") println("Not found: " + pubkey)
-    		Array[Field](new Title(title), new CoAuthors(authors), new Venue(venue))
+    		Array[Field](new Title(title), new CoAuthors(authors.init), new Venue(venue))
    		} else Array[Field]()
    	}
 
