@@ -226,8 +226,6 @@ class AuthorLink {
 		val trainPublications = LoadDBLPCoref.fromFile(trainFile)
 		val testPublications = LoadDBLPCoref.fromFile(testFile)
 
-		trainPublications.foreach{ println(_) }
-
 		println("Train Publications Size " + trainPublications.length)
 
 		val trainingPairs = pairAndInitFeatures(trainPublications)
@@ -243,7 +241,8 @@ class AuthorLink {
       	val learner = new SampleRankTrainer(new GibbsSampler(model, objective), new ConfidenceWeighting(model, 0.01))
       	val predictor = new IteratedConditionalModes[PairLabel](model) // {temperature=0.01}
       
-      	for (iteration <- 1 until 15) {
+      	for (i <- 1 until 15) {
+      		println("--Iteration " + i)
         	learner.processContexts(trainFieldLabels)
         	learner.processContexts(trainPairLabels)
         	predictor.processAll(testFieldLabels)
