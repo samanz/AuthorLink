@@ -140,21 +140,24 @@ class AuthorLinkModel extends CombinedModel {
 	}
 	// Factor between field and CoAuthorFeatures
 	val CoAuthorTemplate = new DotTemplateWithStatistics2[FieldPairLabel, CoAuthorsFeatures] {
-		factorName = "Title"
+		factorName = "CoAuthor"
 		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, CoAuthorsFeaturesDomain.dimensionSize)
 		def unroll1(fieldlabel : FieldPairLabel) = if(fieldlabel.field.attr.contains[CoAuthorsFeatures]) Factor(fieldlabel, fieldlabel.field.attr[CoAuthorsFeatures]) else Nil
 		def unroll2(tf : CoAuthorsFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
 	}
 	// Factor between field and AffiliationFeatures
 	val AffiliationTemplate = new DotTemplateWithStatistics2[FieldPairLabel, AffiliationFeatures] {
-		factorName = "Title"
+		factorName = "Affiliation"
 		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, AffiliationFeaturesDomain.dimensionSize)
-		def unroll1(fieldlabel : FieldPairLabel) = if(fieldlabel.field.attr.contains[AffiliationFeatures]) Factor(fieldlabel, fieldlabel.field.attr[AffiliationFeatures]) else Nil
+		def unroll1(fieldlabel : FieldPairLabel) = { 
+			println("Got here")
+			if(fieldlabel.field.attr.contains[AffiliationFeatures]) { println("Create Factor"); Factor(fieldlabel, fieldlabel.field.attr[AffiliationFeatures]) } else Nil
+		}
 		def unroll2(tf : AffiliationFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
 	}
 }
 
-class AuthorLinkObjective extends HammingTemplate[PubPairLabel]
+class AuthorLinkObjective extends HammingTemplate[PairLabel]
 
 class AuthorLink {
 	val model = new AuthorLinkModel
@@ -163,19 +166,20 @@ class AuthorLink {
 	def similar(p1 : Publication, p2 : Publication) : Boolean = { true }
 
 	def initTitleFeatures(fp : FieldPair) {
-		fp.attr += new TitleFeatures(fp)
+		//fp.attr += new TitleFeatures(fp)
 	}
 
 	def initCoAuthorsFeatures(fp : FieldPair) {
-		fp.attr += new CoAuthorsFeatures(fp)
+		//fp.attr += new CoAuthorsFeatures(fp)
 	}
 
 	def initAffiliationFeatures(fp : FieldPair) {
 		fp.attr += new AffiliationFeatures(fp)
+		if(fp.field1.asInstanceOf[Affiliation].string==fp.field2.asInstanceOf[Affiliation].string) fp.attr[AffiliationFeatures] += "EXACT"
 	}
 
 	def initVenueFeatures(fp : FieldPair) {
-		fp.attr += new VenueFeatures(fp)
+		//fp.attr += new VenueFeatures(fp)
 	}
 
 	def pairAndInitFeatures(pubs : Seq[Publication]) : Seq[Pair] = {
@@ -247,6 +251,7 @@ class AuthorLink {
         	learner.processContexts(trainPairLabels)
         	predictor.processAll(testFieldLabels)
         	predictor.processAll(testPairLabels)
+        	println(model.AffiliationTemplate.weights)
       	}
       	for (i <- 0 until 3; label <- testFieldLabels) predictor.process(label)
       	for (i <- 0 until 3; label <- testPairLabels) predictor.process(label)
