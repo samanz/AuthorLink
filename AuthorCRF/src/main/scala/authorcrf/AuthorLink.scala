@@ -1,6 +1,7 @@
 package authorcrf
 
 import cc.factorie._
+import cc.factorie.app.strings.Stopwords
 import cc.factorie.optimize._
 import scala.collection.mutable.ArrayBuffer
 
@@ -162,11 +163,27 @@ class AuthorLinkObjective extends HammingTemplate[PairLabel]
 class AuthorLink {
 	val model = new AuthorLinkModel
 	val objective = new AuthorLinkObjective
+	var titleStat:Map[String, Int] = null
+	var venueStat:Map[String, Int] = null
+	val statThreshold = 10
 
 	def similar(p1 : Publication, p2 : Publication) : Boolean = { true }
 
 	def initTitleFeatures(fp : FieldPair) {
-		//fp.attr += new TitleFeatures(fp)
+		val f = new TitleFeatures(fp)
+		val v1 = fp.field1.asInstanceOf[Title].string
+		val v2 = fp.field2.asInstanceOf[Title].string
+		val v1WithoutStop = v1.toLowerCase().replaceAll("\\p{Punct}+", " ").split(" +").filterNot(Stopwords.contains(_))
+		val v2WithoutStop = v2.toLowerCase().replaceAll("\\p{Punct}+", " ").split(" +").filterNot(Stopwords.contains(_))
+		if (v1.equalsIgnoreCase(v2)) f += "Title_Same"
+		f += "Title_Overlap_" + v1WithoutStop.toSet.intersect(v2WithoutStop.toSet) // TODO: bin?
+		for (w1 <- v1WithoutStop.toSet[String].filter(w => titleStat.contains(w) && titleStat(w) > statThreshold)) {
+		  for (w2 <- v2WithoutStop.toSet[String]filter(w => titleStat.contains(w) && titleStat(w) > statThreshold)) {
+		    f += "Title_WordPair_" + (if (w1 < w2) (w1 + "_" + w2) else (w2 + "_" + w1))
+		  }
+		}
+		// TODO: use lucene score?
+		fp.attr += f
 	}
 
 	def initCoAuthorsFeatures(fp : FieldPair) {
@@ -179,7 +196,19 @@ class AuthorLink {
 	}
 
 	def initVenueFeatures(fp : FieldPair) {
-		//fp.attr += new VenueFeatures(fp)
+		val f = new VenueFeatures(fp)
+		val v1 = fp.field1.asInstanceOf[Venue].string
+		val v2 = fp.field2.asInstanceOf[Venue].string
+		val v1WithoutStop = v1.toLowerCase().replaceAll("\\p{Punct}+", " ").split(" +").filterNot(Stopwords.contains(_))
+		val v2WithoutStop = v2.toLowerCase().replaceAll("\\p{Punct}+", " ").split(" +").filterNot(Stopwords.contains(_))
+		if (v1.equalsIgnoreCase(v2)) f += "Venue_Same"
+		f += "Venue_Overlap_" + v1WithoutStop.toSet.intersect(v2WithoutStop.toSet)
+		for (w1 <- v1WithoutStop.toSet[String].filter(w => venueStat.contains(w) && venueStat(w) > statThreshold)) {
+		  for (w2 <- v2WithoutStop.toSet[String].filter(w => venueStat.contains(w) && venueStat(w) > statThreshold)) {
+		    f += "Venue_WordPair_" + (if (w1 < w2) (w1 + "_" + w2) else (w2 + "_" + w1))
+		  }
+		}
+		fp.attr += f
 	}
 
 	def pairAndInitFeatures(pubs : Seq[Publication]) : Seq[Pair] = {
@@ -276,8 +305,20 @@ object AuthorLink extends AuthorLink {
       		val sigmaSq  =     	new CmdOption("sigmaSq",  "10", "REAL", "Value for regularization constant for BP.")
       		val modelDir =      	new CmdOption("model", "chainner.factorie", "DIR", "Directory for saving or loading model.")
       		val justTest = 		new CmdOption("justTest", "No Training, only Testing.")
+      		val titleStat = 	new CmdOption("titleStat", "titles.txt", "FILE", "counts of words in publication titles.")
+      		val venueStat = 	new CmdOption("venueStat", "venues.txt", "FILE", "counts of words in venues.")
    		}
     	opts.parse(args)
+
+	titleStat = io.Source.fromFile(opts.titleStat.value).getLines().map(l => {
+	  val f = l.split(" ")
+	  f(0) -> f(1).toInt
+	}).toMap
+
+	venueStat = io.Source.fromFile(opts.venueStat.value).getLines().map(l => {
+	  val f = l.split(" ")
+	  f(0) -> f(1).toInt
+	}).toMap
 
     	if(opts.justTest.wasInvoked) {
     		model.load(opts.modelDir.value)
