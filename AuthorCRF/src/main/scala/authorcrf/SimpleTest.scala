@@ -82,6 +82,7 @@ class SimpleTest {
     val fp = new FieldPair(p.publication1.coAuthors, p.publication2.coAuthors,p)
     fp.attr += new FieldPairLabel(fp, fieldLabel(p))
     fp.attr += new CoAuthorsFeatures(fp)
+    CoAuthorStats.addCoAuthorFeatures(p)
     fp
   }
 
