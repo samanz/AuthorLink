@@ -191,7 +191,7 @@ journals/ploscb/XuHLXLFYYMLSHCPK10	95	Max Planck Institute for Molecular Genetic
 journals/tc/SanyalRCK10	96	University of Massachusetts, Amherst
 journals/tgrs/Chen10a	42	Remote Sensing Div., Naval Res. Lab., Washington, DC, USA
 journals/toms/ChenH10	45	City University of New York, New York, NY
-conf/aici/JiangDXCC10	43	School of Art Layout, Hunan University of Commerce, Changsha 410205, China
+??conf/aici/JiangDXCC10	32	School of Art Layout, Hunan University of Commerce, Changsha 410205, China
 conf/airs/ChenZ10	97	MOE-MS Key Laboratory for Intelligent Computing and Intelligent Systems, Shanghai Jiao Tong University
 conf/bibm/ChenZCP10	60	College of Automation, Northwestern Polytechnical University, 710072, Xi'an, China
 conf/bibm/XiaZCC10	54	Department of Electrical and Electronic Engineering, The University of Hong Kong, Hong Kong, PR China
@@ -202,107 +202,106 @@ conf/fskd/ZhouCF10	100	Coll. of Inf. Sci. & Eng., Wuhan Univ. of Sci. & Technol.
 conf/gcb/Gogol-DoringC10	95	Berlin Institute for Medical Systems Biology, Max Delbruck Center for Molecular Medicine, Berlin, Germany
 conf/geoinformatics/GaoCDHLG10	101	Department of Urban Forest, Institute of Applied Ecology, Chinese Academy of Sciences, Shenyang (110016), China
 conf/geoinformatics/GuoHCLDG10	101	Department of Urban Forest, Institute of Applied Ecology, Chinese Academy of Sciences, Shenyang (110016), China
-conf/globecom/ChenWLL10	
-conf/globecom/LiuLCWW10	
-conf/grid/ChenFL10	
-conf/icdim/ChenF10	
-conf/icee/ZengC10	
-conf/icee/ZengQC10	
-conf/icic/YuanLC10	
-conf/icic/ChenZTF10	
-conf/icmlc/ChenGL10	
-conf/icmlc/ChenYC10	
-conf/icnc/SunCH10	
-conf/icnc/ChenC10	
-conf/icwl/FengXPCS10	
-conf/isqed/ShenCCLZH10	
-conf/isvc/Chen10	
-conf/mvhi/GaoCYF10	
-conf/nips/ChenLM10	
-conf/pimrc/XieZHCS10	
-conf/smc/ChenSL10	
-conf/smc/YuanLC10	
-conf/smc/HuFLCY10	
-conf/vtc/ChuahC10	
-conf/vinci/2010	
-journals/bioinformatics/ChenLA09	
-journals/ejwcn/ZhangCZWZ09	
-journals/ijbra/ChenLZL09	
-journals/neuroimage/LiuZCH09	
-journals/neuroimage/ZhangYZUC09	
-journals/tbe/DingZCH09	
-journals/tcsv/ChenSH09	
-conf/ACISicis/ChenZLG09	
-conf/bmei/SuiTLCLR09	
-conf/bmei/XiaWGZWLCBL09	
-conf/cdc/KhanACD09	
-conf/cdc/WangWHZC09	
-conf/cnsr/ChenHXZ09	
-conf/cso/Chen09	
-conf/cts/ChenDD09	
-conf/dbta/LiuLC09	
-conf/dbta/LiCWCG09	
-conf/esiat/ChenJBQSKLM09	
-conf/esiat/ChenYW09	
-conf/gcc/JiangZCP09	
-conf/grc/ChenCJC09	
-conf/grc/GuoCW09	
-conf/grc/YangCW09	
-conf/grc/ZhangCW09	
-conf/iccms/ChenL09	
-conf/icfie/Chen09a	
-conf/icip/BoulosCPC09	
-conf/icnc/ChenF09a	
-conf/icnc/ZhaoCX09	
-conf/igarss/JiangWZCZTW09	
-conf/isit/ZhangZCS09	
-conf/jcai/ChenZ09	
-conf/jcai/LinLGC09	
-conf/jcai/LiuCG09	
-conf/mass/LiCZ09	
-conf/nems/YinLCCZ09	
-conf/nips/ChenLLML09	
-conf/nss/ChenZCG09	
-conf/otm/ChenFGJ09	
-conf/smc/LiuC09	
-conf/wism/CheCFZ09	
-conf/wkdd/ChenCYCL09	
-series/sci/LiuC09	
-journals/chinaf/ChenZ08	
-journals/neuroimage/ZhangZZC08	
-journals/neuroimage/ZhangZC08	
-journals/prl/ChenZ08	
-journals/tgrs/ChubbMSCEK08	
-conf/bmei/ZhuRLC08	
-conf/cscwd/ZhengDTC08	
-conf/csse/XiongWZZJ08	
-conf/csse/XiongWJZZ08	
-conf/icira/LiCZW08	
-conf/icis/YeGCL08	
-conf/icpads/ChenZW08	
-conf/icwn/ChenMG08	
-conf/ieaaie/ChenSDFX08	
-conf/igarss/BachmannNMLWFCMKMMKKMBSGSPST08	
-conf/igarss/ChenMS08	
-conf/isecs/CaiC08	
-conf/medbiometrics/ZhangCZCP08	
-conf/otm/ChenWWQ08	
-conf/paciia/YuCL08	
-journals/adcm/ChenL07	
-journals/ieicet/ChenBOQV07	
-conf/atc/ChenCSZ07	
-conf/cec/YinCL07	
-conf/compsac/TongGCL07	
-conf/dac/RastogiCK07	
-conf/ecumn/LvKCL07	
-conf/fskd/LiHCWC07	
-conf/gcc/ShenYCLW07	
-conf/i3e/ChenZJ07	
-conf/icfie/ChenZZC07	
-conf/icppw/WeiXYX07	
-conf/snpd/XuCY07	
-conf/snpd/ChenSLL07	
-conf/vlsid/RastogiCSK07	
+conf/globecom/ChenWLL10	69	National Key Lab of Science and Technology on Communications, University of Electronic Science and Technology, Chengdu, P.R. China
+conf/globecom/LiuLCWW10	69	School of Computer Science and Engineering, University of Electronic Science and Technology, Chengdu, China
+conf/grid/ChenFL10	102	School of Information Technologies, University of Sydney, Sydney NSW 2006 Australia
+conf/icdim/ChenF10	70	Department of Computer and Information Science, University of Macau, Macau SAR
+conf/icee/ZengC10	103	Department of Information Technology, ZheJiang Economic & Trade Polytechnic, Hangzhou, Zhejiang Province, China
+conf/icee/ZengQC10	103	Department of Information Technology, ZheJiang Economic & Trade Polytechnic, Hangzhou, Zhejiang Province, China
+conf/icic/YuanLC10	104	Intelligent Computing Lab, Division of Informatics, Graduate School of Shenzhen, Tsinghua University, Shenzhen 518055, P.R. China
+conf/icic/ChenZTF10	73	China Agricultural University, Beijing, 100083, PR China
+conf/icmlc/ChenGL10	84	College of Economics and Management, Hebei University of Science and Technology, Shijiazhuang 050018, China
+conf/icmlc/ChenYC10	105	Department of Computer and Communication Engineering, Ming Chuan University, Taiwan
+conf/icnc/SunCH10	106	College of Computer Science and Engineering, Changchun University of Technology, Changchun, 130012, China
+conf/icnc/ChenC10	107	Unmanned Aircraft Vehicle Teaching & Research Section, A A P.L.A, Hefei, China
+conf/icwl/FengXPCS10	78	School of Computer Science and Technology, Beijing Institute of Technology, Beijing, China
+conf/isqed/ShenCCLZH10	108	Magma Design Automation Inc., 1650 Technology Drive, San Jose, CA 95110, U.S.A
+conf/isvc/Chen10	42	U.S. Naval Research Laboratory, Remote Sensing Division, Code 7233, 4555 Overlook Ave. S.W., Washington, D.C. 23075, USA
+conf/mvhi/GaoCYF10	109	College of Computer and Information Engineering, Heilongjiang Institute of Science and Technology, Harbin,China
+conf/nips/ChenLM10	110	Chinese Academy of Sciences
+conf/pimrc/XieZHCS10	111	ICT&SSME Center, Beijing University of Posts and Telecommunications, NO.10 Xi Tu Cheng Road, 100876, Beijing, P. R. China
+conf/smc/ChenSL10	51	Department of Information Management, Nanjing Audit University, Jiangsu, China
+conf/smc/YuanLC10	51	Department of Information Management, Nanjing Audit University, China
+conf/smc/HuFLCY10	51	Department of Information Management, Nanjing Audit University, China
+conf/vtc/ChuahC10	112	CSE Dept, Lehigh University, Bethlehem, PA 18015, USA
+journals/bioinformatics/ChenLA09	113	Center for Statistical Genetics, Department of Biostatistics, University of Michigan, 1420 Washington Heights, Ann Arbor, MI 48109, USA
+journals/ejwcn/ZhangCZWZ09	114	College of Communication Engineering, Chongqing University, Shazheng Street no. 174, District of Shapingba, Chongqing 400044, China
+journals/ijbra/ChenLZL09	115	Laboratory of Theoretical Biophysics, School of Physical Science and Technology, Inner Mongolia University, Hohhot 010021, China
+journals/neuroimage/LiuZCH09	53	Center for Magnetic Resonance Research, Department of Radiology, University of Minnesota, Minneapolis, MN, USA
+journals/neuroimage/ZhangYZUC09	53	Center for Magnetic Resonance Research, Department of Radiology, University of Minnesota, Minneapolis, MN, USA
+journals/tbe/DingZCH09	53	Center for Magnetic Resonance Research, Department of Radiology, University of Minnesota, Minneapolis, MN, USA
+journals/tcsv/ChenSH09	116	Philips Research, 5656 AE Eindhoven, The Netherlands
+conf/ACISicis/ChenZLG09	117	Faculty of Automation , Guangdong University of Technology, Guangzhou 510006, China
+conf/bmei/SuiTLCLR09	118	Department of anatomy, histology & embryology, Shanghai Medical College of Fudan University, Shanghai 200032, China
+conf/bmei/XiaWGZWLCBL09	119	College of Chemistry and chemical Engineering, Qiqihar University, Qiqihar, China
+conf/cdc/KhanACD09	120	Institute of Automatic Control and Complex Systems, University of Duisburg-Essen, Bismarckstrasse 81, D-47057 Duisburg, Germany
+conf/cdc/WangWHZC09	121	College of Engineering, Peking University, Beijing 100871, China
+conf/cnsr/ChenHXZ09	100	School of Information Engineering, WuHan University of Technology, WuHan, 430070, China
+conf/cso/Chen09	32	Hunan University of Commerce, Changsha 410205, China
+conf/cts/ChenDD09	58	Intelligent Automation, Inc., USA
+conf/dbta/LiuLC09	122	Department of Information Engineering, Environmental Management College of China, Qinhuangdao, P.R.China
+conf/dbta/LiCWCG09	123	Department of Nephrology, Changhai Hospital, The Second Military Medical University, Shanghai, P.R.China
+conf/esiat/ChenJBQSKLM09	124	China Univ Geosci, Sch Environm Studies, Key Lab Biogeol & Environm Geol, Minist Educ, Wuhan 430074, Peoples R China
+conf/esiat/ChenYW09	125	Institute of Surveying and Mapping, Information Engineering University, Zhengzhou, China
+conf/gcc/JiangZCP09	126	MOE KLINNS Lab and SKLMS Lab, Department of Computer Science and Technology, Xi'an Jiaotong University, Xi'an, 710049, China
+conf/grc/ChenCJC09	127	Dept of Comput. Sci., Univ. of Nebraska at Omaha, Omaha, NE, USA
+conf/grc/GuoCW09	127	Dept of Comput. Sci., Univ. of Nebraska at Omaha, Omaha, NE, USA
+conf/grc/YangCW09	128	Department of Computer Science, HuaZhong Normal University, Wuhan 430079, China
+conf/grc/ZhangCW09	127	Dept of Comput. Sci., Univ. of Nebraska at Omaha, Omaha, NE, USA
+conf/iccms/ChenL09	77	Institute of Mechanical Science and Engineering, Jilin University, Changchun 130022, China
+conf/icfie/Chen09a	43	School of Information, Capital University of Economics and Business, Beijing 100070,  China
+conf/icip/BoulosCPC09	129	Nantes Atlantique Universités, IRCCyN CNRS UMR 6597, Polytech'Nantes, Rue Christian Pauc, 44306 Nantes, France
+conf/icnc/ChenF09a	130	Department of Electrical Engineering and Automation, Luoyang Institute of Science and Technology Luoyang 471023 China
+conf/icnc/ZhaoCX09	48	School of information technology, Jiangnan University, Wuxi, China
+conf/igarss/JiangWZCZTW09	131	Southwest Petroleum University, Chengdu, Sichuan, China
+conf/isit/ZhangZCS09	114	College of Communication Engineering, Chongqing University, Chongqing 400044, China
+conf/jcai/ChenZ09	131	Institute of Wuhan Didital Engineering, Wuhan, China
+conf/jcai/LinLGC09	132	College of Computer Science & Information Engineering, Zhejiang Gongshang University, Hangzhou, China
+conf/jcai/LiuCG09	132	College of Computer Science & Information Engineering, Zhejiang Gongshang University, Hangzhou, China
+conf/mass/LiCZ09	69	University of Electronic Science and Technology, Chengdu, China
+conf/nems/YinLCCZ09	133	Department of Microelectronics, Harbin Institute of Technology, Harbin, Heilongjiang, China
+conf/nips/ChenLLML09	110	Chinese Academy of Sciences
+conf/nss/ChenZCG09	94	College of Computer Science and Technology, Nanjing University of Posts and Telecommunications, Nanjing, China
+conf/otm/ChenFGJ09	102	School of Information Technologies, University of Sydney, Sydney NSW 2006 Australia
+conf/smc/LiuC09	134	Key Laboratory of Integrated Micro-system, Key Laboratory of Machine Perception and Intelligence, Shenzhen Graduate School, Peking University, CHINA
+conf/wism/CheCFZ09	46	College of Computer Science and Technology, Jilin University, Changchun, 130012, China
+conf/wkdd/ChenCYCL09	134	Shanghai University, Shanghai, China
+series/sci/LiuC09	132	College of Computer Science & Information Engineering, Zhejiang Gongshang University, Hangzhou, China
+journals/chinaf/ChenZ08	135	School of Automation Science and Electrical Engineering, Beijing University of Aeronautics and Astronautics, Beijing 100083, China
+journals/neuroimage/ZhangZZC08	53	Center for Magnetic Resonance Research, Department of Radiology, University of Minnesota, Minneapolis, MN, USA
+journals/neuroimage/ZhangZC08	53	Center for Magnetic Resonance Research, Department of Radiology, University of Minnesota, Minneapolis, MN, USA
+journals/prl/ChenZ08	55	Department of Electronic Engineering, Image Engineering Laboratory, Tsinghua University, Beijing 100084, China
+journals/tgrs/ChubbMSCEK08	42	Remote Sensing Division, Naval Research Laboratory, Washington, DC 20375 USA
+conf/bmei/ZhuRLC08	69	University of Electronic Science and Technology of China, Chengdu, 610054, China
+conf/cscwd/ZhengDTC08	126	MOE KLINNS Lab and SKLMS Lab, Department of Computer Science and Technology, Xi'an Jiaotong University, Xi'an, 710049, China
+conf/csse/XiongWZZJ08	117	Automation Faculty, Guangdong University of Technology, Guangzhou, China
+conf/csse/XiongWJZZ08	117	Automation Faculty, Guangdong University of Technology, Guangzhou, China
+conf/icira/LiCZW08	117	Automation Faculty, Guangdong University of Technology, Guangzhou, China
+conf/icis/YeGCL08	136	Hong Kong Polytechnic University
+conf/icpads/ChenZW08	94	Computer College, Nanjing University of Posts and Telecommunications, Nanjing 210003, Jiangsu, China
+conf/icwn/ChenMG08	137	Department of Computer Science, Tennessee State University, 3500 John A. Merritt Blvd, Nashville, TN 37209, USA
+conf/ieaaie/ChenSDFX08	48	School of Information Technology, Jiangnan University, No. 1800, Lihu Avenue, Wuxi, Jiangsu P.R. China
+conf/igarss/BachmannNMLWFCMKMMKKMBSGSPST08	42	Naval Research Laboratory, Remote Sensing Division, Washington, DC 20375
+conf/igarss/ChenMS08	42	Naval Research Laboratory, Remote Sensing Division, Washington, DC 20375
+conf/isecs/CaiC08	43	School of Information, Capital University of Economics and Business, Beijing, 100026, China
+conf/medbiometrics/ZhangCZCP08	60	College of Automation, Northwestern Polytechnical University, 710072, Xi'an, China
+conf/otm/ChenWWQ08	56	Institute of Software, Chinese Academy of Sciences, Beijing, 100190, P.R. China
+conf/paciia/YuCL08	131	Wuhan Digital Engineering Institute, 718 Luoyu Road, Wuhan, Hubei,430074, China
+journals/adcm/ChenL07	138	School of Economics, Shandong University, Jinan 250100, People's Republic of China
+journals/ieicet/ChenBOQV07	139	Ghent University, INTEC/IMEC, Ghent, 9000, BELGIQUE
+conf/atc/ChenCSZ07	94	Computer College, Nanjing University of Posts and Telecommunications, Nanjing 210003, Jiangsu, China
+conf/cec/YinCL07	140	Department of Electronics and Electrical Engineering, University of Glasgow, Glasgow, G12 8LT, U.K.
+conf/compsac/TongGCL07	135?	Computer School of Beijing University of Aeronautics and Astronautics, China
+conf/dac/RastogiCK07	96	Dept. of Electrical & Computer Eng. University of Massachusetts Amherst, MA, 01003
+conf/ecumn/LvKCL07	135	National Lab. of Software Development Environment, Beijing University of Aeronautics and Astronautics, Beijing 100083
+conf/fskd/LiHCWC07	141	Software Engineering Institute, XiDian Univ., Xi'an, 710071
+conf/gcc/ShenYCLW07	142	Department of Computer Science, University of Science and Technology of China, Hefei, Anhui, 230027, China
+conf/i3e/ChenZJ07	51	Nanjing Audit University, Nanjing, Jiangsu 210029, China
+conf/icfie/ChenZZC07	43	School of Economics and Management, Beijing Jiaotong University, Beijing, 100044, P.R. China
+conf/icppw/WeiXYX07	143	Computer School of BeiHang University
+conf/snpd/XuCY07	43	School of Informaition, Capital University of Economics and Business, Beijing, 100070, P.R. China
+conf/snpd/ChenSLL07	57	Department of Information Science and Electronic Engineering, Zhejiang University, China
+conf/vlsid/RastogiCSK07	96	University of Massachusetts, Amherst
 journals/telsys/ChenY06	
 conf/fskd/Chen06	
 conf/icip/XieRSC06	
