@@ -3,13 +3,12 @@ package authorcrf
 import cc.factorie._
 import cc.factorie.optimize._
 import scala.collection.mutable.ArrayBuffer
-
 object PairLabelDomain extends CategoricalDomain[String]
-abstract class PairLabel(initialValue:String) extends LabeledCategoricalVariable(initialValue) {
-	  def domain = PairLabelDomain
+abstract class PairLabel(b:String) extends LabeledCategoricalVariable(b) {
+  def domain = PairLabelDomain
 }
-class FieldPairLabel(val field:FieldPair, initialValue:String) extends PairLabel(initialValue)
-class PubPairLabel(val pair:Pair, initialValue:String) extends PairLabel(initialValue)
+class FieldPairLabel(val field:FieldPair, b:String) extends PairLabel(b)
+class PubPairLabel(val pair:Pair, b:String) extends PairLabel(b)
 
 class ClusterId(val id : Int, val target : Int)
 
@@ -94,76 +93,107 @@ class VenueFeatures(field : FieldPair) extends AuthorFeatures(field) {
 class AuthorLinkModel extends CombinedModel {
 	val bias = new DotTemplateWithStatistics1[PairLabel] {
 		factorName = "Bias"
-		lazy val weights = new la.DenseTensor1(PairLabelDomain.size)
+		lazy val weights = new la.DenseTensor1(BooleanDomain.size)
 	}
+  // Factor between publication pair variable and affiliation features
+  val fieldFeature = new DotTemplateWithStatistics2[PubPairLabel, AffiliationFeatures] {
+    factorName = "Field1"
+    lazy val weights = new la.DenseTensor2(BooleanDomain.size, AffiliationFeaturesDomain.dimensionSize)
+    def unroll1(pairlabel: PubPairLabel) = {
+      val label = pairlabel
+      val af = pairlabel.pair.fields(3).attr[AffiliationFeatures]
+      Factor(pairlabel, af)
+    }
+    def unroll2(tf : AffiliationFeatures) = Factor(tf.field.pair.attr[PubPairLabel], tf)
+  }
 	// Factor between publication pair variable and field variables
 	val fieldTemplate1 = new DotTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
 		factorName = "Field1"
-		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)
+		lazy val weights = new la.DenseTensor2(BooleanDomain.size, BooleanDomain.size)
 	    def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(0).attr[FieldPairLabel])
 	    def unroll2(fieldlabel: FieldPairLabel) = Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel)
 	}
 	// Factor between publication pair variable and field variables
 	val fieldTemplate2 = new DotTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
 		factorName = "Field2"
-		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)
+		lazy val weights = new la.DenseTensor2(BooleanDomain.size, BooleanDomain.size)
 	    def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(1).attr[FieldPairLabel])
 	    def unroll2(fieldlabel: FieldPairLabel) = Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel)
 	}
 	// Factor between publication pair variable and field variables
 	val fieldTemplate3 = new DotTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
 		factorName = "Field3"
-		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)
+		lazy val weights = new la.DenseTensor2(BooleanDomain.size, BooleanDomain.size)
 	    def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(2).attr[FieldPairLabel])
 	    def unroll2(fieldlabel: FieldPairLabel) = Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel)
 	}
 	// Factor between publication pair variable and field variables
 	val fieldTemplate4 = new DotTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
 		factorName = "Field4"
-		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)
+		lazy val weights = new la.DenseTensor2(BooleanDomain.size, BooleanDomain.size)
 	    def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(3).attr[FieldPairLabel])
-	    def unroll2(fieldlabel: FieldPairLabel) = Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel)
+	    def unroll2(fieldlabel: FieldPairLabel) = if(fieldlabel.field.field1.isInstanceOf[Affiliation]) Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel) else Nil
 	}
 	// Factor between field and TitleFeatures
 	val TitleTemplate = new DotTemplateWithStatistics2[FieldPairLabel, TitleFeatures] {
 		factorName = "Title"
-		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, TitleFeaturesDomain.dimensionSize)
+		lazy val weights = new la.DenseTensor2(BooleanDomain.size, TitleFeaturesDomain.dimensionSize)
 		def unroll1(fieldlabel : FieldPairLabel) = if(fieldlabel.field.attr.contains[TitleFeatures]) Factor(fieldlabel, fieldlabel.field.attr[TitleFeatures]) else Nil
 		def unroll2(tf : TitleFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
 	}
 	// Factor between field and VenueFeatures
 	val VenueTemplate = new DotTemplateWithStatistics2[FieldPairLabel, VenueFeatures] {
 		factorName = "Venue"
-		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, VenueFeaturesDomain.dimensionSize)
+		lazy val weights = new la.DenseTensor2(BooleanDomain.size, VenueFeaturesDomain.dimensionSize)
 		def unroll1(fieldlabel : FieldPairLabel) = if(fieldlabel.field.attr.contains[VenueFeatures]) Factor(fieldlabel, fieldlabel.field.attr[VenueFeatures]) else Nil
 		def unroll2(tf : VenueFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
 	}
 	// Factor between field and CoAuthorFeatures
 	val CoAuthorTemplate = new DotTemplateWithStatistics2[FieldPairLabel, CoAuthorsFeatures] {
 		factorName = "CoAuthor"
-		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, CoAuthorsFeaturesDomain.dimensionSize)
+		lazy val weights = new la.DenseTensor2(BooleanDomain.size, CoAuthorsFeaturesDomain.dimensionSize)
 		def unroll1(fieldlabel : FieldPairLabel) = if(fieldlabel.field.attr.contains[CoAuthorsFeatures]) Factor(fieldlabel, fieldlabel.field.attr[CoAuthorsFeatures]) else Nil
 		def unroll2(tf : CoAuthorsFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
 	}
 	// Factor between field and AffiliationFeatures
 	val AffiliationTemplate = new DotTemplateWithStatistics2[FieldPairLabel, AffiliationFeatures] {
 		factorName = "Affiliation"
-		lazy val weights = new la.DenseTensor2(PairLabelDomain.size, AffiliationFeaturesDomain.dimensionSize)
+		lazy val weights = new la.DenseTensor2(BooleanDomain.size, AffiliationFeaturesDomain.dimensionSize)
 		def unroll1(fieldlabel : FieldPairLabel) = { 
-			println("Got here")
-			if(fieldlabel.field.attr.contains[AffiliationFeatures]) { println("Create Factor"); Factor(fieldlabel, fieldlabel.field.attr[AffiliationFeatures]) } else Nil
+			if(fieldlabel.field.attr.contains[AffiliationFeatures]) { Factor(fieldlabel, fieldlabel.field.attr[AffiliationFeatures]) } else Nil
 		}
 		def unroll2(tf : AffiliationFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
 	}
+
+  //this += bias
+  this += fieldFeature
+  //this += fieldTemplate1
+  //this += fieldTemplate2
+  //this += fieldTemplate3
+  //this += fieldTemplate4
+  //this += TitleTemplate
+  //this += VenueTemplate
+  //this += CoAuthorTemplate
+  //this += AffiliationTemplate
 }
 
-class AuthorLinkObjective extends HammingTemplate[PairLabel]
+class AuthorLinkObjective extends HammingTemplate[PubPairLabel]
 
 class AuthorLink {
 	val model = new AuthorLinkModel
 	val objective = new AuthorLinkObjective
 
-	def similar(p1 : Publication, p2 : Publication) : Boolean = { true }
+	def similar(p1 : Publication, p2 : Publication) : Boolean = {
+    val split1 = p1.block.split(" ")
+    val split2 = p2.block.split(" ")
+    var sim = false
+    for (s <- split1) {
+      for(t <- split2) {
+        if(s==t) sim = true
+      }
+    }
+    sim
+  }
 
 	def initTitleFeatures(fp : FieldPair) {
 		//fp.attr += new TitleFeatures(fp)
@@ -175,8 +205,10 @@ class AuthorLink {
 
 	def initAffiliationFeatures(fp : FieldPair) {
 		fp.attr += new AffiliationFeatures(fp)
-		if(fp.field1.asInstanceOf[Affiliation].string==fp.field2.asInstanceOf[Affiliation].string) fp.attr[AffiliationFeatures] += "EXACT"
-	}
+		//if(fp.field1.asInstanceOf[Affiliation].string.trim.toLowerCase()==fp.field2.asInstanceOf[Affiliation].string.trim.toLowerCase) fp.attr[AffiliationFeatures] += "EXACT"
+    if(fp.attr[FieldPairLabel].targetCategory=="YES") fp.attr[AffiliationFeatures] += "YES"  else fp.attr[AffiliationFeatures] += "NO"
+
+  }
 
 	def initVenueFeatures(fp : FieldPair) {
 		//fp.attr += new VenueFeatures(fp)
@@ -193,7 +225,7 @@ class AuthorLink {
 		}
 		for(pair <- pairs) {
 			for(fp <- pair.fields) {
-				fp.attr += new FieldPairLabel(fp, pair.attr[PairLabel].targetCategory)
+				fp.attr += new FieldPairLabel(fp, pair.attr[PubPairLabel].targetCategory)
 				fp.field1 match {
 					case title : Title => initTitleFeatures(fp)
 					case venue : Venue => initVenueFeatures(fp)
@@ -212,7 +244,7 @@ class AuthorLink {
       	val testFieldLabels = testingPairs.map(_.fields).flatten.map(_.attr[FieldPairLabel])
       	val testPairLabels = testingPairs.map(_.attr[PubPairLabel])
 
-		(testFieldLabels ++ testPairLabels).foreach(_.setRandomly())
+		    (testFieldLabels ++ testPairLabels).foreach(_.setRandomly())
 
       	val predictor = new IteratedConditionalModes[PairLabel](model) // {temperature=0.01}
       
@@ -234,27 +266,40 @@ class AuthorLink {
 
 		val trainingPairs = pairAndInitFeatures(trainPublications)
 		val testingPairs = pairAndInitFeatures(testPublications) 
-      	
-      	val trainFieldLabels = trainingPairs.map(_.fields).flatten.map(_.attr[FieldPairLabel])
-      	val trainPairLabels = trainingPairs.map(_.attr[PubPairLabel])
-      	val testFieldLabels = testingPairs.map(_.fields).flatten.map(_.attr[FieldPairLabel])
-      	val testPairLabels = trainingPairs.map(_.attr[PubPairLabel])
 
-		(trainFieldLabels ++ trainPairLabels ++ testFieldLabels ++ testPairLabels).foreach(_.setRandomly())
+    //trainingPairs.foreach( x => println(x.fields(3).attr[AffiliationFeatures]))
+
+    val trainLabels= trainingPairs.map(_.fields).flatten.map(_.attr[FieldPairLabel]) ++ trainingPairs.map(_.attr[PubPairLabel])
+    val testLabels = testingPairs.map(_.fields).flatten.map(_.attr[FieldPairLabel]) ++ testingPairs.map(_.attr[PubPairLabel])
+
+		(trainLabels ++ testLabels).foreach( _.setRandomly() )
       	
-      	val learner = new SampleRankTrainer(new GibbsSampler(model, objective), new ConfidenceWeighting(model, 0.01))
-      	val predictor = new IteratedConditionalModes[PairLabel](model) // {temperature=0.01}
-      
-      	for (i <- 1 until 15) {
-      		println("--Iteration " + i)
-        	learner.processContexts(trainFieldLabels)
-        	learner.processContexts(trainPairLabels)
-        	predictor.processAll(testFieldLabels)
-        	predictor.processAll(testPairLabels)
-        	println(model.AffiliationTemplate.weights)
-      	}
-      	for (i <- 0 until 3; label <- testFieldLabels) predictor.process(label)
-      	for (i <- 0 until 3; label <- testPairLabels) predictor.process(label)
+    if(false) {
+      val examples = trainLabels.map(v => new optimize.DiscreteLikelihoodExample(v))
+      val trainer = new optimize.SGDTrainer(model, new optimize.AROW(model))
+      (1 to 100).foreach(i => trainer.processExamples(examples))
+      val predictor = new IteratedConditionalModes[PairLabel](model)
+      predictor.processAll(trainLabels)
+      predictor.processAll(testLabels)
+    } else {
+      val pieces = trainingPairs.map(_.attr[PubPairLabel]).map(l => new SampleRankExample(l, new GibbsSampler(model, objective)))
+      val learner = new SGDTrainer(model, new optimize.AROW(model))
+      val predictor = new IteratedConditionalModes[PubPairLabel](model)
+      for (i <- 1 until 15) {
+        println("--Iteration " + i)
+        learner.processExamples(pieces)
+        predictor.processAll(testingPairs.map(_.attr[PubPairLabel]))
+        println(model.bias.weights)
+        println(model.AffiliationTemplate.weights)
+        println(model.fieldFeature.weights)
+        println(objective.accuracy( trainingPairs.map(_.attr[PubPairLabel]) ))
+     }
+     for (i <- 0 until 3; label <- testingPairs.map(_.attr[PubPairLabel])) predictor.process(label)
+    }
+        for(pair <- trainingPairs) {
+          println(pair.attr[PubPairLabel].categoryValue + ":" + pair.attr[PubPairLabel].targetCategory)
+          println(pair.fields(3).attr[AffiliationFeatures])
+        }
 
       	EvaluatePairs.clearMaps()
       	EvaluatePairs.cluster(trainingPairs)

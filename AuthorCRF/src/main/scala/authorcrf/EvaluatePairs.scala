@@ -33,9 +33,9 @@ object EvaluatePairs {
     (pubs /: pairs)((s, p) => s ++= Set(p.publication1, p.publication2))
     pubs.foreach(p => entMap.addMention(p, entMap.numMentions.toLong))
     if (useTrue) {
-      pairs.foreach(p => if (p.attr[PubPairLabel].targetCategory.equals("YES")) entMap.addCoreferentPair(p.publication1, p.publication2))
+      pairs.foreach(p => if (p.attr[PubPairLabel].targetCategory=="YES") entMap.addCoreferentPair(p.publication1, p.publication2))
     } else {
-      pairs.foreach(p => if (p.attr[PubPairLabel].categoryValue.equals("YES")) entMap.addCoreferentPair(p.publication1, p.publication2))
+      pairs.foreach(p => if (p.attr[PubPairLabel].categoryValue=="YES") entMap.addCoreferentPair(p.publication1, p.publication2))
     }
     entMap
   }
