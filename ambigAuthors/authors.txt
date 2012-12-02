@@ -191,7 +191,7 @@ journals/ploscb/XuHLXLFYYMLSHCPK10	95	Max Planck Institute for Molecular Genetic
 journals/tc/SanyalRCK10	96	University of Massachusetts, Amherst
 journals/tgrs/Chen10a	42	Remote Sensing Div., Naval Res. Lab., Washington, DC, USA
 journals/toms/ChenH10	45	City University of New York, New York, NY
-??conf/aici/JiangDXCC10	32	School of Art Layout, Hunan University of Commerce, Changsha 410205, China
+conf/aici/JiangDXCC10	144	School of Art Layout, Hunan University of Commerce, Changsha 410205, China
 conf/airs/ChenZ10	97	MOE-MS Key Laboratory for Intelligent Computing and Intelligent Systems, Shanghai Jiao Tong University
 conf/bibm/ChenZCP10	60	College of Automation, Northwestern Polytechnical University, 710072, Xi'an, China
 conf/bibm/XiaZCC10	54	Department of Electrical and Electronic Engineering, The University of Hong Kong, Hong Kong, PR China
@@ -237,7 +237,7 @@ conf/bmei/XiaWGZWLCBL09	119	College of Chemistry and chemical Engineering, Qiqih
 conf/cdc/KhanACD09	120	Institute of Automatic Control and Complex Systems, University of Duisburg-Essen, Bismarckstrasse 81, D-47057 Duisburg, Germany
 conf/cdc/WangWHZC09	121	College of Engineering, Peking University, Beijing 100871, China
 conf/cnsr/ChenHXZ09	100	School of Information Engineering, WuHan University of Technology, WuHan, 430070, China
-conf/cso/Chen09	32	Hunan University of Commerce, Changsha 410205, China
+conf/cso/Chen09	144	Hunan University of Commerce, Changsha 410205, China
 conf/cts/ChenDD09	58	Intelligent Automation, Inc., USA
 conf/dbta/LiuLC09	122	Department of Information Engineering, Environmental Management College of China, Qinhuangdao, P.R.China
 conf/dbta/LiCWCG09	123	Department of Nephrology, Changhai Hospital, The Second Military Medical University, Shanghai, P.R.China
@@ -291,7 +291,7 @@ journals/adcm/ChenL07	138	School of Economics, Shandong University, Jinan 250100
 journals/ieicet/ChenBOQV07	139	Ghent University, INTEC/IMEC, Ghent, 9000, BELGIQUE
 conf/atc/ChenCSZ07	94	Computer College, Nanjing University of Posts and Telecommunications, Nanjing 210003, Jiangsu, China
 conf/cec/YinCL07	140	Department of Electronics and Electrical Engineering, University of Glasgow, Glasgow, G12 8LT, U.K.
-conf/compsac/TongGCL07	135?	Computer School of Beijing University of Aeronautics and Astronautics, China
+conf/compsac/TongGCL07	135	Computer School of Beijing University of Aeronautics and Astronautics, China
 conf/dac/RastogiCK07	96	Dept. of Electrical & Computer Eng. University of Massachusetts Amherst, MA, 01003
 conf/ecumn/LvKCL07	135	National Lab. of Software Development Environment, Beijing University of Aeronautics and Astronautics, Beijing 100083
 conf/fskd/LiHCWC07	141	Software Engineering Institute, XiDian Univ., Xi'an, 710071
@@ -302,44 +302,355 @@ conf/icppw/WeiXYX07	143	Computer School of BeiHang University
 conf/snpd/XuCY07	43	School of Informaition, Capital University of Economics and Business, Beijing, 100070, P.R. China
 conf/snpd/ChenSLL07	57	Department of Information Science and Electronic Engineering, Zhejiang University, China
 conf/vlsid/RastogiCSK07	96	University of Massachusetts, Amherst
-journals/telsys/ChenY06	
-conf/fskd/Chen06	
-conf/icip/XieRSC06	
-conf/icn/ChenY06	
-conf/icpads/QuYC06	
-conf/iptps/ChenL06	
-conf/iros/ZhangSZC06	
-journals/bmcbi/SheddenCKGMCGGFTH05	
-journals/bmcbi/ChenERLU05	
-journals/ieicet/ChenGT05	
-journals/tbe/ZhangUSC05	
-conf/interspeech/ChenKS05	
-conf/ispw/ChenYXZ05	
-conf/sosp/YuRC05	
-journals/dt/LouC04	
-journals/ieiceee/BauwelinckCVMOQV04	
-journals/jcisd/ChenHG04	
-conf/gcc/ZhaoCQS04	
-conf/globecom/ChenZ04	
-conf/aspdac/LouC03	
-conf/rsfdgrc/ZhouQZZCL03	
-journals/stvr/ChenURER02	
-conf/bildmed/ChenF02	
-conf/bildmed/WangKC02	
-conf/vlsid/ChenPB02	
-journals/jise/ChiangCWH01	
-conf/iscas/ChenKMC01	
-journals/cai/ChiangCWH00	
-journals/tcad/ChenHP00	
-conf/iccad/ChenHP00	
-journals/jei/SegallCA99	
-conf/iccad/LouCP99	
-conf/ispd/ChenHP99	
-journals/cai/ChiangWC98	
-journals/mp/ArmstrongCGJ98	
-journals/mp/GoldfarbC97	
-conf/wdag/InoueC94	
-journals/scp/ChenU90	
-conf/acm/Chen90	
-conf/mpc/ChenUV89	
-conf/mpc/ChenU89	
+journals/telsys/ChenY06	75	Department of Electronic and Computer Engineering, The Hong Kong University of Science and Technology, Clear Water Bay, Kowloon, Hong Kong, China
+conf/fskd/Chen06	57	State Key Lab of CAD&CG, Zhejiang University
+conf/icip/XieRSC06	145	Robotics Institute, Harbin Institute of Technology, Harbin, China
+conf/icn/ChenY06	75	Department of Computer Science, Hong Kong University of Science and Technology, Clear Water Bay, Kowloon, Hong Kong
+conf/icpads/QuYC06	146	School of Computer Science, National University of Defense Technology, Changsha, China
+conf/iptps/ChenL06	47	Microsoft Research Asia
+conf/iros/ZhangSZC06	117	College of Automation, Guangdong University of Technology, Guangzhou, China
+journals/bmcbi/SheddenCKGMCGGFTH05	113	Department of Biostatistics, University of Michigan, Ann Arbor, Michigan, USA
+journals/bmcbi/ChenERLU05	95	Max-Planck Institute for Molecular Genetics, Ihnestrasse 73, 14195 Berlin, Germany
+journals/ieicet/ChenGT05	147	Nanyang Technol. Univ., Singapore
+journals/tbe/ZhangUSC05	53	Center for Magnetic Resonance Research, Department of Radiology, University of Minnesota, Minneapolis, MN, USA
+conf/interspeech/ChenKS05	148	McGill University, Canada
+conf/ispw/ChenYXZ05	56	Laboratory for Internet Software Technologies, Institute of Software, The Chinese Academy of Science, Beijing, 100039, China
+conf/sosp/YuRC05	149	Computer Science Division, University of California, Berkeley, CA 94720
+journals/dt/LouC04	150	Synopsys
+journals/ieiceee/BauwelinckCVMOQV04	139	Ghent University, INTEC/IMEC, Gent, 9000, Belgium
+journals/jcisd/ChenHG04	151	Center for Advanced Research in Biotechnology, University of Maryland Biotechnology Institute
+conf/gcc/ZhaoCQS04	57	State Key Lab. of CAD&CG, Zhejiang University, Hangzhou, 310027, P.R. China
+conf/globecom/ChenZ04	152	Dept. of Electrical & Computer Eng., Drexel University, Philadelphia, PA 19104
+conf/aspdac/LouC03	150	Synopsys Inc., 700 E. Middlefield Road, Mountain View, CA 94043-4033
+conf/rsfdgrc/ZhouQZZCL03	69	College of Computer Science and Engineering, University of Electronic Science and Technology of China, Sichuan, Chengdu 610054, P.R. China
+journals/stvr/ChenURER02	153	Microsoft Corporation
+conf/bildmed/ChenF02	154	Department of Cognitive Computing & Medical Imaging (A7), Fraunhofer Institute for Computer Graphics, Rundeturmstrasse 6, D-64283 Darmstadt, Germany
+conf/bildmed/WangKC02	154	Department of Cognitive Computing & Medical Imaging (A7), Fraunhofer Institute for Computer Graphics, Rundeturmstrasse 6, D-64283 Darmstadt, Germany
+conf/vlsid/ChenPB02	150	University of Southern California, Los Angeles, CA 90089
+journals/jise/ChiangCWH01	156	Department of Information Engineering, Tamkang University, Tamsui, Taipei Hsien, TAIWAN
+conf/iscas/ChenKMC01	75	Integrated Power Electronics Laboratory, Department of Electrical and Electronic Engineering, The Hong Kong University of Science and Technology, Clear Water Bay, Hong Kong SAR, China
+journals/cai/ChiangCWH00	156	Department of Information Engineering, Tamkang University, Tamsui, Taipei Hsien, TAIWAN
+journals/tcad/ChenHP00	150	Department of Electrical Engineering-Systems, University of Southern California, Los Angeles, CA 90089 USA
+conf/iccad/ChenHP00	150	Department of Electrical Engineering-Systems, University of Southern California, Los Angeles, CA 90089 USA
+journals/jei/SegallCA99	157	School of Electrical and Computer Engineering, Oklahoma State University, Stillwater, Oklahoma 74078
+conf/iccad/LouCP99	150	Department of Electrical Engineering – Systems, University of Southern California, Los Angeles, CA 90089
+conf/ispd/ChenHP99	150	Department of Electrical Engineering - System, University of Southern California, LAX Angeles, CA 90089
+journals/cai/ChiangWC98	156	Department of Information Engineering, Tamkang University, Tamsui, Taipei Hsien, TAIWAN
+journals/mp/ArmstrongCGJ98	158	American Express Travel Related Services Company, Inc., New York, NY 10825, USA
+journals/mp/GoldfarbC97	159	Department of Industrial Engineering and Operations Research, Columbia University, New York, NY 10027, USA
+conf/wdag/InoueC94	137	Department of Electrical and Computer Engineering, Nagoya Institute of Technology, Showa, Nagoya 466, Japan
+journals/scp/ChenU90	161	Department of Computer Science, Washington University, St. Louis, MO 63130, USA
+conf/acm/Chen90	161	Department of Computer Science, Campus Box 1045, Washington University, Saint Louis, MO 63130
+conf/mpc/ChenUV89	161	Department of Computer Science, Washington University, St. Louis, MO
+conf/mpc/ChenU89	161	Department of Computer Science, Washington University, St. Louis, MO 63130
+
+journals/tedu/ZhangDZCP12	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/tvcg/ShiCLXCQ12	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/vinci/2012	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/chinaf/PanZWCP11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/jzusc/MaoFCYFP11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/tvcg/ZhangHXXC11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/tvcg/WangCZDSC11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/biovis/LivengoodM0E11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/cadgraphics/ZhangCYZP11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cgf/YuLRC10	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/jzusc/TanCL10	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/vc/ZhangWWYCP10	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/vc/ZhangCFWP10	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/apvis/WangCSDC10	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/apvis/HuWXFC10	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cgf/ChenLME09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cgf/SongCMGE09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cgf/YanCLE09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/tvcg/ChanWMCQ09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/tvcg/ChenYZCEMMCDL09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/tvcg/ChenDZMCQCTYP09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/tvcg/MaciejewskiWCE09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/apvis/ChenZCT09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/bmei/ZhangPCWC09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/npar/KimMIACSE09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/si3d/ZhangHXC09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+series/sci/LuCRE09	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cga/MaciejewskiIAESC08	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cgf/ChenZCE08	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cgf/LiuYPWC08	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cviu/ZengSCP08	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/vc/GongCZZP08	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cad/LinCB07	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cgf/ChenLE07	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/jvca/ZhangZJLCP07	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/vc/ZhangCEP07	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/cadgraphics/SongPDTZCX07	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/cgf/GuanCLDP06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/jcst/ZengCP06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/jvca/ZhangQACB06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/jvca/GuanCZZP06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/vc/XuCZB06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/cgi/GongCZZP06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/cgi/HuCZP06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/cgi/ZhangSTCP06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/edutainment/SongTZCGGP06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/edutainment/GuanLDFCP06	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/vc/LinCW05	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/cadgraphics/ZhangCHP05	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/cvbia/ZhuangLCBS05	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/fskd/ZhangCHP05	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/gcc/DongCZP04	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/pg/DongCBZP04	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/visualization/ChenRZP04	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+conf/vrst/ChenWZBP04	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/jcst/ChenHBP03	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
+journals/jsac/BaiCLC12	55	Department of Electronic Engineering, Tsinghua University
+journals/jsac/BaiCLC11	55	Department of Electronic Engineering, Tsinghua University
+journals/twc/Bai0LC11	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/BaiCLC11	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/WangCC11a	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/00010LC11	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/0002LC11	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/Liu0CZ11	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/Liu0CZ11a	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/Wang0C11	55	Department of Electronic Engineering, Tsinghua University
+conf/iwcmc/WangLCC11	55	Department of Electronic Engineering, Tsinghua University
+conf/vtc/RaoCC11	55	Department of Electronic Engineering, Tsinghua University
+conf/wcnc/ChenHC11	55	Department of Electronic Engineering, Tsinghua University
+journals/ejwcn/BaiCCL10	55	Department of Electronic Engineering, Tsinghua University
+journals/jnw/ChenCFL10	55	Department of Electronic Engineering, Tsinghua University
+journals/sigmobile/WangCC10	55	Department of Electronic Engineering, Tsinghua University
+journals/tcom/BaiCCL10	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/BaiCLC10	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/LiuCCZ10	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/WangCC10	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/BaiCLC10	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/LiuCCZ10	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/RaoCC10	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/SunCL10	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/WangCC10	55	Department of Electronic Engineering, Tsinghua University
+conf/iwcmc/BaiCLC10	55	Department of Electronic Engineering, Tsinghua University
+journals/corr/abs-1007-5239	55	Department of Electronic Engineering, Tsinghua University
+journals/icl/BaiCC09	55	Department of Electronic Engineering, Tsinghua University
+journals/jsac/FanZWL09	55	Department of Electronic Engineering, Tsinghua University
+journals/twc/FanZWL09	55	Department of Electronic Engineering, Tsinghua University
+journals/twc/DaiCCL09	55	Department of Electronic Engineering, Tsinghua University
+journals/twc/ChenLC09	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/BaiCCL09	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/BaiCCL09a	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/LiuCCZ09	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/WangCC09	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/BaiCCL09	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/LiuCCZL09	55	Department of Electronic Engineering, Tsinghua University
+conf/wcnc/SunCL09	55	Department of Electronic Engineering, Tsinghua University
+conf/wcnc/MaLCC09	55	Department of Electronic Engineering, Tsinghua University
+journals/icl/XuCC08	55	Department of Electronic Engineering, Tsinghua University
+journals/twc/WeiFL08	55	Department of Electronic Engineering, Tsinghua University
+journals/twc/ChenDLC08	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/XuCCL08a	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/BaiCCL08	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/LiuCCZL08	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/XuCCL08	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/LiuCCL08	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/BaiCCL08	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/ChenLC08	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/MaCC08	55	Department of Electronic Engineering, Tsinghua University
+conf/npc/ZhiWFL08	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/ChenLC07a	55	Department of Electronic Engineering, Tsinghua University
+conf/icc/WeiFL07	55	Department of Electronic Engineering, Tsinghua University
+conf/wcnc/ChenDLC07	55	Department of Electronic Engineering, Tsinghua University
+conf/globecom/ChenLC06a	55	Department of Electronic Engineering, Tsinghua University
+journals/ijnc/ChenMH11	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/isuvr/MuzahidulW011	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/percom/HongMC11	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/ipps/ChenMHSA10	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/ahswn/UchidaMKCW08	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/tcs/UchidaCW07	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/ipps/ChenMMSWZ07	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/hicss/UchidaMKCW06	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/scjapan/HattoriICW05	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/ijfcs/FujiwaraMC04	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/jda/WadaC04	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/ipps/FujiwaraMC03	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/ispdc/OkuwaCW03	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/opodis/UchidaCW03	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/tcs/ChenWK02	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/tpds/ChenW02	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/ijcga/ChenDWK01	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/cocoon/CastanhoCWF01	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/algorithmica/ChenCWK00	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/ipps/ImaiHKCWCOO00	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/robocup/EsakiSFITCW00	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/wg/WadaC00	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/wg/WadaNC99	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/ijcga/ChenWKC98	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/icpp/ChenW98	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/wg/WadaC98	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/jpdc/WadaIKC97	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/cocoon/ChenDWK97	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/wg/WadaCLK97	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/compgeom/ChenWK96	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/esa/ChenCWK96	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+conf/wg/WadaIKC95	137	Tennessee State University /  Nagoya Institute of Technology, Japan
+journals/jsw/ChenWLR12	165	City University of Hong Kong
+conf/cis/LuLCO11	165	City University of Hong Kong
+journals/ieicet/ChenLGOOG10	165	City University of Hong Kong
+conf/icuimc/LiCY10	165	City University of Hong Kong
+journals/jcp/LiuCG09	165	City University of Hong Kong
+journals/www/WenyinHCF09	165	City University of Hong Kong
+conf/icmcs/ChenLW09	165	City University of Hong Kong
+journals/ijdet/HuCZHFW08	165	City University of Hong Kong
+conf/icuimc/ChenCL08	165	City University of Hong Kong
+conf/icuimc/MengCLWW08	165	City University of Hong Kong
+journals/concurrency/ChenZWH07	165	City University of Hong Kong
+conf/icwl/WenyinZCMZ06	165	City University of Hong Kong
+conf/skg/ChenZW06	165	City University of Hong Kong
+conf/skg/MinWC06	165	City University of Hong Kong
+journals/ijon/ChenZBWC10	166	College of Computer Science, Zhejiang University
+journals/jzusc/ChenCZWB10	166	College of Computer Science, Zhejiang University
+conf/apweb/ZhengCZBC10	166	College of Computer Science, Zhejiang University
+conf/pakdd/ChenWCZB10	166	College of Computer Science, Zhejiang University
+conf/mm/ZhangCCBCH09	166	College of Computer Science, Zhejiang University
+conf/iat/ChenZWCB08	166	College of Computer Science, Zhejiang University
+conf/iat/LiuCBCZ07	166	College of Computer Science, Zhejiang University
+conf/sigir/ChenBLCZ07	166	College of Computer Science, Zhejiang University
+conf/www/CaiBCLC07	166	College of Computer Science, Zhejiang University
+conf/pcm/LiuCCBWH06	166	College of Computer Science, Zhejiang University
+conf/aina/ChenWW05	166	College of Computer Science, Zhejiang University
+conf/icess/ZhaoWYWC04	166	College of Computer Science, Zhejiang University
+journals/jpdc/XiaoCH08	94	Nanjing University of Posts and Telecommunications
+journals/tjs/XiaoCH06	94	Nanjing University of Posts and Telecommunications
+conf/icpads/HeCPX05	94	Nanjing University of Posts and Telecommunications
+conf/icpads/XiaoCHS05	94	Nanjing University of Posts and Telecommunications
+conf/ispa/HeCPY05	94	Nanjing University of Posts and Telecommunications
+conf/msn/HeCX05	94	Nanjing University of Posts and Telecommunications
+conf/ispa/XiaoCH04	94	Nanjing University of Posts and Telecommunications
+conf/npc/HeCYP04	94	Nanjing University of Posts and Telecommunications
+journals/tc/ChenTA02	168	Oracle Corporation
+journals/tc/ChenTA02a	168	Oracle Corporation
+journals/dc/AguileraCT00	168	Oracle Corporation
+journals/siamcomp/AguileraCT00	168	Oracle Corporation
+conf/dsn/ChenTA00	168	Oracle Corporation
+journals/tcs/AguileraCT99	168	Oracle Corporation
+conf/wdag/AguileraCT98	168	Oracle Corporation
+conf/wdag/AguileraCT97	168	Oracle Corporation
+conf/atal/ChenD06	58	Intelligent Automation Inc.
+conf/aois/ChenD04	58	Intelligent Automation Inc.
+conf/atal/ChenD04	58	Intelligent Automation Inc.
+conf/atal/ChenD02	58	Intelligent Automation Inc.
+conf/prima/ChenD02	58	Intelligent Automation Inc.
+journals/tjs/ChenCW12	146	 National University of Defense Technology, Changsha, China
+conf/IEEEares/ChenWDW11	146	 National University of Defense Technology, Changsha, China
+conf/icpads/ChenCLZSW11	146	 National University of Defense Technology, Changsha, China
+conf/imis/ChenXWDWZW11	146	 National University of Defense Technology, Changsha, China
+journals/jcp/ChenWC10	146	 National University of Defense Technology, Changsha, China
+conf/iccd/ShiWRCCSL10	146	 National University of Defense Technology, Changsha, China
+conf/icpads/XuCD10	146	 National University of Defense Technology, Changsha, China
+conf/icpads/TanCW10	146	 National University of Defense Technology, Changsha, China
+conf/IEEEcit/ChenWLSXZ09	146	 National University of Defense Technology, Changsha, China
+conf/icpads/ChenSLWX09	146	 National University of Defense Technology, Changsha, China
+conf/ispa/ChenLSWX09	146	 National University of Defense Technology, Changsha, China
+journals/et/GongCLDW08	146	 National University of Defense Technology, Changsha, China
+conf/euc/ChenLSWX08	146	 National University of Defense Technology, Changsha, China
+conf/icycs/ChenLSWXC08	146	 National University of Defense Technology, Changsha, China
+conf/sac/RuiWFKZ08	146	 National University of Defense Technology, Changsha, China
+conf/IEEEcit/ChenGDLW06	146	 National University of Defense Technology, Changsha, China
+conf/csreaESA/ChenGLDW06	146	 National University of Defense Technology, Changsha, China
+conf/dft/RuiWFKZ06	146	 National University of Defense Technology, Changsha, China
+conf/isda/ChenWWX06	146	 National University of Defense Technology, Changsha, China
+conf/isda/WangCLWH06	146	 National University of Defense Technology, Changsha, China
+journals/bmcbi/WangCLC06	171	First Teaching Hospital of Medical School, Xi'an Jiatong University
+conf/imsccs/YingWXB06	171	First Teaching Hospital of Medical School, Xi'an Jiatong University
+conf/ics/IancuCY08	172	Intel
+conf/IEEEpact/IancuCY07	172	Intel
+conf/vecpar/IancuHC04	172	Intel
+journals/tip/YuHCT12	173	National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences
+journals/tip/LiT0H12	173	National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences
+conf/icip/WuCHT11	173	National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences
+conf/accv/LiCHT10	173	National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences
+conf/cvpr/LiCHT10	173	National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences
+conf/icip/ChenHTT09	173	National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences
+conf/accv/CaiCHT07	173	National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences
+journals/tcs/BeiCTZZ11	47	Microsoft Research Asia
+journals/tpds/YangTZCD11	47	Microsoft Research Asia
+conf/icwsm/SunCLWSZL11	47	Microsoft Research Asia
+conf/ijcai/ChenLSW11	47	Microsoft Research Asia
+conf/infocom/TangYMLCD11	47	Microsoft Research Asia
+conf/sdm/ChenCCKLRSWWY11	47	Microsoft Research Asia
+conf/wine/ChenLSTWZ11	47	Microsoft Research Asia
+journals/corr/abs-1110-4723	47	Microsoft Research Asia
+journals/datamine/ChenLSW10	47	Microsoft Research Asia
+conf/icdm/ChenYZ10	47	Microsoft Research Asia
+conf/kdd/ChenWW10	47	Microsoft Research Asia
+journals/corr/abs-1007-1501	47	Microsoft Research Asia
+journals/ipl/ZhangC09a	47	Microsoft Research Asia
+journals/ipl/ZhangC09b	47	Microsoft Research Asia
+journals/tcs/ZhaoCT09	47	Microsoft Research Asia
+conf/esa/BeiCTZZ09	47	Microsoft Research Asia
+conf/faw/ChenTWZ09	47	Microsoft Research Asia
+conf/fm/LiuCLS09	47	Microsoft Research Asia
+conf/kdd/ChenWY09	47	Microsoft Research Asia
+conf/seke/ZhangLSDCL09	47	Microsoft Research Asia
+conf/wdag/ChenSTW09	47	Microsoft Research Asia
+conf/faw/OkamotoCL08	47	Microsoft Research Asia
+conf/isaac/ZhaoCT08	47	Microsoft Research Asia
+conf/srds/TianYCZD08	47	Microsoft Research Asia
+journals/sigops/ZhangLLCCJ07	47	Microsoft Research Asia
+conf/podc/ChenZCL07	47	Microsoft Research Asia
+conf/prdc/ChenZCL07	47	Microsoft Research Asia
+conf/srds/ChenCLZ07	47	Microsoft Research Asia
+conf/sss/ChenC07	47	Microsoft Research Asia
+conf/wdag/ChenZCL07	47	Microsoft Research Asia
+conf/wdag/ChenC06	47	Microsoft Research Asia
+conf/icdcs/LianCZ05	47	Microsoft Research Asia
+conf/icnp/LianZWZ05	47	Microsoft Research Asia
+conf/prdc/ChenLLZ05	47	Microsoft Research Asia
+journals/jcc/YuHCS11	175	Institute of Theoretical Chemistry, Jilin University
+journals/jcc/WangCYLWS11	175	Institute of Theoretical Chemistry, Jilin University
+journals/jcc/YuCGA10	175	Institute of Theoretical Chemistry, Jilin University
+journals/jcc/XuWLWWCYGA09	175	Institute of Theoretical Chemistry, Jilin University
+journals/jcc/LiWWLCSGA06	175	Institute of Theoretical Chemistry, Jilin University
+reference/assisted/TanCR12	176	Dept. of Industrial Design, Eindhoven University of Technology
+journals/ijsnet/ChenHBBF11	176	Dept. of Industrial Design, Eindhoven University of Technology
+conf/intenv/PotuzakovaCBF11	176	Dept. of Industrial Design, Eindhoven University of Technology
+conf/iwec/ChangI0R11	176	Dept. of Industrial Design, Eindhoven University of Technology
+journals/osn/OuveysiSCSZ10	176	Dept. of Industrial Design, Eindhoven University of Technology
+journals/titb/ChenBFAKGT10	176	Dept. of Industrial Design, Eindhoven University of Technology
+conf/date/ChenABF10	176	Dept. of Industrial Design, Eindhoven University of Technology
+conf/edutainment/HuCBR10	176	Dept. of Industrial Design, Eindhoven University of Technology
+journals/jaise/ChenSBBF09	176	Dept. of Industrial Design, Eindhoven University of Technology
+conf/bsn/BouwstraCFB09	176	Dept. of Industrial Design, Eindhoven University of Technology
+conf/ems/TanCLR09	176	Dept. of Industrial Design, Eindhoven University of Technology
+journals/spl/ChenRW12	177	University of Cambridge, UK
+journals/twc/ChenRW12	177	University of Cambridge, UK
+conf/icassp/0016RW12	177	University of Cambridge, UK
+conf/icassp/ChenRW11	177	University of Cambridge, UK
+conf/icc/0016RW11	177	University of Cambridge, UK
+conf/vtc/ChenLSLY09	177	University of Cambridge, UK
+conf/vtc/ChenZLZW08	177	University of Cambridge, UK
+conf/vtc/ZhangLCW08	177	University of Cambridge, UK
+conf/icc/0017011	178	Shanghai Jiao Tong University
+conf/globecom/WangCC09a	178	Shanghai Jiao Tong University
+conf/aaim/XuCSZ12	56	Institute of Software, Chinese Academy of Sciences
+journals/ipl/ChenZ09	56	Institute of Software, Chinese Academy of Sciences
+journals/jcst/XuCXZ09	56	Institute of Software, Chinese Academy of Sciences
+conf/tase/ChenZ09	56	Institute of Software, Chinese Academy of Sciences
+conf/tase/XuCXZ07	56	Institute of Software, Chinese Academy of Sciences
+conf/interspeech/ChenM11	180	Language Technologies Institute, Carnegie Mellon University
+conf/its/ChenMA10	180	Language Technologies Institute, Carnegie Mellon University
+conf/its/MostowABCCDDDGGJKLLMTVWY10	180	Language Technologies Institute, Carnegie Mellon University
+conf/aied/MostowC09	180	Language Technologies Institute, Carnegie Mellon University
+conf/acl/Chen08	180	Language Technologies Institute, Carnegie Mellon University
+conf/cdc/MeynCO10	181	Department of Electrical and Computer Engineering, University of Illinois
+journals/questa/ChenTHMMO09	181	Department of Electrical and Computer Engineering, University of Illinois
+conf/cdc/ChenHKUZMMW09	181	Department of Electrical and Computer Engineering, University of Illinois
+conf/cdc/DengCMM08	181	Department of Electrical and Computer Engineering, University of Illinois
+journals/eswa/ChenTY11	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+conf/apweb/ChenZHOWY11	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+conf/waim/WangHCWY11	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+conf/ictai/ChenT10	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+journals/jcam/ChenT09	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+journals/jcam/ChenT09a	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+conf/fuzzIEEE/ChenT09	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+conf/fuzzIEEE/ChenT09a	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+conf/fuzzIEEE/ChenT09b	182	Key Laboratory of High Confidence Software Technologies, School of EECS, Peking University
+journals/dke/ChenC11	127	University of Nebraska at Omaha
+conf/cidm/ChenC09a	127	University of Nebraska at Omaha
+conf/dawak/ChenC09	127	University of Nebraska at Omaha
+conf/mpc/BackhouseCF10	184	University of Nottingham
