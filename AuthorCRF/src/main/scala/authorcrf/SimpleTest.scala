@@ -99,7 +99,9 @@ class SimpleTest {
     fp.attr += f
     val v1 = p.publication1.venue.string
     val v2 = p.publication2.venue.string
-    if (venuePairStat.contains(Set(v1, v2))) {
+    if (v1.equalsIgnoreCase(v2))
+      f += "Same_Venu"
+    else if (venuePairStat.contains(Set(v1, v2))) {
       val v = venuePairStat(Set(v1, v2))
       if (v == 1)
         f += "Venue_1"
@@ -230,7 +232,7 @@ object SimpleTest extends SimpleTest {
       f(0) -> f(1).toInt
     }).toMap
 
-    venuePairStat = io.Source.fromFile("venuesPair.count").getLines().map(l => {
+    venuePairStat = io.Source.fromFile("venuePair.count").getLines().map(l => {
       val f = l.split("\t")
       Set(f(0), f(1)) -> f(2).toInt
     }).toMap
