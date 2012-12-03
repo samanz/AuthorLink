@@ -346,7 +346,6 @@ conf/mpc/ChenU89	161	Department of Computer Science, Washington University, St. 
 
 journals/tedu/ZhangDZCP12	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
 journals/tvcg/ShiCLXCQ12	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
-conf/vinci/2012	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
 journals/chinaf/PanZWCP11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
 journals/jzusc/MaoFCYFP11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
 journals/tvcg/ZhangHXXC11	57	The State Key Laboratory of CAD and CG, Zhejiang University, Hangzhou
