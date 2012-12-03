@@ -59,6 +59,7 @@ object LoadDBLPCoref {
 		val publications = new ArrayBuffer[Publication]()
 		for(line <- Source.fromFile(file).getLines()) {
 			if(line.startsWith("#")) block = line.substring(1)
+            if(block.contains("(")) block = block.substring(0, block.indexOf("(")).trim
 			else if(line.trim.length > 0) {
 				val split = line.split("\t")
 				if(split.length > 1) {

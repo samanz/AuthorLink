@@ -1,6 +1,7 @@
 package authorcrf
 
 import java.sql.{Connection, DriverManager, ResultSet, Statement}
+import scala.collection.mutable.ArrayBuffer
 import java.io._
 import scala.xml._
 
@@ -10,6 +11,27 @@ object UpdateDBLP {
   val st = db.createStatement
   var note = ""
   
+  def getUrlpt(node : authorcrf.CoAuthorStats.Node) : String = {
+    if(node.urlpt != "") node.urlpt
+    else {
+      val split = node.author.split(" ")
+      val url = split.last.first.toLowerCase + ":" + split.first.replaceAll("-","=").replaceAll("\\.", "=") + (1 until split.length-1).map( i => "_" + split(i).replaceAll("\\.","=")).mkString("")
+      url
+    }
+  }
+
+  def getCoauthors(author : authorcrf.CoAuthorStats.Node) : Seq[(String,String,Int)] = {
+    val al = ArrayBuffer[(String, String, Int)]()
+    val url = getUrlpt(author)
+    val codoc = XML.load("http://dblp.dagstuhl.de/pers/xc/" + url + ".xml")
+    val conodes = (codoc \ "author")
+    conodes.foreach{ x =>
+      al += new Tuple3(x.child.head.text, (x \ "@urlpt").text, (x \ "@count").text.toInt)
+    }
+    al.toSeq
+  }
+
+
   def hasNote(node : Node) : Boolean = {
     val personRec = XML.load("http://dblp.uni-trier.de/rec/bibtex/" + node.child.head.toString + ".xml")
     if((personRec \ "www" \ "note").length > 0) {

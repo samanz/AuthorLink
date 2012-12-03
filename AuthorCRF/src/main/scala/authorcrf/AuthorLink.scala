@@ -78,8 +78,13 @@ abstract class AuthorFeatures(val field : FieldPair) extends BinaryFeatureVector
   def domain : CategoricalTensorDomain[String] 
   override def skipNonCategories = true
 }
-class TitleFeatures(field : FieldPair) extends AuthorFeatures(field) {
+/*
+class TitleFeatures(val field : Title, f : FieldPair = new FieldPair(field,field, n)) extends AuthorFeatures(field) {
 	def domain = TitleFeaturesDomain
+}*/
+class TitleFeatures(val field : Title) extends BinaryFeatureVectorVariable[String] {
+	def domain = TitleFeaturesDomain
+	  override def skipNonCategories = true
 }
 class CoAuthorsFeatures(field : FieldPair) extends AuthorFeatures(field) {
 	def domain = CoAuthorsFeaturesDomain
@@ -199,7 +204,7 @@ class AuthorLink {
     sim
   }
 
-	def initTitleFeatures(fp : FieldPair) {
+	/*def initTitleFeatures(fp : FieldPair) {
 		val f = new TitleFeatures(fp)
 		val v1 = fp.field1.asInstanceOf[Title].string
 		val v2 = fp.field2.asInstanceOf[Title].string
@@ -215,7 +220,7 @@ class AuthorLink {
 		// TODO: use lucene score?
 		fp.attr += f
 	}
-
+*/
 	def initCoAuthorsFeatures(fp : FieldPair) {
 		//fp.attr += new CoAuthorsFeatures(fp)
 	}
@@ -256,7 +261,7 @@ class AuthorLink {
 			for(fp <- pair.fields) {
 				fp.attr += new FieldPairLabel(fp, pair.attr[PubPairLabel].targetCategory)
 				fp.field1 match {
-					case title : Title => initTitleFeatures(fp)
+					//case title : Title => initTitleFeatures(fp)
 					case venue : Venue => initVenueFeatures(fp)
 					case affil : Affiliation => initAffiliationFeatures(fp)
 					case coauth : CoAuthors => initCoAuthorsFeatures(fp)
