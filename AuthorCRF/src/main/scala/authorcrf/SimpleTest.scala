@@ -19,6 +19,12 @@ class SimpleModel extends CombinedModel {
     def unroll2(tf: TitleFeatures) = Nil //Factor(tf.field.attr[FieldPairLabel], tf, tf)
     def unroll3(tf: TitleFeatures) = Nil //Factor(tf.field.attr[FieldPairLabel], tf, tf)
   }
+  val botVen = new DotTemplateWithStatistics2[FieldPairLabel, VenueFeatures] {
+    lazy val weights = new la.DenseTensor2(PairLabelDomain.size, VenueFeaturesDomain.dimensionSize)
+    def unroll1(fieldlabel: FieldPairLabel) = if (fieldlabel.field.attr.contains[VenueFeatures]) Factor(fieldlabel, fieldlabel.field.attr[VenueFeatures]) else Nil
+    def unroll2(tf: VenueFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
+  }
+
   val middleTitle = new TupleTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
     /*lazy val weights = new DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)*/
     def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(1).attr[FieldPairLabel])
@@ -30,15 +36,26 @@ class SimpleModel extends CombinedModel {
   val middleAff = new TupleTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
     /*lazy val weights = new DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)*/
     def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(0).attr[FieldPairLabel])
-    def unroll2(fieldlabel: FieldPairLabel) = Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel)
+    def unroll2(fieldlabel: FieldPairLabel) = if(fieldlabel.field.field1.isInstanceOf[Affiliation]) Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel) else Nil
     def score(v1: PubPairLabel#Value, v2: FieldPairLabel#Value): Double = {
       if(v1.category==v2.category) 1.0 else 0.0
     }
   }
-  this += botAff
+  val middleVen = new TupleTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
+    /*lazy val weights = new DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)*/
+    def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(2).attr[FieldPairLabel])
+    def unroll2(fieldlabel: FieldPairLabel) = if(fieldlabel.field.field1.isInstanceOf[Venue]) Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel) else Nil
+    def score(v1: PubPairLabel#Value, v2: FieldPairLabel#Value): Double = {
+      if(v1.category==v2.category) 1.0 else 0.0
+    }
+  }
+
+  //this += botAff
   //this += botTitl
-  this += middleAff
+  //this += middleAff
   //this += middleTitle
+  this += middleVen
+  this += botVen
 }
 
 class SimpleObjective extends HammingTemplate[PairLabel]
@@ -99,9 +116,9 @@ class SimpleTest {
     fp.attr += f
     val v1 = p.publication1.venue.string
     val v2 = p.publication2.venue.string
-    if (v1.equalsIgnoreCase(v2))
-      f += "Same_Venu"
-    else if (venuePairStat.contains(Set(v1, v2))) {
+    //if (v1.equalsIgnoreCase(v2))
+    //  f += "Same_Venu"
+    if (venuePairStat.contains(Set(v1, v2))) {
       val v = venuePairStat(Set(v1, v2))
       if (v == 1)
         f += "Venue_1"
@@ -121,7 +138,7 @@ class SimpleTest {
     val fp = new FieldPair(p.publication1.coAuthors, p.publication2.coAuthors, p)
     fp.attr += new FieldPairLabel(fp, fieldLabel(p))
     fp.attr += new CoAuthorsFeatures(fp)
-    CoAuthorStats.addCoAuthorFeatures(p)
+    //CoAuthorStats.addCoAuthorFeatures(p)
     fp
   }
 
@@ -155,7 +172,7 @@ class SimpleTest {
     }
     val trainPairs = pairs.toSeq
 
-    val labels = trainPairs.map(_.fields(0).attr[FieldPairLabel])  ++ trainPairs.map(_.attr[PubPairLabel])
+    val labels = /*trainPairs.map(_.fields(0).attr[FieldPairLabel]) ++*/ trainPairs.map(_.fields(2).attr[FieldPairLabel]) ++ trainPairs.map(_.attr[PubPairLabel])
     trainPairs.map(_.attr[PubPairLabel]).foreach(_.setRandomly())
     //trainPairs.flatMap(_.fields.map(_.attr[FieldPairLabel])).foreach(_.setRandomly())
     labels.foreach(_.setRandomly()) // _.setCategory("O")(null))
@@ -170,8 +187,7 @@ class SimpleTest {
       learner.processExamples(pieces)
       predictor.processAll(labels)
       println(model.botAff.weights)
-      println(model.botTitl.weights)
-
+      println(model.botVen.weights)
       println(objective.accuracy(labels.filter(_.isInstanceOf[PubPairLabel])))
       println(objective.accuracy(labels))
     }
@@ -181,12 +197,12 @@ class SimpleTest {
       println(x.attr[PubPairLabel].targetCategory)
       println("=============")
     }*/
-    trainPairs.foreach { x =>
+    /*trainPairs.foreach { x =>
       println(x.attr[PubPairLabel].targetCategory)
       println(x.attr[PubPairLabel].categoryValue)
       println(x.fields(0).attr[FieldPairLabel])
       println(x.fields(0).attr[AffiliationFeatures])
-    }
+    }*/
     EvaluatePairs.clearMaps()
     EvaluatePairs.cluster(pairs)
 
@@ -218,6 +234,30 @@ def allFalse(trainFile : String) {
 
     EvaluatePairs.evaluation(pairs)
   }
+
+def printTruth(trainFile : String) {
+    var lf = LoadDBLPCoref.fromFile(trainFile)
+    lf.foreach(initTitlePub(_))
+    val pairs = new ArrayBuffer[Pair]()
+    for (l1 <- 0 until lf.length) {
+      val l = lf(l1)
+      for (l2 <- (l1 + 1) until lf.length) {
+        val k = lf(l2)
+        if (similar(l, k)) {
+          val p = new Pair(l, k)
+          p.attr += new PubPairLabel(p, if (l.attr[ClusterId].target == k.attr[ClusterId].target) "YES" else "NO")
+          //p.fields = Array(aff, tit, ven, coa)
+          pairs += p
+        }
+      }
+    }
+    val trainPairs = pairs.toSeq
+
+    EvaluatePairs.clearMaps()
+    EvaluatePairs.cluster(pairs)
+
+    EvaluatePairs.evaluation(pairs)
+  }
 }
 
 object SimpleTest extends SimpleTest {
@@ -238,5 +278,6 @@ object SimpleTest extends SimpleTest {
     }).toMap
 
     trainNew(args(0))
+    //printTruth(args(0))
   }
 }
