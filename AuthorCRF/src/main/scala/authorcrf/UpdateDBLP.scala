@@ -154,13 +154,17 @@ object UpdateDBLP {
   def updateFromURL(url : String) {
     val a = Source.fromURL(url)
     val lines = a.getLines()
-    val matcher = "<a href=\"(.*\\.xml)\">".r
+    val matcher = "<a href=\"([a-zA-Z0-9/\\.\\-:]*.xml)\">".r
+    var count = 0
     for(line <- lines) {
       val matches = matcher.findAllIn(line).matchData
       val r = matches.map(_.subgroups.mkString(",")).mkString(",")
-      if(r.lastIndexOf("\"") > 0) {
-        val xmlfile = r.substring(r.lastIndexOf("\""+1),r.length)
-        updateFromKeyWithUrl(xmlfile)
+      if(r.length > 0) {
+        count += 1
+        if(count > 1) {
+          val xmlfile = r
+          updateFromKeyWithUrl(xmlfile)
+        }
       }
     }
   }
