@@ -19,6 +19,12 @@ class SimpleModel extends CombinedModel {
     def unroll2(tf: TitleFeatures) = Nil //Factor(tf.field.attr[FieldPairLabel], tf, tf)
     def unroll3(tf: TitleFeatures) = Nil //Factor(tf.field.attr[FieldPairLabel], tf, tf)
   }
+  val botVen = new DotTemplateWithStatistics2[FieldPairLabel, VenueFeatures] {
+    lazy val weights = new la.DenseTensor2(PairLabelDomain.size, VenueFeaturesDomain.dimensionSize)
+    def unroll1(fieldlabel: FieldPairLabel) = if (fieldlabel.field.attr.contains[VenueFeatures]) Factor(fieldlabel, fieldlabel.field.attr[VenueFeatures]) else Nil
+    def unroll2(tf: VenueFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
+  }
+
   val middleTitle = new TupleTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
     /*lazy val weights = new DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)*/
     def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(1).attr[FieldPairLabel])
@@ -35,6 +41,15 @@ class SimpleModel extends CombinedModel {
       if(v1.category==v2.category) 1.0 else 0.0
     }
   }
+  val middleVen = new TupleTemplateWithStatistics2[PubPairLabel, FieldPairLabel] {
+    /*lazy val weights = new DenseTensor2(PairLabelDomain.size, PairLabelDomain.size)*/
+    def unroll1(pairlabel: PubPairLabel) = Factor(pairlabel, pairlabel.pair.fields(2).attr[FieldPairLabel])
+    def unroll2(fieldlabel: FieldPairLabel) = Factor(fieldlabel.field.pair.attr[PubPairLabel], fieldlabel)
+    def score(v1: PubPairLabel#Value, v2: FieldPairLabel#Value): Double = {
+      if(v1.category==v2.category) 1.0 else 0.0
+    }
+  }
+
   this += botAff
   //this += botTitl
   this += middleAff
@@ -102,7 +117,7 @@ class SimpleTest {
     val fp = new FieldPair(p.publication1.coAuthors, p.publication2.coAuthors, p)
     fp.attr += new FieldPairLabel(fp, fieldLabel(p))
     fp.attr += new CoAuthorsFeatures(fp)
-    CoAuthorStats.addCoAuthorFeatures(p)
+    //CoAuthorStats.addCoAuthorFeatures(p)
     fp
   }
 
@@ -136,7 +151,7 @@ class SimpleTest {
     }
     val trainPairs = pairs.toSeq
 
-    val labels = trainPairs.map(_.fields(0).attr[FieldPairLabel])  ++ trainPairs.map(_.attr[PubPairLabel])
+    val labels = trainPairs.map(_.fields(0).attr[FieldPairLabel]) ++ trainPairs.map(_.fields(2).attr[FieldPairLabel]) ++ trainPairs.map(_.attr[PubPairLabel])
     trainPairs.map(_.attr[PubPairLabel]).foreach(_.setRandomly())
     //trainPairs.flatMap(_.fields.map(_.attr[FieldPairLabel])).foreach(_.setRandomly())
     labels.foreach(_.setRandomly()) // _.setCategory("O")(null))

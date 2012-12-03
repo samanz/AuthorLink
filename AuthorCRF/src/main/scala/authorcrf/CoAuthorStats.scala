@@ -45,10 +45,20 @@ object CoAuthorStats {
 			graph.nodes(co).parents(pair.publication2.block) = graph.nodes(pair.publication2.block)
 		}
 		for(i <- 0 until 3) graph.addEnds()
+
+		graph.print()
 	}
 
 	class Graph {
 		val nodes = new HashMap[String,Node]()
+
+		def print() {
+			println("=========")
+			for(node <- nodes) {
+				println(node._1 + " :-> " + node._2.nodes.map( x => x._2.n.author + " (" + x._2.count + ")").mkString(" ;: ") )
+			}
+		}
+
 
 		def getCoauthors(node : Node) : Seq[(String,String,Int)] = {
 			if(!node.author.contains("?")) UpdateDBLP.getCoauthors(node) else Array[(String,String,Int)]()
@@ -66,7 +76,7 @@ object CoAuthorStats {
 		def addEnds() {
 			for(nodeKV <- nodes) {
 				val node = nodeKV._2
-				if(!node.root && node.nodes == null) {
+				if(!node.root && node.nodes.size == 0) {
 					val coauthors = getCoauthors(node)
 					coauthors.foreach(addParent(_, node))
 				}
