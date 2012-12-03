@@ -4,6 +4,7 @@ import java.sql.{Connection, DriverManager, ResultSet, Statement}
 import scala.collection.mutable.ArrayBuffer
 import java.io._
 import scala.xml._
+import scala.io.Source
 
 object UpdateDBLP {
   classOf[org.postgresql.Driver]
@@ -94,6 +95,22 @@ object UpdateDBLP {
 		if(ty == "article") ("journal", "article") else if(ty=="incollection") ("booktitle","incollection") else ("booktitle", "inproceedings")
 	}
 
+  def updateFromKeyWithUrl(url: String) : (String, String) = {
+    val doc = XML.load(url)
+    val pub = doc.child(1)
+    val ty = pub.label
+    val pubkey = (pub \ "@key").text.toString
+    val coauth = (pub \ "author").map( _.child.head).mkString(" ,")
+    val title =  (pub \ "title").head.child.head.toString
+    val venue = if( (pub \ "journal").length > 0) (pub \ "journal").head.child.head.toString
+      else if((pub \ "booktitle").length > 0)  (pub \ "booktitle").head.child.head.toString
+      else ""
+    val year = (pub \ "year").head.child.head.toString.toInt
+    val publ = new Publication(new Title(title), new CoAuthors(coauth), new Venue(venue), new Affiliation(""), "", year, ty, pubkey)
+    updateFromPulication(publ)
+    if(ty == "article") ("journal", "article") else if(ty=="incollection") ("booktitle","incollection") else ("booktitle", "inproceedings")
+  }
+
 	def insertAuthor(name : String) : Int = {
 		val dbins = db.prepareStatement("INSERT into author(name) values(?)", Statement.RETURN_GENERATED_KEYS);
 		dbins.setString(1,name)
@@ -133,4 +150,18 @@ object UpdateDBLP {
    		insertVenue.setString(2, pub.venue.string)
    		insertVenue.executeUpdate()
 	}
+
+  def updateFromURL(url : String) {
+    val a = Source.fromURL(url)
+    val lines = a.getLines()
+    val matcher = "<a href=\"(.*\\.xml)\">".r
+    for(line <- lines) {
+      val matches = matcher.findAllIn(line).matchData
+      val r = matches.map(_.subgroups.mkString(",")).mkString(",")
+      if(r.lastIndexOf("\"") > 0) {
+        val xmlfile = r.substring(r.lastIndexOf("\""+1),r.length)
+        updateFromKeyWithUrl(xmlfile)
+      }
+    }
+  }
 }
