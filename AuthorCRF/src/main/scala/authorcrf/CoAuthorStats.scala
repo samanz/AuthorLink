@@ -29,7 +29,8 @@ object CoAuthorStats {
 		val coauthors2 = getCoAuthors(pair.publication2)
 		val graph = new Graph
 		graph.nodes(pair.publication1.block) = new Node(pair.publication1.block, null, true)
-		graph.nodes(pair.publication2.block) = new Node(pair.publication2.block, null, true)
+		if(pair.publication2.block != pair.publication1.block) graph.nodes(pair.publication2.block) = new Node(pair.publication2.block, null, true)
+    else graph.nodes(pair.publication2.block+"2") = new Node(pair.publication2.block, null, true)
 		for(co <- coauthors1) {
 			if(!graph.nodes.contains(co)) {
 				graph.nodes(co) = new Node(co, graph.nodes(pair.publication1.block))
@@ -44,7 +45,7 @@ object CoAuthorStats {
 			graph.nodes(pair.publication2.block).nodes(graph.nodes(co).author) = new Child(1,graph.nodes(co))
 			graph.nodes(co).parents(pair.publication2.block) = graph.nodes(pair.publication2.block)
 		}
-		for(i <- 0 until 3) graph.addEnds()
+		graph.addEnds()
 
 		graph.print()
 	}
@@ -55,6 +56,7 @@ object CoAuthorStats {
 		def print() {
 			println("=========")
 			for(node <- nodes) {
+				if(node._2.root) println("ROOT")
 				println(node._1 + " :-> " + node._2.nodes.map( x => x._2.n.author + " (" + x._2.count + ")").mkString(" ;: ") )
 			}
 		}

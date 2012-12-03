@@ -15,15 +15,16 @@ object UpdateDBLP {
     if(node.urlpt != "") node.urlpt
     else {
       val split = node.author.split(" ")
-      val url = split.last.first.toLowerCase + ":" + split.first.replaceAll("-","=").replaceAll("\\.", "=") + (1 until split.length-1).map( i => "_" + split(i).replaceAll("\\.","=")).mkString("")
+      val url = split.last.first.toLowerCase + "/" + split.last + ":" + split.first.replaceAll("-","=").replaceAll("\\.", "=") + (1 until split.length-1).map( i => "_" + split(i).replaceAll("\\.","=")).mkString("")
       url
     }
   }
 
   def getCoauthors(author : authorcrf.CoAuthorStats.Node) : Seq[(String,String,Int)] = {
     val al = ArrayBuffer[(String, String, Int)]()
-    val url = getUrlpt(author)
-    val codoc = XML.load("http://dblp.dagstuhl.de/pers/xc/" + url + ".xml")
+    val url = "http://dblp.dagstuhl.de/pers/xc/" + getUrlpt(author) + ".xml"
+    val codoc = XML.load(url)
+
     val conodes = (codoc \ "author")
     conodes.foreach{ x =>
       al += new Tuple3(x.child.head.text, (x \ "@urlpt").text, (x \ "@count").text.toInt)

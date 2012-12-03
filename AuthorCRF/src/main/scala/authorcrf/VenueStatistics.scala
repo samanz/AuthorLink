@@ -6,7 +6,9 @@ object VenueStatistics {
 
   def main(args: Array[String]) {
     val pubs = LoadDBLPCoref.fromFile(args(0))
-    val venues = pubs.map(_.venue.string).toSet.toSeq
+    val venues = pubs.map(_.venue.string.trim).toSet.toSeq
+    println(venues.contains("ISDA"))
+    println(venues.mkString(","))
 
     val authorVenue = Map[String, Set[String]]() // venue -> set of authorid
     io.Source.fromFile(args(1)).getLines().foreach(l => {
