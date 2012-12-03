@@ -65,6 +65,7 @@ class SimpleTest {
   var titleStat: Map[String, Int] = null
   var venueStat: Map[String, Int] = null
   val statThreshold = 10
+  var venuePairStat: Map[Set[String], Int] = null
 
   def similar(pub1: Publication, pub2: Publication): Boolean = {
     val w = pub1.block.split(" ")
@@ -109,7 +110,25 @@ class SimpleTest {
   def initVenue(p: Pair): FieldPair = {
     val fp = new FieldPair(p.publication1.venue, p.publication2.venue, p)
     fp.attr += new FieldPairLabel(fp, fieldLabel(p))
-    fp.attr += new VenueFeatures(fp)
+    val f = new VenueFeatures(fp)
+    fp.attr += f
+    val v1 = p.publication1.venue.string
+    val v2 = p.publication2.venue.string
+    if (v1.equalsIgnoreCase(v2))
+      f += "Same_Venu"
+    else if (venuePairStat.contains(Set(v1, v2))) {
+      val v = venuePairStat(Set(v1, v2))
+      if (v == 1)
+        f += "Venue_1"
+      else if (v >= 2 && v <= 5)
+        f += "Venue_2to5"
+      else if (v >= 6 && v <= 10)
+        f += "Venue_6to10"
+      else
+        f += "Venue_10"
+    } else {
+      f += "Venue_0"
+    }
     fp
   }
 
@@ -226,6 +245,11 @@ object SimpleTest extends SimpleTest {
     venueStat = io.Source.fromFile("venues.count").getLines().map(l => {
       val f = l.split(" ")
       f(0) -> f(1).toInt
+    }).toMap
+
+    venuePairStat = io.Source.fromFile("venuePair.count").getLines().map(l => {
+      val f = l.split("\t")
+      Set(f(0), f(1)) -> f(2).toInt
     }).toMap
 
     trainNew(args(0))
