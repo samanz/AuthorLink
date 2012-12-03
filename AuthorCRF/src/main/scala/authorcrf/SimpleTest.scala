@@ -116,18 +116,22 @@ class SimpleTest {
     fp.attr += f
     val v1 = p.publication1.venue.string
     val v2 = p.publication2.venue.string
-    //if (v1.equalsIgnoreCase(v2))
-    //  f += "Same_Venu"
+    if (v1.equalsIgnoreCase(v2))
+     f += "Same_Venu"
     if (venuePairStat.contains(Set(v1, v2))) {
       val v = venuePairStat(Set(v1, v2))
       if (v == 1)
         f += "Venue_1"
-      else if (v >= 2 && v <= 5)
-        f += "Venue_2to5"
-      else if (v >= 6 && v <= 10)
-        f += "Venue_6to10"
+      else if (v > 1 && v <= 4)
+        f += "Venue_2to4"
+      else if (v > 4 && v <= 16)
+        f += "Venue_5to16"
+      else if (v > 16 && v <= 64)
+	f += "Venue_17to64"
+      else if (v > 64 && v <= 256)
+	f += "Venue_65to256"
       else
-        f += "Venue_10"
+        f += "Venue_257"
     } else {
       f += "Venue_0"
     }
