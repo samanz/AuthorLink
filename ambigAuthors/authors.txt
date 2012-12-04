@@ -653,3 +653,88 @@ journals/dke/ChenC11	127	University of Nebraska at Omaha
 conf/cidm/ChenC09a	127	University of Nebraska at Omaha
 conf/dawak/ChenC09	127	University of Nebraska at Omaha
 conf/mpc/BackhouseCF10	184	University of Nottingham
+
+#David Smith (homepages/33/2297)
+journals/jocch/BammanS12	185	University of Massachusetts-Amherst
+conf/ccnc/KhanSHH12	186	School of Engineering and Applied Science, George Washington University, Washington DC, USA
+conf/csndsp/Bobor-OyiboFSY12	187	Northumbria University, School of Computing, Engineering and Information Sciences, Newcastle upon Tyne, NE1 8ST, United Kingdom
+conf/csndsp/YurdusevenSPFB12	187	Northumbria University, School of Computing, Engineering and Information Sciences, Newcastle upon Tyne, NE1 8ST, United Kingdom
+conf/isscc/PayneSBECST11	188	Texas Instruments, Dallas, TX
+journals/jssc/PayneCSHK10	188	High Performance Analog Division, Texas Instruments (TI) Inc., Dallas, TX 75243 USA
+conf/csndsp/Bobor-OyiboSF10	187	NCRL, School of computing, Engineering and Information Science, Northumbria University, NE1 8ST
+conf/csndsp/JiangFSS10	187	School of Computing Engineering and Information Science, University of Northumbria, Newcastle upon Tyne, NE1 8ST, UK
+conf/csndsp/FernandoBES10	187	School of Computing Engineering and Information Sciences, Northumbria University, NE1 8ST, UK
+conf/isscc/PayneCSKH10	188	Texas Instruments, Dallas, TX
+conf/scsc/BarjisSS10	189	New York City College of Technology
+conf/emnlp/BangaloreS08	190	AT&T Labs – Research, 180 Park Ave, Florham Park, NJ 07932
+series/hci/SmithK08	191	School of Art, Media and Design, University of Wales College, Newport, UK
+journals/ais/Smith07	191	Newport School of Art, Media and Design, University of Wales, PO Box 179, Newport, Wales NP18 3YG, UK
+journals/ais/Smith07a	191	School of Art, Media and Design, University of Wales, Newport, Wales, UK
+journals/candc/YapZSSH07	192	Department of Biochemistry, Li Ka Shing Faculty of Medicine, The University of Hong Kong (HKU), 21 Sassoon Road, Pokfulam, Hong Kong SAR, China
+conf/ifip8-2/BaldwinPSAM07	193	Qwaq Inc.
+conf/mss/AbadieBBCCWDFFFGGJKLLLPMMMMNOPPSSSSTZ07	194	CERN, European Organization for Nuclear Research, Switzerland
+conf/mss/AbadieBBCFGLMMNST07	194	CERN, European Organization for the Nuclear Research, Geneva, Switzerland, Inc.
+conf/biocomp/PearceWJS06	195	University of Wolverhampton
+conf/miccai/GrabnerJBSPC06	196	Oxford University, UK
+journals/ais/StapletonSM05	191	School of Art, Media and Design, University of Wales, Newport, Wales
+journals/micro/TallaHTBSBXH04	188	Texas Instruments
+conf/naacl/OchGKSYFKSSEJJR04	197	Johns Hopkins U.
+journals/ais/Smith03	191	School of Art, Media and Design, University of Wales College, Newport, NP18 3YG
+journals/ais/SmithK02	191	School of Art, Media and Design, University of Wales College, Newport, UK
+conf/jcdl/HillHS02	197	Perseus Project, Department of Classics, Tufts University
+journals/artmed/AllenS01	198	Department of Anaesthesia, University of Southampton, Southampton, Hampshire, SO17 1BJ, UK
+journals/bib/BaldockBBHKOSSWYD01	199	University of Edinburgh
+journals/ets/SmithH00	200	Huddersfield University Business School, Queensgate, Huddersfield, HD1 3DH, United Kingdom
+journals/lre/Smith99	197	Perseus Project, Eaton Hall 124, Tufts University, Medford, MA 02155, USA
+conf/icis/ZackADSU99	201	IBM Institute for Knowledge Management, U.S.A.
+conf/chi/DruinSHCB97	202	Apple Research Laboratories, Apple Computer
+conf/group/MahlingBILSR97	203	
+conf/iccal/MooreS92	204	Department of Mathematics, Duke University, Durham, NC 27706
+journals/ais/Smith87	191	
+conf/dac/PutatundaSMC86	205	RCA/Aerospace and Defense/Advanced Technology Moorestown, NJ 08057
+
+#David A. Smith (homepages/45/3159)
+conf/emnlp/RiedelSM12	197	Department of Computer Science, University of Massachusetts, Amherst
+conf/emnlp/NaradowskyRS12	197	Department of Computer Science, University of Massachusetts Amherst, Amherst, MA, 01003, U.S.A.
+conf/sigir/CartrightCDDGKWYAMS12	197	Center for Intelligent Information Retrieval, Dept. of Computer Science, Univ. of Massachusetts, Amherst, MA 01003
+journals/corr/abs-1203-3511	197	Department of Computer Science, University of Massachusetts, Amherst, MA 01003, U.S.A.
+journals/ijdar/KaeSL11	197	Department of Computer Science, University of Massachusetts, Amherst, 140 Governors Drive, Amherst, MA 01003-9264, USA
+journals/ir/SeoCS11	197	Center for Intelligent Information Retrieval, University of Massachusetts, Amherst, MA 01003, USA
+conf/acl/BenderskyCS11	197	Dept. of Computer Science, University of Massachusetts, Amherst, MA
+conf/acl/LeeNS11	197	Department of Computer Science, University of Massachusetts, Amherst
+conf/cikm/ParkCS11	197	Center for Intelligent Information Retrieval, Department of Computer Science, University of Massachusetts, Amherst, MA 01003
+conf/cikm/SmithMA11	197	Center for Intelligent Information Retrieval, Department of Computer Science, University of Massachusetts, Amherst, MA 01003
+conf/cikm/DaltonAS11	197	Center for Intelligent Information Retrieval, Department of Computer Science, University of Massachusetts, Amherst, MA 01003
+conf/cikm/KimCSB11	197	Department of Computer Science, University of Massachusetts Amherst
+conf/ecir/AktolgaAS11	197	Center for Intelligent Information Retrieval, Department of Computer Science, University of Massachusetts, Amherst, MA 01002, USA
+conf/cikm/XueCS10	197	Center for Intelligent Information Retrieval, Department of Computer Science, University of Massachusetts, Amherst, MA 01003, USA
+conf/cikm/BenderskyCS10	197	Center for Intelligent Information Retrieval, Department of Computer Science, University of Massachusetts, Amherst, MA
+conf/cikm/KimBSC10	197	Department of Computer Science, University of Massachusetts Amherst
+conf/naacl/RiedelS10	197	Department of Computer Science, University of Massachusetts, Amherst
+conf/uai/RiedelSM10	197	Department of Computer Science, University of Massachusetts, Amherst
+conf/cikm/SeoCS09	197	Center for Intelligent Information Retrieval, University of Massachusetts, Amherst
+conf/emnlp/SmithE09	197	Department of Computer Science, University of Massachusetts Amherst, Amherst, MA 01003, USA
+conf/emnlp/MimnoWNSM09	197	University of Massachusetts, Amherst, Amherst, MA 01003
+conf/sigir/BenderskyCS09	197	Center for Intelligent Information Retrieval, Department of Computer Science, University of Massachusetts, Amherst, MA 01003
+conf/emnlp/SmithE08	197	Dept. of Computer Science, Johns Hopkins University, Balitmore, MD 21218, USA
+conf/emnlp/SmithS07	197	Department of Computer Science, Center for Language and Speech Processing, Johns Hopkins University, Baltimore, MD 21218 USA
+conf/emnlp/SmithE07	197	Department of Computer Science, Johns Hopkins University, Balitmore, MD 21218, USA
+conf/emnlp/HallHS07	197	Center for Language and Speech Processing, Johns Hopkins University, Baltimore, MD USA
+journals/dlib/Smith06	197	Computer Science Department, Center for Language and Speech Processing, Johns Hopkins University
+conf/acl/SmithE06a	197	Department of Computer Science, Center for Language and Speech Processing, Johns Hopkins University, Baltimore, MD 21218, USA
+conf/c5/McGeerRRSK06	206	Viewpoints Research Institute, Cary, NC
+conf/c5/SmithRORK05	206	Croquet Project, 104 So. Tamilynn Cr., Cary, NC, 27513 USA
+conf/naacl/SmithST05	197	Department of Computer Science / Center for Language and Speech Processing, Johns Hopkins University, Baltimore, MD 21218 USA
+conf/c5/SmithRRK04	206	Bellsouth
+conf/emnlp/SmithS04	197	Department of Computer Science, Center for Language and Speech Processing, Johns Hopkins University, Baltimore, MD 21218, USA
+conf/c5/SmithKRR03	206	Bell South
+conf/jcdl/SmithMC02	197	Perseus Project, Tufts University, Medford, MA 02155
+conf/jcdl/Smith02	197	Perseus Project, Tufts University, Medford, MA 02155
+conf/sigir/Smith02	197	Perseus Project, Tufts University, Medford, MA 02155, U.S.A.
+journals/cacm/CraneCMMRSW01	197	Perseus Digital Library, Medford, MA
+conf/ercimdl/SmithC01	197	Perseus Project, Tufts University, Medford, MA, USA
+conf/jcdl/CraneSW01	197	Perseus Project, Eaton Hall, Tufts University, Medford MA 02155
+journals/jdi/HudaSS97	207	Department of Radiology, University of Florida College of Medicine, Gainsville, FL
+journals/jsac/SmithBJC90	208	Bellcore, Red Bank, NJ
+journals/toms/FesslerFS83	204	Department of Mathematics, Duke Umversity, Durham, NC 277O6
+journals/toms/FesslerFS83a	204	Department of Mathematics, Duke Umversity, Durham, NC 277O6
