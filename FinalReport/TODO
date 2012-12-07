@@ -1,0 +1,21 @@
+TODO:
+====================
+Add new section 3:	Annotations:	
+	List hard examples.
+		Wei Chen paper, (show two example papers)
+	Discuss the source of the affiliation feature.
+	Find another interesting example of two publications that are the same person but hard to calc.
+
+Feature Discussion:
+====================
+Show advantage of using string similarity to exact matchings.
+Show advantage of temporal: (if none, discuss more annotations)
+Why venue features fail:
+	mean, median. Two histograms (dist for true, dist for false)
+Describe intuition behind using coauthor features 
+Statistics on coauthor features. Also add histogram of values.
+
+Experimental Evaluation
+====================
+Output B3 MUC on training and testing. 
+Can output the score for each feature as well as the aggregate.

@@ -66,6 +66,7 @@ object LoadDBLPCoref {
 					val fields = if(split.length > 2) (getFields(split(0)) ++ Array[Field](new Affiliation(split(2)))) else getFields(split(0))
 					if(fields.length > 2) {
 						val pub = Publication.fromFields(fields, block)
+            pub.pubkey = split(0)
 						pub.attr += new ClusterId(split(1).toInt,split(1).toInt)
 						publications += pub
 					}

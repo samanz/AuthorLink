@@ -2,6 +2,7 @@ package authorcrf
 
 import java.sql.{Connection, DriverManager, ResultSet, Statement}
 import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.HashMap
 import java.io._
 import scala.xml._
 import scala.io.Source
@@ -16,19 +17,27 @@ object UpdateDBLP {
     if(node.urlpt != "") node.urlpt
     else {
       val split = node.author.split(" ")
-      val url = split.last.first.toLowerCase + "/" + split.last + ":" + split.first.replaceAll("-","=").replaceAll("\\.", "=") + (1 until split.length-1).map( i => "_" + split(i).replaceAll("\\.","=")).mkString("")
+      var url = ""
+      if(split.last.matches("[0-9]*")) {
+        url = split(split.length-2).first.toLowerCase + "/" + split(split.length-2) + "_" + split.last + ":" + split.first.replaceAll("-","=").replaceAll("\\.", "=").replaceAll("'", "=") + (1 until split.length-2).map( i => "_" + split(i).replaceAll("\\.","=")).mkString("")
+      } else {
+        url = split.last.first.toLowerCase + "/" + split.last.replaceAll("-", "=") + ":" + split.first.replaceAll("-","=").replaceAll("\\.", "=") + (1 until split.length-1).map( i => "_" + split(i).replaceAll("\\.","=")).mkString("")
+      }
       url
     }
   }
 
   def getCoauthors(author : authorcrf.CoAuthorStats.Node) : Seq[(String,String,Int)] = {
     val al = ArrayBuffer[(String, String, Int)]()
-    val url = "http://dblp.dagstuhl.de/pers/xc/" + getUrlpt(author) + ".xml"
-    val codoc = XML.load(url)
-
-    val conodes = (codoc \ "author")
-    conodes.foreach{ x =>
-      al += new Tuple3(x.child.head.text, (x \ "@urlpt").text, (x \ "@count").text.toInt)
+      val url = "http://dblp.dagstuhl.de/pers/xc/" + getUrlpt(author) + ".xml"
+    try {
+      val codoc = XML.load(url)
+      val conodes = (codoc \ "author")
+      conodes.foreach{ x =>
+        al += new Tuple3(x.child.head.text, (x \ "@urlpt").text, (x \ "@count").text.toInt)
+      }
+    } catch {
+      case ieo : org.xml.sax.SAXParseException => { println("BAD URL: " + url) }
     }
     al.toSeq
   }

@@ -21,7 +21,7 @@ class CoAuthors(string : String) extends Field(string) {
 }
 class Venue(string : String) extends Field(string)
 class Affiliation(string : String) extends Field(string)
-class Publication(val title : Title, val coAuthors :  CoAuthors, val venue : Venue, val affiliation : Affiliation, val block : String, val year : Int = 1999, val ty : String = "", val pubkey : String = "") extends Attr {
+class Publication(val title : Title, val coAuthors :  CoAuthors, val venue : Venue, val affiliation : Affiliation, val block : String, val year : Int = 1999, val ty : String = "", var pubkey : String = "") extends Attr {
 	override def toString : String = {
 		title.string + " : " + coAuthors.string + " " + venue.string + " "
 	}
