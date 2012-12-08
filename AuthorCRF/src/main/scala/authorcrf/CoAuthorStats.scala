@@ -44,6 +44,7 @@ object CoAuthorStats {
 				if(!graph.nodes.contains(co)) {
 					graph.nodes(co) = new Node(co, graph.nodes(pair.publication1.block))
 				}
+
 				//graph.nodes(pair.publication1.block).nodes(graph.nodes(co).author) = new Child(1,graph.nodes(co))
 				//graph.nodes(pair.publication1.block).neigh(graph.nodes(co).author) = new Meta(1,graph.nodes(co))
 				graph.addLink(Link(graph.nodes(pair.publication1.block), graph.nodes(co), 1), graph.nodes(pair.publication1.block).nickname)
@@ -53,7 +54,7 @@ object CoAuthorStats {
       if(graph.links.contains(pair.publication1.block)) {
 			  graph.addEndsFrom( graph.nodes(pair.publication1.block) )
       }
-      KeyStore(pair.publication1.pubkey) = graph.nodes(pair.publication1.block)
+      		KeyStore(pair.publication1.pubkey) = graph.nodes(pair.publication1.block)
 			LinkStore(pair.publication1.pubkey) = graph.links.values.flatten.toArray
 		}
 		if(KeyStore.contains(pair.publication2.pubkey)) {
@@ -85,8 +86,22 @@ object CoAuthorStats {
       KeyStore(pair.publication2.pubkey) = graph.nodes(search)
 			LinkStore(pair.publication2.pubkey) = graph.links.values.flatten.toArray
 		}
-		for(node <- graph.nodes) { node._2.color = 0 }
-		graph.color(graph.nodes(pair.publication1.block))
+		for(node <- graph.nodes) { node._2.color1 = 0; node._2.color2 = 0; node._2.fromColor = "" }
+    	var d = (0,0)
+		try {
+		graph.color1(graph.nodes(pair.publication1.block), graph.nodes(search))
+		graph.color2(graph.nodes(search), graph.nodes(pair.publication1.block))
+
+	   	if(graph.links.contains(search) && graph.links.contains(pair.publication1.block)) {
+    		d = graph.percentage(graph.nodes(search),graph.nodes(pair.publication1.block))
+     		println("1-----------"); println(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t"); graph.printNeato(true)
+     		val t = (pair.publication1.attr[ClusterId].target==pair.publication2.attr[ClusterId].target)
+    		out.write(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t" + d + "\t" + t + "\n")
+    		out.flush()
+    	}
+    	} catch {
+    		case ne : java.util.NoSuchElementException => { println(ne.getMessage()); println(graph.nodes); println(pair.publication1.pubkey + "\t" + pair.publication2.pubkey) }
+    	}
 
     /*if(count > 600) {
       println(pair.publication1)
@@ -94,42 +109,87 @@ object CoAuthorStats {
       if (KeyStore.contains(pair.publication1.pubkey)) {
         LinkStore(pair.publication1.pubkey)
       }
-		  graph.print()
     } */
-    	var d = 0.0
+    	/*var d = (0,0)
     	if(graph.links.contains(search)) {
     		d = graph.percentage(graph.nodes(search))
-    		out.write(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t" + d + "\n")
+     		if(d._1 >= 1) { println("1-----------"); println(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t"); graph.print() }
+    		for(node <- graph.nodes) { node._2.color = 0; node._2.fromColor = "" }
+			graph.color(graph.nodes(search), graph.nodes(pair.publication1.block))
+    		if(graph.links.contains(pair.publication1.block)) {
+    			val dnew = graph.percentage(graph.nodes(pair.publication1.block))
+    			d = (d._1+dnew._1,d._2+dnew._2)
+    		}
+    		if(d._1 >= 1) { println("2-----------"); println(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t"); graph.print() }
+    		val t = (pair.publication1.attr[ClusterId].target==pair.publication2.attr[ClusterId].target)
+    		out.write(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t" + d + "\t" + t + "\n")
     		out.flush()
-    	}
-    	d
+    	}*/
+    	(d._1.toDouble/d._2.toDouble)
   }
 
 	class Graph {
 		val nodes = new HashMap[String, Node]()
 		val links = new HashMap[String, Array[Link]]()
 
-		def color(node : Node, count : Int = 0) {
-			node.color = 1
-			if(count < 5) {
+		def color1(node : Node, search : Node, from : Node = null, count : Int = 0) {
+			node.color1 = 1
+			if(from != null)
+				node.fromColor = from.nickname
+				if(count < 2 && node != search) {
 				if(links.contains(node.nickname)) {
 					for(link <- links(node.nickname)) { 
 						val other = link.getOther(node)
-						color(other, count+1)
+						if(other != from) 
+							color1(other, search, node, count+1)
 					}
 				}
 			}
 		}
 
-		def percentage(node : Node) : Double = {
-			var total = 0
-			var colored = 0
-			for(link <- links(node.nickname)) {
-				total += 1 
-				val other = link.getOther(node)
-				if(other.color==1) colored += 1
+		def color2(node : Node, search : Node, from : Node = null, count : Int = 0) {
+			node.color2 = 1
+			if(from != null)
+				node.fromColor = from.nickname
+			if(count < 2 && node != search) {
+				if(links.contains(node.nickname)) {
+					for(link <- links(node.nickname)) { 
+						val other = link.getOther(node)
+						if(other != from) 
+							color2(other, search, node, count+1)
+					}
+				}
 			}
-			colored.toDouble/total.toDouble
+		}
+
+
+		def percentage(bot : Node, top : Node) : (Int, Int) = {
+			var topp = 0
+			var bottom = 0
+			var colored = new HashMap[String, Boolean]()
+			for(link <- links(bot.nickname)) {
+				bottom += 1 
+				val other = link.getOther(bot)
+				if(links.contains(other.author)){
+					for(link2 <- links(other.author)) {
+						val other2 = link2.getOther(other)
+						if(other2.color1==1 && other.color2==1) colored(other.author) = true
+					}
+				}
+			}
+			for(link <- links(top.nickname)) {
+				topp += 1 
+				val other = link.getOther(top)
+				if(links.contains(other.author)){
+					for(link2 <- links(other.author)) {
+						val other2 = link2.getOther(other)
+						if(other2.color1==1 && other.color2==1) colored(other.author) = true
+					}
+				}
+			}
+			val max = math.max(topp, bottom)
+			val col = math.min(colored.size, max)
+			(col,max)
 		}
 
     def linkExists(link : Link): Boolean = {
@@ -145,23 +205,7 @@ object CoAuthorStats {
           else links(curNick) = Array(link)
         } else {
           if(links.contains(n1.nickname)) links(n1.nickname) = links(n1.nickname) ++ Array(link)
-			    else links(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            n1.nickname) = Array(link)
+			    else links(n1.nickname) = Array(link)
         }
         if(n2.root) {
          if(links.contains(curNick)) links(curNick) = links(curNick) ++ Array(link)
@@ -197,6 +241,19 @@ object CoAuthorStats {
 			}
 		}
 
+		def printNeato(all : Boolean = false) {
+			println("graph G {")
+			for(linka <- links) {
+				for(link <- linka._2) {
+					val from = link.links(0)
+					val to = link.links(1)
+					if(all || from.root || to.root || (from.color1==1 && from.color2==1 && from.rootParent == null) || (to.color1==1 && to.color2==1 && to.rootParent == null))
+						println(from.nickname.replaceAll(" +","_") + "_" + from.color1 + "_" + from.color2 + " -- " + to.nickname.replaceAll(" +","_") + "_" + to.color1 + "_" + to.color2 + "[label=" + link.count + "];")
+				}
+			}
+			println("}")
+		}
+
 		def print() {
 			println("=========")
 			for(node <- nodes) {
@@ -204,7 +261,7 @@ object CoAuthorStats {
 				println(node._1 + " :-> " + links(node._1).map{ x => 
 					val no = x.links.filter( _.author != node._2.author).head
 					no.nickname + " (" + x.count + ")"
-				}.mkString(" ;: ")) 
+				}.mkString(" ;: ") + " | from: " + node._2.fromColor)
 			}
 		}
 
@@ -228,7 +285,7 @@ object CoAuthorStats {
 				}
 				//node.nodes(a._1) = new Child(a._3,nodes(a._1))
 				//nodes(a._1).parents(node.author) = node
-				if(!(nodes(a._1).root)) addLink( Link(nodes(a._1), node, a._3))
+				if(!(nodes(a._1).root) && (nodes(a._1).rootParent == null || nodes(a._1).rootParent != node.rootParent)) addLink( Link(nodes(a._1), node, a._3))
 			}
 		}
 
@@ -237,7 +294,8 @@ object CoAuthorStats {
 				val noded = link.getOther(node)
 				if(!noded.root && noded.nodes.size == 0) {
 					val coauthors = getCoauthors(noded)
-					coauthors.foreach(addParent(_, noded))
+					if(coauthors.length < 200)
+						coauthors.foreach(addParent(_, noded))
 				}
 			}
 		}
@@ -268,7 +326,9 @@ object CoAuthorStats {
 		}
 	}
 	class Node(val author : String,val parent : Node = null, val root : Boolean = false) {
-		var color = 0
+		var color1 = 0
+		var color2 = 0
+		var fromColor = ""
 		var nick = ""
 		def nickname : String = { if(nick.length == 0) author else nick }
 		var urlpt = ""
@@ -277,6 +337,6 @@ object CoAuthorStats {
 		if(parent != null)
 			parents(parent.author) = parent
 		val nodes = new HashMap[String,Child]()
+		override def toString : String = nickname
 	}
-
 } 
