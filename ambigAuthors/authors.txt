@@ -76,9 +76,8 @@ conf/sigdoc/JohnsonT92	28	Communitee, Inc
 conf/iwomp/BihariWWSC12	29	IBM Corporation
 journals/prl/ChenCXBZ11	30	College of Information System and Management, National University of Defense Technology, Changsha, China
 journals/isci/ChenSTLH10	31	School of Mechanical Engineering, Dalian University of Technology, Dalian 116024, PR China
-conf/aici/JiangDXCC10	32	School of Art Layout, Hunan University of Commerce, Changsha 410205, China
 conf/iwomp/WongBSWMLC10	29	IBM Corporation
-conf/lsms/ShiQCL10	33	China North Vehicle Research Institute Beijing, P.R. China 100072
+conf/lsms/ShiQCL10	31	China North Vehicle Research Institute Beijing, P.R. China 100072
 conf/cw/ChenXXZ08	30	National University of Defense Technology, School of Information System and Management, ChangSha, China
 conf/icic/ChenST08	31	School of Mechanical Engineering, Dalian University of Technology, Dalian, P.R. China 116024
 conf/icic/ChenST08a	31	School of Mechanical Engineering, Dalian University of Technology, Dalian, P.R. China 116024
