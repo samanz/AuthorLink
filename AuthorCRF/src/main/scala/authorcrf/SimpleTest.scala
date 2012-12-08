@@ -6,6 +6,10 @@ import collection.mutable.ArrayBuffer
 import la.DenseTensor2
 import optimize.{ SGDTrainer, SampleRankExample }
 import cc.factorie.app.strings._
+import com.wcohen.ss._
+import com.wcohen.ss.tokens._
+import cc.factorie.optimize._
+
 
 class SimpleModel extends CombinedModel {
   val botAff = new DotTemplateWithStatistics2[FieldPairLabel, AffiliationFeatures] {
@@ -50,18 +54,38 @@ class SimpleModel extends CombinedModel {
     }
   }
 
-  //this += botAff
+  this += botAff
   //this += botTitl
-  //this += middleAff
+  this += middleAff
   //this += middleTitle
-  this += middleVen
-  this += botVen
+  //this += middleVen
+  //this += botVen
 }
+
+/*class AffModel extends CombinedModel {
+  val botAff = new DotTemplateWithStatistics2[FieldPairLabel, AffiliationFeatures] {
+    lazy val weights = new la.DenseTensor2(PairLabelDomain.size, AffiliationFeaturesDomain.dimensionSize)
+    def unroll1(fieldlabel: FieldPairLabel) = if (fieldlabel.field.attr.contains[AffiliationFeatures]) Factor(fieldlabel, fieldlabel.field.attr[AffiliationFeatures]) else Nil
+    def unroll2(tf: AffiliationFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
+  }
+  this += botAff
+}
+
+class VenueModel extends CombinedModel {
+  val botVen = new DotTemplateWithStatistics2[FieldPairLabel, VenueFeatures] {
+    lazy val weights = new la.DenseTensor2(PairLabelDomain.size, VenueFeaturesDomain.dimensionSize)
+    def unroll1(fieldlabel: FieldPairLabel) = if (fieldlabel.field.attr.contains[VenueFeatures]) Factor(fieldlabel, fieldlabel.field.attr[VenueFeatures]) else Nil
+    def unroll2(tf: VenueFeatures) = Factor(tf.field.attr[FieldPairLabel], tf)
+  }
+  this += botVen
+}*/
 
 class SimpleObjective extends HammingTemplate[PairLabel]
 
 class SimpleTest {
   val model = new SimpleModel
+  //val affModel = new AffModel
+  //val venModel = new VenueModel
   val objective = new SimpleObjective
 
   var titleStat: Map[String, Int] = null
@@ -78,12 +102,16 @@ class SimpleTest {
   def fieldLabel(p: Pair): String = if ((p.publication1.attr[ClusterId].target == p.publication2.attr[ClusterId].target)) "YES" else "NO"
 
   def initAffiliation(p: Pair): FieldPair = {
+    val jaroW = new JaroWinkler()
     val fp = new FieldPair(p.publication1.affiliation, p.publication2.affiliation, p)
     fp.attr += new FieldPairLabel(fp, fieldLabel(p))
     val feat = fp.attr += new AffiliationFeatures(fp)
     val f1 = p.publication1.affiliation
     val f2 = p.publication2.affiliation
+    val jaroScore = jaroW.score(p.publication1.affiliation.string, p.publication2.affiliation.string)
     //if (p.publication1.attr[ClusterId].target==p.publication2.attr[ClusterId].target) feat += "YES" else feat += "NO"
+    if(jaroScore < .9) feat += "LESS5"
+    if(jaroScore >= .9) feat += "GREATER7"
     if (f1.string == f2.string) feat += "EXACT" else feat += "NOTEXACT"
     fp
   }
@@ -142,15 +170,18 @@ class SimpleTest {
     val fp = new FieldPair(p.publication1.coAuthors, p.publication2.coAuthors, p)
     fp.attr += new FieldPairLabel(fp, fieldLabel(p))
     fp.attr += new CoAuthorsFeatures(fp)
-    //CoAuthorStats.addCoAuthorFeatures(p)
+    CoAuthorStats.addCoAuthorFeatures(p)
     fp
   }
 
-  def trainNew(trainFile: String) {
+  def trainNew(trainFile: String, testFile : String) {
     var lf = LoadDBLPCoref.fromFile(trainFile)
+    var pf = LoadDBLPCoref.fromFile(testFile)
+
     //lf.foreach(initTitlePub(_))
-    val pairs = new ArrayBuffer[Pair]()
+    val trainingPairs = new ArrayBuffer[Pair]()
     for (l1 <- 0 until lf.length) {
+      if(l1 % 100 == 0) println(l1)
       val l = lf(l1)
       for (l2 <- (l1 + 1) until lf.length) {
         val k = lf(l2)
@@ -170,31 +201,99 @@ class SimpleTest {
           if ( (l.attr[ClusterId].target == k.attr[ClusterId].target) ) feat += "YES" else feat += "NO"
           */
           p.fields = Array(aff, tit, ven, coa)
-          pairs += p
+          trainingPairs += p
         }
       }
     }
-    val trainPairs = pairs.toSeq
+    val testingPairs = new ArrayBuffer[Pair]()
+    for (l1 <- 0 until pf.length) {
+      if(l1 % 100 == 0) println(l1)
+      val l = pf(l1)
+      for (l2 <- (l1 + 1) until pf.length) {
+        val k = pf(l2)
+        if (similar(l, k)) {
+          val p = new Pair(l, k)
+          p.attr += new PubPairLabel(p, if (l.attr[ClusterId].target == k.attr[ClusterId].target) "YES" else "NO")
+          val aff = initAffiliation(p)
+          val tit = initTitle(p)
+          val ven = initVenue(p)
+          val coa = initCoauthor(p)
+          /*val fp = new FieldPair(new Affiliation(""), new Affiliation(""), p)
+          val fp1 = new FieldPair(new Title(""), new Title(""), p)
+          fp.attr += new FieldPairLabel(fp, if(l.attr[ClusterId].target==k.attr[ClusterId].target) "YES" else "NO")
+          fp1.attr += new FieldPairLabel(fp, if(l.attr[ClusterId].target==k.attr[ClusterId].target) "YES" else "NO")
+          val feat = fp.attr += new AffiliationFeatures(fp)
+          val feat1 = fp1.attr += new TitleFeatures(fp)
+          if ( (l.attr[ClusterId].target == k.attr[ClusterId].target) ) feat += "YES" else feat += "NO"
+          */
+          p.fields = Array(aff, tit, ven, coa)
+          testingPairs += p
+        }
+      }
+    }
 
-    val labels = /*trainPairs.map(_.fields(0).attr[FieldPairLabel]) ++*/ trainPairs.map(_.fields(2).attr[FieldPairLabel]) ++ trainPairs.map(_.attr[PubPairLabel])
-    trainPairs.map(_.attr[PubPairLabel]).foreach(_.setRandomly())
+    val trainPairs = trainingPairs.toSeq
+    val testPairs = testingPairs.toSeq
+
+    val trainlabels = trainPairs.map(_.fields(0).attr[FieldPairLabel]) ++ trainPairs.map(_.attr[PubPairLabel])
+    val testlabels = testPairs.map(_.fields(0).attr[FieldPairLabel]) ++ testPairs.map(_.attr[PubPairLabel])
     //trainPairs.flatMap(_.fields.map(_.attr[FieldPairLabel])).foreach(_.setRandomly())
-    labels.foreach(_.setRandomly()) // _.setCategory("O")(null))
+    trainlabels.foreach(_.setRandomly()) // _.setCategory("O")(null))
+    testlabels.foreach(_.setRandomly()) // _.setCategory("O")(null))
+
     PairLabelDomain.foreach(println(_))
-    val pieces = labels.map(l => new SampleRankExample(l, new GibbsSampler(model, objective)))
-    val learner = new SGDTrainer(model, new optimize.AROW(model))
+    //val pieces = (trainlabels).map(l => new SampleRankExample(l, new GibbsSampler(model, objective)))
+    val learner = new SampleRankTrainer(new GibbsSampler(model, objective), new AROW(model) ) //{ temperature = 0.01 }
+
+//    val learner = new SGDTrainer(model, new optimize.AROW(model))
     val predictor = new IteratedConditionalModes[PairLabel](model)
-      println(model.botTitl.weights.size)
+
+    for (i <- 1 to 40) {
+      println("--Iteration " + i)
+      learner.processContexts(trainlabels)
+      predictor.processAll(trainlabels)
+      predictor.processAll(testlabels)
+      println(model.botAff.weights)
+      println(objective.accuracy(trainlabels))
+      println(objective.accuracy(testlabels))
+    }
+    /*val labels2 = trainPairs.map(_.fields(2).attr[FieldPairLabel])
+    //trainPairs.flatMap(_.fields.map(_.attr[FieldPairLabel])).foreach(_.setRandomly())
+    labels2.foreach(_.setRandomly()) // _.setCategory("O")(null))
+    val pieces2 = labels2.map(l => new SampleRankExample(l, new GibbsSampler(venModel, objective)))
+    val learner2 = new SGDTrainer(venModel, new optimize.AROW(venModel))
+    val predictor2 = new IteratedConditionalModes[PairLabel](venModel)
 
     for (i <- 1 to 4) {
       println("--Iteration " + i)
-      learner.processExamples(pieces)
-      predictor.processAll(labels)
-      println(model.botAff.weights)
-      println(model.botVen.weights)
-      println(objective.accuracy(labels.filter(_.isInstanceOf[PubPairLabel])))
-      println(objective.accuracy(labels))
+      learner2.processExamples(pieces2)
+      predictor2.processAll(labels2)
+      println(venModel.botVen.weights)
+      println(objective.accuracy(labels2))
+    }*/
+    for(pair <- trainPairs) {
+      var isGood = false
+      if(pair.fields(0).attr[FieldPairLabel].categoryValue == "YES") isGood = true
+      /*for(field <- pair.fields) {
+        if(field.attr[FieldPairLabel].categoryValue == "YES") isGood = true
+      }*/
+      if(isGood) 
+        pair.attr[PubPairLabel].setCategory("YES")(null)
+      else
+        pair.attr[PubPairLabel].setCategory("NO")(null)
     }
+    for(pair <- testPairs) {
+      var isGood = false
+      if(pair.fields(0).attr[FieldPairLabel].categoryValue == "YES") isGood = true
+      /*for(field <- pair.fields) {
+        if(field.attr[FieldPairLabel].categoryValue == "YES") isGood = true
+      }*/
+      if(isGood) 
+        pair.attr[PubPairLabel].setCategory("YES")(null)
+      else
+        pair.attr[PubPairLabel].setCategory("NO")(null)
+    }
+
     /*for (i <- 0 until 3; label <- labels) predictor.process(label)
     trainPairs.foreach { x =>
       println(x.fields(1).attr[FieldPairLabel])
@@ -208,9 +307,15 @@ class SimpleTest {
       println(x.fields(0).attr[AffiliationFeatures])
     }*/
     EvaluatePairs.clearMaps()
-    EvaluatePairs.cluster(pairs)
+    //EvaluatePairs.cluster(trainPairs)
 
-    EvaluatePairs.evaluation(pairs)
+    EvaluatePairs.evaluation(trainPairs)
+  
+    EvaluatePairs.clearMaps()
+    //EvaluatePairs.cluster(testPairs)
+
+    EvaluatePairs.evaluation(testPairs)
+
 
   }
 
@@ -281,7 +386,7 @@ object SimpleTest extends SimpleTest {
       Set(f(0), f(1)) -> f(2).toInt
     }).toMap
 
-    trainNew(args(0))
+    trainNew(args(0), args(1))
     //printTruth(args(0))
   }
 }
