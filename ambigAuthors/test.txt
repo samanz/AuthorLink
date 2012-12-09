@@ -1,0 +1,91 @@
+#John Smith (homepages/96/3481)
+conf/interspeech/GarnierWHS08	1	University of New South Wales, Australia
+conf/interspeech/EppsDSW97	1	School of Physics, The University of New South Wales, Sydney, Australia
+conf/dl/DewanJSSO95	2	Computer Science Department, University of North Carolina, Chapel Hill, NC 27599-3175
+conf/ht/BairdEKSS89	3	University of North Carolina
+conf/dac/ThompsonKRRSB80	4	Comprehensive Computing Systems, and Services, Inc., 8403 Shoal Creek Blvd., Austin, Texas 78758
+
+#John A. Smith (homepages/72/1096)
+journals/jbi/Tarczy-HornochMSH07	5	Department of Pathology, University of Alabama at Birmingham, USA
+conf/ieaaie/SmithB89	6	Air Ops Information Services, Federal Express Corporation, P.O. Box 727, Memphis, TN 38194
+
+#John H. Smith (homepages/79/4777)
+journals/jct/Smith11	7	
+journals/jct/Smith99	7	Boston College, Chestnut Hill, Massachusetts, 02167-3806
+conf/hci/SmithBSA97	8	
+
+#John B. Smith (homepages/s/JohnBSmith)
+conf/ht/Smith97	3	Department of Computer Science, The University of North Carolina, Chapel Hill, NC
+conf/ht/BernsteinLMS96	3	University of North Carolina, Chapel Hill
+journals/jasis/GauchS93	3	Department of Computer Science, University of North Carolina, Chapel Hill, NC 27599-3175
+conf/ht/ShackelfordSS93	3	Department of Computer Science, University of North Carolina, Chapel Hill, North Carolina
+conf/chi/SmithL92	3	Department of Computer Science, University of North Carolina, Chapel Hill, NC 27599-3175
+conf/cscw/JeffayLMSS92	3	University of North Carolina at Chapel Hill, Department of Computer Science, Chapel Hill, NC, USA 27599-3175
+journals/tois/GauchS91	3	Univ. of North Carolina
+conf/ht/SmithS91	3	Department of Computer Science, CB#3175, Sitterson Hall, University of North, Chapel Hill, NC
+conf/echt/SchulerS90	3	Department of Computer Science, The Univesity of North Carolina, Chapel Hill, North Carolina
+journals/ipm/GauchS89	3	Department of Computer Science, University of North Carolina, Chapel Hill, NC 27599-3175, U.S.A.
+journals/cacm/SmithW88	3	Department of Computer Science, The Univesity of North Carolina, Chapel Hill, North Carolina
+conf/riao/GauchS88	3	Department of Computer Science, The Univesity of North Carolina, Chapel Hill, North Carolina
+journals/spe/SmithW87	3	Department of Computer Science, The University of North Carolina, Chapel Hill, North Carolina 27514, U.S.A.
+conf/ht/SmithWF87	3	Department of Computer Science, University of North Carolina, Chapel Hill, NC
+conf/sigir/SmithWF87	3	Department of Computer Science, The Univesity of North Carolina, Chapel Hill, North Carolina
+conf/ifip/Smith74	3	Pennsylvania State University
+conf/ifip/Smith71	3	Pennsylvania State University
+
+#James Johnson
+conf/csedu/ColemanBPJFM11	10	Marist College, Poughkeepsie, New York, United States
+journals/jdfp/ManesJBHDH08	11	University of Tulsa, Computer Science, Tulsa, OK
+reference/wiley/Johnson08	12	Western Washington University, Bellingham, Washington
+journals/fgcs/FerschaJT01	13	BEKO, Modecenter Strasse 22/A1, A-1030 Vienna, Austria
+journals/fgcs/FerschaJ00	13	Universität Wien, Institut für Angewandte Informatik und Informationssysteme, Lenaugasse 2/8, A-1080 Wien, Austria
+conf/dsrt/FerschaJ99	13	University of Vienna
+conf/mascots/FerschaJKA98	13	Universitat Wien, Austria
+conf/webnet/RowleyCJ98	14	US Air Force Research Laboratories, USA
+conf/ichim/Johnson97	15	The Natural History Museum, London, UK
+conf/wsc/FerschaJ96	13	Institut für Angewandte Informatik, Universität Wien, Lenaugasse 2/8, A-1080 Vienna, Austria
+conf/hicss/FerschaJ95	13	Inst. fur Angewandte Inf., Wien Univ., Austria
+conf/conpar/FerschaJ94	13	Inst. fur Angewandte Inf., Wien Univ., Austria
+conf/hpts/Johnson93	16	
+
+#Robert Williams
+journals/ijea/WilliamsPTT09	17	NEO, United Kingdom
+journals/ijet/ChangGKW09	18	Curtin University, Perth, Australia
+conf/ista/WilliamsN09	18	Curtin University, Perth, Australia
+conf/fqas/DreherW06	18	Curtin University, Perth, Australia
+conf/wsc/GuruSW00	19	University of Nebraska, Lincoln, NE
+conf/ieaaie/WilliamsL96	20	
+conf/muc/LehnertCFRW91	21	University of Massachusetts
+conf/muc/LehnertCFRW91a	21	University of Massachusetts
+
+#Michael Jackson
+journals/sosym/Jackson12	22	The Open University, Milton Keynes, UK
+conf/birthday/Jackson11	22	Newcastle University
+conf/birthday/Jackson10	22	The Open University, Milton Keynes, UK
+journals/spe/TunTJLN09	22	Department of Computing, The Open University, Milton Keynes
+
+#John Johnson (homepages/79/4022)
+conf/amcis/KimMJ07	23	USU
+conf/icis/SykesVJ07	24	University of Arkansas
+conf/iccS/LiuHJV06	25	Lawrence Livermore National Laboratory
+conf/interspeech/PearceEFJ05	26	Motorola Labs, USA
+conf/itc/MayberryJST02	27	Intel Corporation
+conf/sigdoc/JohnsonT92	28	Communitee, Inc
+
+#Wang Chen (homepages/26/1439)
+conf/iwomp/BihariWWSC12	29	IBM Corporation
+journals/prl/ChenCXBZ11	30	College of Information System and Management, National University of Defense Technology, Changsha, China
+journals/isci/ChenSTLH10	31	School of Mechanical Engineering, Dalian University of Technology, Dalian 116024, PR China
+conf/iwomp/WongBSWMLC10	29	IBM Corporation
+conf/lsms/ShiQCL10	33	China North Vehicle Research Institute Beijing, P.R. China 100072
+conf/cw/ChenXXZ08	30	National University of Defense Technology, School of Information System and Management, ChangSha, China
+conf/icic/ChenST08	31	School of Mechanical Engineering, Dalian University of Technology, Dalian, P.R. China 116024
+conf/icic/ChenST08a	31	School of Mechanical Engineering, Dalian University of Technology, Dalian, P.R. China 116024
+conf/icat/BaoZC06	30	Department of Systems and Engineering, National University of Defense Technology, Changsha 410073, Hunan, P.R. China
+conf/apweb/HaibingCLYH05	34	Computer and Information Technology Department, Fudan University 200433, Shanghai, China
+conf/dcoss/ChenLR05	35	Department of Computer Science and Engineering, Michigan State University, East Lansing, MI 48824
+conf/cis/ZhaoCL04	36	Department of Automation, Logistical Engineering University, Chongqing 400016, P.R. China
+conf/fpga/ChenKLR04	37	Northeastern University, Boston, MA
+conf/hpcn/ChenT00	38	Department of Computer Science, National University of Singapore, 3 Science Drive 2, Singapore 117543
+journals/jpdc/RajasekaranCY97	39	Department of CIS, University of Pennsylvania, Philadelphia, Pennsylvania, 19104
+conf/isaac/RajasekaranCY94	39	Dept. of CIS, Univ. of Pennsylvania, Philadelphia, PA 19104
