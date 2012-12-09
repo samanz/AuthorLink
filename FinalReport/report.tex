@@ -312,7 +312,7 @@ Testing & B3 & 100.000 & 69.380 & 81.922 \\
 
 \paragraph{Venue} % (fold)
 \label{par:venue}
-The venue feature indicates the probability that for any given author, he/she publishes in both venues.  This feature serves as a proxy to how compatible two venues are, as the more authors publish in the two venues, the more related they are.  We collected the statistics from DBLP of the number of authors that published in each pair of venues that appear in our dataset.  Figure \ref{fig:venue} shows the number of venue pairs that a particular number of authors published in.  The results using only this features is shown in Table \ref{tab:venue}.  The performance is not as good as we expected.  This is possibly because although our general intuition that people are less likely to publish in different fields is true, the fact that ambiguous authors in DBLP skew the distribution of our statistics.
+The venue feature indicates the probability that for any given author, he/she publishes in both venues.  This feature serves as a proxy to how compatible two venues are, as the more authors publish in the two venues, the more related they are.  We collected the statistics from DBLP of the number of authors that published in each pair of venues that appear in our dataset.  Figure \ref{fig:venue} shows the number of venue pairs that a particular number of authors published in.  The results using only this features is shown in Table \ref{tab:venue}.  The performance is not as good as we expected.  This is possibly in part because although our general intuition that people are less likely to publish in different fields is true, the fact that ambiguous authors in DBLP skew the distribution of our statistics, and in part the distribution of the positive and negative examples are quite similar.  Figure \ref{fig:venuedataset} shows the distributions of the frequencies of venue pairs for both the positive and negative pairs in our dataset.  Note that since the ratio of negative examples to positive examples is over 23 in our dataset, there is much variance in the distribution for the true examples.
 \begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{venuepair}
@@ -331,6 +331,13 @@ Testing & B3 & 94.595 & 65.701 & 77.544 \\
 \caption{Venue feature contribution}
 \label{tab:venue}
 \end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{venuestat_dataset}
+  \caption{Caption}
+  \label{fig:venuedataset}
+\end{figure}
 % paragraph venue (end)
 
 \paragraph{Coauthor feature} % (fold)
