@@ -86,7 +86,7 @@ class SimpleModel extends CombinedModel {
       if(v1.category==v2.category) 1.0 else 0.0
     }
   }
-  //this += botAff2
+  this += botAff2
   //this += temporal
   //this += botCo
   //this += middleCo
@@ -95,7 +95,7 @@ class SimpleModel extends CombinedModel {
   //this += middleAff
   //this += middleTitle
   //this += middleVen
-  this += botVen
+  //this += botVen
 }
 
 /*class AffModel extends CombinedModel {
@@ -159,8 +159,8 @@ class SimpleTest {
     val f2 = p.publication2.affiliation
     val jaroScore = jaroW.score(p.publication1.affiliation.string, p.publication2.affiliation.string)
     //if (p.publication1.attr[ClusterId].target==p.publication2.attr[ClusterId].target) feat += "YES" else feat += "NO"
-    if(jaroScore < .9) feat += "LESS5"
-    if(jaroScore >= .9) feat += "GREATER7"
+    //if(jaroScore < .9) feat += "LESS5"
+    //if(jaroScore >= .9) feat += "GREATER7"
     if (f1.string == f2.string) feat += "EXACT" else feat += "NOTEXACT"
     fp
   }
@@ -322,8 +322,8 @@ class SimpleTest {
     val trainPairs = trainingPairs.toSeq
     val testPairs = testingPairs.toSeq
 
-    val trainlabels = trainPairs.map(_.fields(2).attr[FieldPairLabel]) ++ trainPairs.map(_.attr[PubPairLabel])
-    val testlabels = testPairs.map(_.fields(2).attr[FieldPairLabel]) ++ testPairs.map(_.attr[PubPairLabel])
+    val trainlabels = trainPairs.map(_.fields(0).attr[FieldPairLabel]) ++ trainPairs.map(_.attr[PubPairLabel])
+    val testlabels = testPairs.map(_.fields(0).attr[FieldPairLabel]) ++ testPairs.map(_.attr[PubPairLabel])
     //trainPairs.flatMap(_.fields.map(_.attr[FieldPairLabel])).foreach(_.setRandomly())
     trainlabels.foreach(_.setRandomly()) // _.setCategory("O")(null))
     testlabels.foreach(_.setRandomly()) // _.setCategory("O")(null))
@@ -361,13 +361,13 @@ class SimpleTest {
       println(objective.accuracy(labels2))
     }*/
 
-    val of = new BufferedWriter(new FileWriter(new File("venue.predit")))
+    val of = new BufferedWriter(new FileWriter(new File("affwo.predit")))
     for(pair <- trainPairs) {
-      of.write(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t" + pair.fields(2).attr[FieldPairLabel].categoryValue + "\n")
+      of.write(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t" + pair.fields(0).attr[FieldPairLabel].categoryValue + "\n")
     }
 
     for(pair <- testPairs) {
-      of.write(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t" + pair.fields(2).attr[FieldPairLabel].categoryValue + "\n")
+      of.write(pair.publication1.pubkey + "\t" + pair.publication2.pubkey + "\t" + pair.fields(0).attr[FieldPairLabel].categoryValue + "\n")
     }
 
     of.flush()
@@ -375,7 +375,7 @@ class SimpleTest {
 
     for(pair <- trainPairs) {
       var isGood = false
-      if(pair.fields(2).attr[FieldPairLabel].categoryValue == "YES") isGood = true
+      if(pair.fields(0).attr[FieldPairLabel].categoryValue == "YES") isGood = true
       /*for(field <- pair.fields) {
         if(field.attr[FieldPairLabel].categoryValue == "YES") isGood = true
       }*/
@@ -386,7 +386,7 @@ class SimpleTest {
     }
     for(pair <- testPairs) {
       var isGood = false
-      if(pair.fields(2).attr[FieldPairLabel].categoryValue == "YES") isGood = true
+      if(pair.fields(0).attr[FieldPairLabel].categoryValue == "YES") isGood = true
       /*for(field <- pair.fields) {
         if(field.attr[FieldPairLabel].categoryValue == "YES") isGood = true
       }*/
