@@ -11,6 +11,7 @@
 
 % Setup for fullpage use
 \usepackage{fullpage}
+\usepackage{subfigure}
 
 % Multipart figures
 %\usepackage{subfigure}
@@ -287,7 +288,7 @@ Training & B3 & 98.398 & 79.439 & 87.908 \\
 Testing & B3 & 100.000 & 69.380 & 81.922 \\
  & MUC & 100.000 & 56.757 & 72.414 \\
 \end{tabular}
-\caption{Affiliation}
+\caption{Affiliation feature contribution}
 \label{tab:aff}
 \end{table}
 % paragraph affiliation_feature (end)
@@ -301,17 +302,27 @@ JAIPING... talk about venue feature here. Doesn't work. Why? histograms?! Tables
 \begin{tabular}{l || l | r r r}
  & & Precision & Recall & F1 \\ \hline
 Training & B3 & 41.412 & 62.659 & 49.867 \\
- & MUC & 74.561 70.248 72.340\\ \hline
+ & MUC & 74.561 & 70.248 & 72.340\\ \hline
 Testing & B3 & 94.595 & 65.701 & 77.544 \\
  & MUC & 83.333 & 54.054 & 65.574 \\
 \end{tabular}
-\caption{Affiliation}
-\label{tab:aff}
+\caption{Venue feature contribution}
+\label{tab:venue}
 \end{table}
 % paragraph venue (end)
 
 \paragraph{Coauthor feature} % (fold)
 \label{par:coauthor_feature}
+The coauthor feature is, like the affiliation feature, a high precision one. It is often the case that our assumption is true, authors are likely to publish with author publish is groups that are connected. The trend is so strong, that upon finding a publication pair with a high connected score that was marked as not the same person, it turned out to be an annotation error. 
+\begin{figure}%
+\centering 
+\subfigure[True Pairs.]{\includegraphics[scale=0.3]{trueHistogram.png}
+}\qquad 
+\subfigure[False Pairs.]{\includegraphics[scale=0.3]{falseHistogram.png}
+}\\ 
+\caption{Histograms for connected feature.} \label{3figs}
+\end{figure}
+
 
 % paragraph coauthor_feature (end)
 % subsection feature_contribution (end)
