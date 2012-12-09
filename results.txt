@@ -45,6 +45,16 @@ MUC 82.946 88.430 85.600
 B3 95.413 91.892 93.619
 MUC 93.939 83.784 88.571
 
+Affiliation just exact
+Training
+B3 99.324 71.957 83.454
+MUC 99.176 74.587 85.142
+
+Testing
+B3 98.649 58.569 73.500
+MUC 92.308 32.432 48.000
+
+
 Affiliation
 
 Training

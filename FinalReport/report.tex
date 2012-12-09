@@ -33,7 +33,7 @@
 
 \setlength{\marginparwidth}{2cm}
 
-\title{Author Linkage in Records using Temporal Information and Conditional Random Fields : A midterm report}
+\title{Author Linkage in Records using Temporal Information and Conditional Random Fields}
 \author{Sam Anzaroot, Jiaping Zheng}
 
 \date{}
@@ -66,6 +66,11 @@ Various numbers of people have attempted to build classifiers using graphical mo
 
 ``A Conditional Model of Deduplication for Multi-Type Relational Data'' \cite{Culotta05aconditional} extends the model previously stated by making the ``information nodes'' first-class variables in the model.  Binary latent variables that indicate record duplication (both paper and venue) are connected in the CRF to capture the interdependencies between the deduplication results of publications and venues.  For example, equivalent venue records that are merged should result in weights in CRF that also encourage merging of paper records.  To perform inference of finding optimal configurations of the latent variables, the authors convert the model into a weighted undirected graph to find a optimal partitioning.  Learning is approximated by maximizing the product of local marginals using limited-memory BFGS.  Their experiments show an up to a 30\% error reduction in venue deduplication and 20\% in paper deduplication.
 % section related_work (end)
+
+\section{Annotation} % (fold)
+\label{sec:annotation}
+
+% section annotation (end)
 
 \section{Methodology} % (fold)
 \label{sec:methodology}
@@ -178,14 +183,6 @@ In addition, the paper ``Linking Temporal Records'' \cite{DBLP:journals/fcsc/LiD
 % paragraph similarity_features (end)
 % section methodology (end)
 
-\section{Proposed Experiments} % (fold)
-\label{sec:proposed_experiments}
-We will compare our completed model with various alternatives. The first is the clustering available already in the DBLP dataset. Those in the DBLP community have tackled the problem by incorporating various heuristics, heavily using coauthorship graphs. They also manually split and combine authors based on human request. We will compare our results to DBLP on some subsection of the DBLP dataset. 
-
-In order to determine the advantages of our model, we will also compare our results with a simple thresholding of our independent similarity functions, and naive combinations thereof. We will generate ROC curves by varying the thresholds. We will compare the best scores of the similarity thresholding for classification with our model.
-
-We will also compare our model with two alternative versions. One will not include any temporal information. Another will incorporate temporal information in our model by performing a simple concatenation of the change in time between the two records and our similarity features. The final model will contain our proposed method of incorporating temporal information. This form of evaluation will inform us of the utility of temporal information in this domain.
-% section proposed_experiments (end)
 
 \section{Evaluation Plan} % (fold)
 \label{sec:evaluation}
@@ -208,13 +205,13 @@ The community has developed several evaluation metrics that overcome
 the problem described above.  These metrics measure how different the
 true and predicted partitions are.
 
-We will evaluate our system's performance with two metrics from the
+We evaluated our system's performance with two metrics from the
 coreference resolution community.  The first is the MUC score
 \cite{Vilain95} developed for a coreference resolution shared task.
 This metric considers the minimal number of ``links'' between author
 mentions required to group a set of authors together.
 
-The other metric that we will use is the $B^3$ score \cite{Bagga98b}.
+The other metric that we used is the $B^3$ score \cite{Bagga98b}.
 This metric addresses two shortcomings of the MUC score.  MUC score
 does not give any credit for separating out singletons (author
 entities that no other mentions refer to), and it treats different
@@ -226,6 +223,100 @@ the performance.  The MUC score tends to favor larger clusters while
 the $B^3$ gives higher penalty to such behavior.  Publications on the
 coreference resolution also present multiple scores for this reason.
 % section evaluation (end)
+
+\section{Experiments} % (fold)
+\label{sec:experiments}
+In order to determine the contribution of each feature, we ran the classifier using only a subset of the features.
+\subsection{Baseline} % (fold)
+\label{sub:baseline}
+Here we compare the results of setting all classifier values to false and true. In table \ref{tab:alltrue} you can see the results for all true. By setting the classifier to all true, every block is classified to be in the same cluster. This results in a perfect recall, as all publications that should be clustered togather are. The much worse score for B3 compared to MUC speaks to the superroity of B3 as a metic. All false results are available in table \ref{tab:allfalse}. Here the precision is perfect, since every publication is clustered into a singular cluster, thus no two publication that should not be clustered are clustered.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l || l | r r r}
+ & & Precision & Recall & F1 \\ \hline
+Training & B3 & 6.812 & 100.000 & 12.755 \\
+ & MUC & 75.743 & 100.000 & 86.198 \\ \hline
+Testing & B3 & 6.730 & 100.000 & 12.612 \\
+ & MUC & 70.440 & 100.000 & 82.657 \\
+\end{tabular}
+\caption{All classifier values set to all true}
+\label{tab:alltrue}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l || l | r r r}
+ & & Precision & Recall & F1 \\ \hline
+Training & B3 & 100.000 & 24.493 & 39.348 \\
+ & MUC & 100.000 & 0.000 & 0.000\\ \hline
+Testing & B3 & 100.000 & 29.890 & 46.024 \\
+ & MUC & 100.000 & 0.000 & 0.000 \\
+\end{tabular}
+\caption{All classifier values set to all false}
+\label{tab:allfalse}
+\end{table}
+
+
+% subsection baseline (end)
+\subsection{Feature Contribution} % (fold)
+\label{sub:feature_contribution}
+\paragraph{Affiliation Feature} % (fold)
+\label{par:affiliation_feature}
+The affiliation feature set contains three discrete features. One for exact matching of the string, above a Jaro-Winker TFIDF threshold, and below the threshold. To see the advantages of using not exact string matching, we also compared just the exact string match feature to the complete feature set. The results for affiliation with just exact matchings are in table \ref{tab:exact}, and for with non-exact string matching in \ref{tab:aff}. Using non-exact string matching here improves B3 by a large margin. This is because affiliation as extracted does not always have the same format, even when referring to the same institution.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l || l | r r r}
+ & & Precision & Recall & F1 \\ \hline
+Training & B3 & 99.324 & 71.957 & 83.454 \\
+ & MUC & 99.176 & 74.587 & 85.142\\ \hline
+Testing & B3 & 98.649 & 58.569 & 73.500 \\
+ & MUC & 92.308 & 32.432 & 48.000 \\
+\end{tabular}
+\caption{Affiliation Just Exact}
+\label{tab:exact}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l || l | r r r}
+ & & Precision & Recall & F1 \\ \hline
+Training & B3 & 98.398 & 79.439 & 87.908 \\
+ & MUC & 98.100 & 85.331 & 91.271\\ \hline
+Testing & B3 & 100.000 & 69.380 & 81.922 \\
+ & MUC & 100.000 & 56.757 & 72.414 \\
+\end{tabular}
+\caption{Affiliation}
+\label{tab:aff}
+\end{table}
+% paragraph affiliation_feature (end)
+
+\paragraph{Venue} % (fold)
+\label{par:venue}
+JAIPING... talk about venue feature here. Doesn't work. Why? histograms?! Tables are below!
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l || l | r r r}
+ & & Precision & Recall & F1 \\ \hline
+Training & B3 & 41.412 & 62.659 & 49.867 \\
+ & MUC & 74.561 70.248 72.340\\ \hline
+Testing & B3 & 94.595 & 65.701 & 77.544 \\
+ & MUC & 83.333 & 54.054 & 65.574 \\
+\end{tabular}
+\caption{Affiliation}
+\label{tab:aff}
+\end{table}
+% paragraph venue (end)
+
+\paragraph{Coauthor feature} % (fold)
+\label{par:coauthor_feature}
+
+% paragraph coauthor_feature (end)
+% subsection feature_contribution (end)
+% section experiments (end)
+
 
 \bibliographystyle{plain}
 \bibliography{refs}
