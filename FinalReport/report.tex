@@ -29,11 +29,11 @@
 \usepackage{graphicx}
 \fi
 
-\usepackage{todonotes}
+%\usepackage{todonotes}
 
 \setlength{\marginparwidth}{2cm}
 
-\title{Author Linkage in Records using Temporal Information and Conditional Random Fields : A midterm report}
+\title{Author Linkage in Records using Temporal Information and Conditional Random Fields}
 \author{Sam Anzaroot, Jiaping Zheng}
 
 \date{}
@@ -50,7 +50,7 @@
 
 \section{Introduction} % (fold)
 \label{sec:introduction}
-Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, there are at least three different individuals with publications named David Smith appearing, and the output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. In this report, we define strings of author names as author mentions, and clusters of author mentions referring to the same person as entities. The goal of the task is to cluster all mentions into the appropriate entities. This task requires a classifier to determine the matchings between two mentions. This task is not a solved one, and we will attempt to build a more robust classifier.
+Record Linking is the task of clustering records in a database such that elements in the same cluster refer to the same real world object. For example, in the DBLP page for David Smith, the first three publications are authored by three different individuals.  In fact, among the 37 publications listed under this name, there are 21 authors.  The output of a record linker would cluster each David Smith's publications into separate clusters. Various attempts have been made for record linking authors of publications listed in datasets such as DBLP. This task is important because there are many downstream applications that require clean clustering of such information, for example, determining the most prolific authors is only accurate if such clusterings are valid. Network analysis of coauthorship also depends on correct clustering of authors. In this report, we define strings of author names as author mentions, and clusters of author mentions referring to the same person as entities. The goal of the task is to cluster all mentions into the appropriate entities. This task requires a classifier to determine the matchings between two mentions. This task is not a solved one, and we will attempt to build a more robust classifier.
 % section introduction (end)
 
 \section{Related Work} % (fold)
@@ -172,14 +172,25 @@ For SoftTFIDF we need a function $CLOSE(\theta; s; s)$ which is defined as the s
 
 Author name and affiliation similarity features can be derived from these string similarity functions. For other fields, more involved similarity features are necessary. Such fields include publication name, venue compatibility, and coauthorship compatibility.  For coauthorship compatibility we intend to make use of coauthorship graphs. An example coauthorship graph is displayed in Figure \ref{fig:coauthor}. Given an undirected graph $G=(N \cup M,E)$ where $M$ are the entity mentions of a publication, $N$ are the entities assumed to be correctly disambugated based on identical string name, each $e \in E$ implies coauthorship between the entities. The edges between the mentions being classified are coauthor mentions in the publication. There cannot be any edges between the two mentions. We define distance in this graph between the two mentions as the shortest path in graph $G$ between the two vertices in $M$. To make such computation efficient, we will set the distance above a certain threshold to be infinity.
 
-We can also define similarity in venues given a hierarchy of venues in the field of computer science. The distance will be how far up in the hierarchy one needs to travel to reach a category both venues belong to. 
+The venue similarity features represent how likely it is for a person to publish at the two different venues.  For example, there are many authors that published both in International Conference on Machine Learning (ICML) and Journal of Machine Learning Research (JMLR), since the two venues are highly related.  However, we would expect that authors that published both in IEEE International Conference on Computer Communications (IEEE INFOCOM) and the journal Bioinformatics are very rare.  This feature serves as a proxy to how compatible two venues are, as the more authors publish in the two venues, the more related they are.  We collected the statistics from DBLP.  Figure \ref{fig:venue} shows the number of venue pairs that a particular number of authors published in.  It approximately follows the power law.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{venuepair}
+  \caption{Venue Similarity.  The X axis show the number of authors published in a venue pair.  The Y axis is the total number of such venue pairs.}
+  \label{fig:venue}
+\end{figure}
 
 In addition, the paper ``Linking Temporal Records'' \cite{DBLP:journals/fcsc/LiDMS12} describes additional information that can be added into similarity metrics for fields. These metrics add temporal information by using the realization that over time, the fact that two fields are similar or different matters less to the task at hand. An example of such a case is affiliation information in the task of author linking in papers. Intuitively, different affiliation information for authors matters more when the papers were published close together in time in comparison to when the papers where published farther apart in time. This information is represented as the probability of the affiliation attribute changes over a time interval. The disadvantage of this approach is that labeled data is needed to learn these values.  We will also use such similarity metrics in our framework, but will be adding them as features in a CRF rather than simply using a threshold on manually weighted similarities. This should allow for better weights as well as the ability for more expressiveness in defining dependencies in our model.
 % paragraph similarity_features (end)
 % section methodology (end)
 
-\section{Proposed Experiments} % (fold)
+\section{Experiments} % (fold)
 \label{sec:proposed_experiments}
+
+\subsection{Data}
+There is no publicly available resource that we can use to train and test our model.  Thus, we selected 13 highly ambiguous names (including for example, John Smith, Wang Chen) from the DBLP dataset, and annotated the true clusters.  We also manually filled in missing author affiliation information from the paper.  The annotated dataset contains 715 publications from 193 authors.
+
 We will compare our completed model with various alternatives. The first is the clustering available already in the DBLP dataset. Those in the DBLP community have tackled the problem by incorporating various heuristics, heavily using coauthorship graphs. They also manually split and combine authors based on human request. We will compare our results to DBLP on some subsection of the DBLP dataset. 
 
 In order to determine the advantages of our model, we will also compare our results with a simple thresholding of our independent similarity functions, and naive combinations thereof. We will generate ROC curves by varying the thresholds. We will compare the best scores of the similarity thresholding for classification with our model.
@@ -187,7 +198,7 @@ In order to determine the advantages of our model, we will also compare our resu
 We will also compare our model with two alternative versions. One will not include any temporal information. Another will incorporate temporal information in our model by performing a simple concatenation of the change in time between the two records and our similarity features. The final model will contain our proposed method of incorporating temporal information. This form of evaluation will inform us of the utility of temporal information in this domain.
 % section proposed_experiments (end)
 
-\section{Evaluation Plan} % (fold)
+\section{Evaluation} % (fold)
 \label{sec:evaluation}
 A simple evaluation metric for our system is the accuracy
 of the pairwise prediction from the CRF model.  However, it cannot
@@ -211,8 +222,8 @@ true and predicted partitions are.
 We will evaluate our system's performance with two metrics from the
 coreference resolution community.  The first is the MUC score
 \cite{Vilain95} developed for a coreference resolution shared task.
-This metric considers the minimal number of ``links'' between author
-mentions required to group a set of authors together.
+This metric considers the minimal number of missing ``links'' between
+author mentions required to group a set of authors together.
 
 The other metric that we will use is the $B^3$ score \cite{Bagga98b}.
 This metric addresses two shortcomings of the MUC score.  MUC score
