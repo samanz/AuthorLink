@@ -176,9 +176,16 @@ and Jaro-Winkler is defined as:
 
 For SoftTFIDF we need a function $CLOSE(\theta; s; s)$ which is defined as the set of words such that there is some $v \in t$ in which $dist(w; v) > \theta$. SoftTFIDF modifies regular cosine similarity by summing over all words in $CLOSE(\theta; s; t)$ the product of regular TFIDF of $s_w$, $t_w$, and $dist(w;t)$. Jaro-Winkler SoftTFIDF is implemented by using Jaro-Winkler as the distance function.
 
-Author name and affiliation similarity features can be derived from these string similarity functions. For other fields, more involved similarity features are necessary. Such fields include publication name, venue compatibility, and coauthorship compatibility.  For coauthorship compatibility we intend to make use of coauthorship graphs. An example coauthorship graph is displayed in Figure \ref{fig:coauthor}. Given an undirected graph $G=(N \cup M,E)$ where $M$ are the entity mentions of a publication, $N$ are the entities assumed to be correctly disambugated based on identical string name, each $e \in E$ implies coauthorship between the entities. The edges between the mentions being classified are coauthor mentions in the publication. There cannot be any edges between the two mentions. We define distance in this graph between the two mentions as the shortest path in graph $G$ between the two vertices in $M$. To make such computation efficient, we will set the distance above a certain threshold to be infinity.
+Author name and affiliation similarity features can be derived from these string similarity functions. For other fields, more involved similarity features are necessary. Such fields include publication name, venue compatibility, and coauthorship compatibility.  For coauthorship compatibility we intend to make use of coauthorship graphs. An example coauthorship graph is displayed in Figure \ref{fig:coauthor}. Given an undirected graph $G=(N \cup M,E)$ where $M$ are the entity mentions of a publication, $N$ are the entities assumed to be correctly disambugated based on identical string name, each $e \in E$ implies coauthorship between the entities. The edges between the mentions being classified are coauthor mentions in the publication. There cannot be any edges between the two mentions. Our goal with this similarity metric is to determine the connectiveness of the two publication's coauthors. We determine this score by counting how many entities can be reached from both mentions. In order to prevent ambugious authors from connecting people who have simply coauthored with two authors with the same name we threshold the authors that we search for coauthors with to have less than 200 total authors they have coauthored a paper with. If $a$ is the number of coauthors of the first publication, $b$ is the number of coauthors of the second publication, and $c$ is the number of entities reachable from both mentions, our connected score is $\frac{min(c,max(a,b))}{max(a,v)}$. One example graph with only contributing entites shown can be seen in figure \ref{fig:chen}.
 
-We can also define similarity in venues given a hierarchy of venues in the field of computer science. The distance will be how far up in the hierarchy one needs to travel to reach a category both venues belong to. 
+\begin{figure*}
+\centering
+\includegraphics[width=\textwidth]{g5}
+\caption{Two Wang Chen mentions (Wang Chen and Wang Chen2) are shown to be highly connected, with a connected score of 1.}
+\label{fig:chen}
+\end{figure*}
+
+JAIPING!!! Change this to what you actually did! We can also define similarity in venues given a hierarchy of venues in the field of computer science. The distance will be how far up in the hierarchy one needs to travel to reach a category both venues belong to. 
 
 In addition, the paper ``Linking Temporal Records'' \cite{DBLP:journals/fcsc/LiDMS12} describes additional information that can be added into similarity metrics for fields. These metrics add temporal information by using the realization that over time, the fact that two fields are similar or different matters less to the task at hand. An example of such a case is affiliation information in the task of author linking in papers. Intuitively, different affiliation information for authors matters more when the papers were published close together in time in comparison to when the papers where published farther apart in time. This information is represented as the probability of the affiliation attribute changes over a time interval. The disadvantage of this approach is that labeled data is needed to learn these values.  We will also use such similarity metrics in our framework, but will be adding them as features in a CRF rather than simply using a threshold on manually weighted similarities. This should allow for better weights as well as the ability for more expressiveness in defining dependencies in our model.
 % paragraph similarity_features (end)
@@ -227,7 +234,6 @@ coreference resolution also present multiple scores for this reason.
 
 \section{Experiments} % (fold)
 \label{sec:experiments}
-In order to determine the contribution of each feature, we ran the classifier using only a subset of the features.
 \subsection{Baseline} % (fold)
 \label{sub:baseline}
 Here we compare the results of setting all classifier values to false and true. In table \ref{tab:alltrue} you can see the results for all true. By setting the classifier to all true, every block is classified to be in the same cluster. This results in a perfect recall, as all publications that should be clustered togather are. The much worse score for B3 compared to MUC speaks to the superroity of B3 as a metic. All false results are available in table \ref{tab:allfalse}. Here the precision is perfect, since every publication is clustered into a singular cluster, thus no two publication that should not be clustered are clustered.
@@ -258,6 +264,7 @@ Testing & B3 & 100.000 & 29.890 & 46.024 \\
 \label{tab:allfalse}
 \end{table}
 
+In order to determine the contribution of each feature, we ran the classifier using only a subset of the features. Title features ended up being too sparse to have any contribution, and as such are left of the discussion. Temporal features also did not have any additional contribution when added in. This effect is probably due to the small dataset used for training, as such statistics would be sparse in a small dataset setting.
 
 % subsection baseline (end)
 \subsection{Feature Contribution} % (fold)
@@ -293,7 +300,7 @@ Testing & B3 & 100.000 & 69.380 & 81.922 \\
 \end{table}
 % paragraph affiliation_feature (end)
 
-\paragraph{Venue} % (fold)
+\paragraph{Venue Feature} % (fold)
 \label{par:venue}
 JAIPING... talk about venue feature here. Doesn't work. Why? histograms?! Tables are below!
 
@@ -313,19 +320,68 @@ Testing & B3 & 94.595 & 65.701 & 77.544 \\
 
 \paragraph{Coauthor feature} % (fold)
 \label{par:coauthor_feature}
-The coauthor feature is, like the affiliation feature, a high precision one. It is often the case that our assumption is true, authors are likely to publish with author publish is groups that are connected. The trend is so strong, that upon finding a publication pair with a high connected score that was marked as not the same person, it turned out to be an annotation error. 
-\begin{figure}%
+The coauthor feature is, like the affiliation feature, a high precision one. It is often the case that our assumption is true, authors are likely to publish with author publish is groups that are connected. The trend is so strong, that upon finding a publication pair with a high connected score that was marked as not the same person, it turned out to be an annotation error. However, our assumption can often fail, as many times people coauthor with a somebody disjointed from their immediate research community, for example in interdiciplinary research, or when advisors publish a small number of papers with one of their students. This makes the coauthor feature a high precision, but low recall one. This trend can be seen in the two histograms in figure \ref{fig:3figs}. The histogram over pairs of that are matched have many perfect connected score wheras in the false case, there are almost none. 
+
+Coauthor feature contribution can be seen in table \ref{tab:coauthor} Coauthor features seem to work well on our testing set, but have low results on our training set. This may be due to large blocking sizes in our training set, which will effect the transitive closure. Working on better blocking methods for cases with identical names should help our training performance.
+
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l || l | r r r}
+ & & Precision & Recall & F1 \\ \hline
+Training & B3 & 41.985 & 85.405 & 56.295 \\
+ & MUC & 82.946 & 88.430 & 85.600\\ \hline
+Testing & B3 & 95.413 & 91.892 & 93.619 \\
+ & MUC & 93.939 & 83.784 & 88.571 \\
+\end{tabular}
+\caption{Coauthor feature contribution}
+\label{tab:coauthor}
+\end{table}
+
+
+\begin{figure}[ht!]%
 \centering 
 \subfigure[True Pairs.]{\includegraphics[scale=0.3]{trueHistogram.png}
 }\qquad 
 \subfigure[False Pairs.]{\includegraphics[scale=0.3]{falseHistogram.png}
 }\\ 
-\caption{Histograms for connected feature.} \label{3figs}
+\caption{Histograms for connected feature.} 
+\label{fig:3figs}
 \end{figure}
-
-
 % paragraph coauthor_feature (end)
 % subsection feature_contribution (end)
+
+\subsection{Final Evaluation} % (fold)
+\label{sub:final_evaluation}
+Table \ref{tab:all} contain evaluation with all features enabled. Since venue features were weak, we evaluated also with only affiliation and coauthor features, which can be seen in table \ref{tab:some}. Again, the training results are very low, and better blocking methods should increase the results. 
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l || l | r r r}
+ & & Precision & Recall & F1 \\ \hline
+Training & B3 & 18.307 & 97.381 & 30.820 \\
+ & MUC & 79.000 & 97.934 & 87.454\\ \hline
+Testing & B3 & 85.818 & 96.622 & 90.900 \\
+ & MUC & 85.366 & 94.595 & 89.744 \\
+\end{tabular}
+\caption{Final evaluation with venue}
+\label{tab:all}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{l || l | r r r}
+ & & Precision & Recall & F1 \\ \hline
+Training & B3 & 37.675 & 92.109 & 53.476 \\
+ & MUC & 83.729 & 94.628 & 88.846\\ \hline
+Testing & B3 & 95.413 & 95.270 & 95.341\\
+ & MUC & 94.444 & 91.892 & 93.151 \\
+\end{tabular}
+\caption{Final evaluation with only affiliaition and coauthor}
+\label{tab:some}
+\end{table}
+
+% subsection final_evaluation (end)
 % section experiments (end)
 
 
