@@ -8,6 +8,7 @@ object LoadDBLPCoref {
     classOf[org.postgresql.Driver]
     val db = DriverManager.getConnection("jdbc:postgresql://localhost/dblp","postgres","")
     val st = db.createStatement
+    var year = 0
 
     def getFields(pubkey : String) : Seq[Field] = {
     	var field = ""
@@ -30,6 +31,7 @@ object LoadDBLPCoref {
     			authors += res.getString(1).toString +","
     			title = res.getString(2)
     			venue = res.getString(3)
+                year = res.getInt(4)
     		}
     		if(title == "") println("Not found: " + pubkey)
     		Array[Field](new Title(title), new CoAuthors(authors.init), new Venue(venue))
@@ -65,7 +67,7 @@ object LoadDBLPCoref {
 				if(split.length > 1) {
 					val fields = if(split.length > 2) (getFields(split(0)) ++ Array[Field](new Affiliation(split(2)))) else getFields(split(0))
 					if(fields.length > 2) {
-						val pub = Publication.fromFields(fields, block)
+						val pub = Publication.fromFields(fields, block, year)
             pub.pubkey = split(0)
 						pub.attr += new ClusterId(split(1).toInt,split(1).toInt)
 						publications += pub

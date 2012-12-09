@@ -28,7 +28,7 @@ class Publication(val title : Title, val coAuthors :  CoAuthors, val venue : Ven
 }
 
 object Publication {
-	def fromFields(fields : Seq[Field], block : String) : Publication = {
+	def fromFields(fields : Seq[Field], block : String, year : Int) : Publication = {
 		var title : Title = null
 		var venue : Venue = null
 		var affil : Affiliation = null
@@ -46,7 +46,7 @@ object Publication {
 			}
 		}
 		if(affil == null) affil = new Affiliation("")
-		new Publication(title, coaut, venue, affil, block)
+		new Publication(title, coaut, venue, affil, block, year)
 	}
 }
 
@@ -73,6 +73,7 @@ object TitleFeaturesDomain extends CategoricalTensorDomain[String]
 object CoAuthorsFeaturesDomain extends CategoricalTensorDomain[String]
 object AffiliationFeaturesDomain extends CategoricalTensorDomain[String]
 object VenueFeaturesDomain extends CategoricalTensorDomain[String]
+object TemporalFeaturesDomain extends CategoricalTensorDomain[String]
 
 abstract class AuthorFeatures(val field : FieldPair) extends BinaryFeatureVectorVariable[String] {
   def domain : CategoricalTensorDomain[String] 
@@ -89,11 +90,14 @@ class TitleFeatures(val field : Title) extends BinaryFeatureVectorVariable[Strin
 class CoAuthorsFeatures(field : FieldPair) extends AuthorFeatures(field) {
 	def domain = CoAuthorsFeaturesDomain
 }
-class AffiliationFeatures(field : FieldPair) extends AuthorFeatures(field) {
+class AffiliationFeatures(val field : FieldPair) extends BinaryFeatureVectorVariable[String] {
 	def domain = AffiliationFeaturesDomain
 }
 class VenueFeatures(field : FieldPair) extends AuthorFeatures(field) {
 	def domain = VenueFeaturesDomain
+}
+class TemporalFeatures(val pair : Pair) extends BinaryFeatureVectorVariable[String] {
+	def domain = TemporalFeaturesDomain
 }
 
 class AuthorLinkModel extends CombinedModel {
