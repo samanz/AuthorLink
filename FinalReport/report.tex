@@ -30,7 +30,7 @@
 \usepackage{graphicx}
 \fi
 
-%\usepackage{todonotes}
+\usepackage{todonotes}
 
 \setlength{\marginparwidth}{2cm}
 
@@ -65,14 +65,14 @@ Similarity metrics are important for classification as they provide information 
 
 Various numbers of people have attempted to build classifiers using graphical models that include complex dependencies. For example, ``Multi-Relational Record Linkage'' \cite{Domingos04multi} models the record linking problem as a conditional random field which improved F1 performance on a publication deduplication task. In this CRF model, each pair of publication records has a binary latent variable to model whether the records are duplicates.  The observations are modeled using similarity functions.  ``Information nodes'' connect the binary duplication variables and the observation nodes which represent whether the fields of the publication in two records match.
 
-``A Conditional Model of Deduplication for Multi-Type Relational Data'' \cite{Culotta05aconditional} extends the model previously stated by making the ``information nodes'' first-class variables in the model.  Binary latent variables that indicate record duplication (both paper and venue) are connected in the CRF to capture the interdependencies between the deduplication results of publications and venues.  For example, equivalent venue records that are merged should result in weights in CRF that also encourage merging of paper records.  To perform inference of finding optimal configurations of the latent variables, the authors convert the model into a weighted undirected graph to find a optimal partitioning.  Learning is approximated by maximizing the product of local marginals using limited-memory BFGS.  Their experiments show an up to a 30\% error reduction in venue deduplication and 20\% in paper deduplication.
+``A Conditional Model of Deduplication for Multi-Type Relational Data'' \cite{Culotta05aconditional} extends the model previously stated by making the ``information nodes'' first-class variables in the model.  Binary latent variables that indicate record duplication (both paper and venue) are connected in the CRF to capture the interdependencies between the deduplication results of publications and venues.  For example, equivalent venue records that are merged should result in weights in CRF that also encourage merging of paper records.  To perform inference of finding optimal configurations of the latent variables, the authors convert the model into a weighted undirected graph to find an optimal partitioning.  Learning is approximated by maximizing the product of local marginals using limited-memory BFGS.  Their experiments show an up to a 30\% error reduction in venue deduplication and 20\% in paper deduplication.
 % section related_work (end)
 
 \section{Annotation} % (fold)
 \label{sec:annotation}
-There is no publicly available resource that we can use to train and test our model.  Thus, we selected 13 highly ambiguous names (including for example, John Smith, Wang Chen) from the DBLP dataset, and annotated the true clusters.  The annotated dataset contains 715 publications from 193 authors.
+There is no publicly available resource that we can use to train and test our model.  Thus, we selected 13 highly ambiguous names (including for example, John Smith and Wang Chen) from the DBLP dataset, and annotated the true clusters.  The annotated dataset contains 715 publications from 193 authors.
 
-To illustrate the difficulty of the problem, we provide a few examples in Table \ref{tbl:examples}.  Notice that the ``Wei Chen'' pair of papers are both about visualization software tools in bioinformatics.  The two journals are also very closely related.  Although the authors' affiliations are different, given that the two papers are published 4 year apart, it is reasonable to assume that they are published by the same author who moved between institutions.  However, this turned out to be not the case.  In the second example of ``Wang Chen'', considering their author affiliations are different (the physical locations are far apart) and they are published in the same year, it's reasonable to assume that they are different, especially since this name is a highly ambiguous Chinese name.  Looking at the coauthors of the paper, and their affiliations, however, it is more likely that they are the same person, probably with multiple affiliations.
+To illustrate the difficulty of the problem, we provide a few examples in Table \ref{tbl:examples}.  Notice that the ``Wei Chen'' pair of papers are both about visualization software tools in bioinformatics.  The two journals are also very closely related.  Although the authors' affiliations are different, given that the two papers are published 4 year apart, it is reasonable to assume that they are published by the same author who moved between institutions.  However, this turned out to be not the case.  In the second example of ``Wang Chen'', considering their author affiliations are different (the physical locations are far apart) and they are published in the same year, it's reasonable to assume that they are different, especially since this name is a highly common and ambiguous in China.  Looking at the coauthors of the paper, and their affiliations, however, it is more likely that they are the same person, probably with multiple affiliations.
 \begin{table*}
   \centering
   \begin{tabular}{l|p{4cm}|l|l|p{4cm}}
@@ -86,7 +86,7 @@ To illustrate the difficulty of the problem, we provide a few examples in Table 
   \label{tbl:examples}
 \end{table*}
 
-We also manually filled in missing author affiliation information from the paper for our affiliation similarity features.  The affiliation information is a highly indicative feature.  However, it is not easy to automatically collect.  Different journals and conferences have different formatting standards.  Online academic publication repositories such as ACM and IEEE often contain errors in their extracted affiliation information.  When the actual publication is not available to download, it is even harder to annotate its authors' affiliations.  We had to rely on other sources, such as the author's home page or CV.  For example, one paper by John B. Smith published in 1974 is listed in DBLP, but the paper is not available online.  To determine his affiliation at the time of publication, we searched the other more recent publications on his DBLP page to find out his home page.  This 1974 paper was listed in his CV, through which we could determine his affiliation.
+We also manually filled in missing author affiliation information from the paper for our affiliation similarity features.  The affiliation information is a highly indicative feature.  However, it is not easy to automatically collect.  Different journals and conferences have different formatting standards.  It is also sometimes embedded in a short biographical text.  Online academic publication repositories such as ACM and IEEE often contain errors in their extracted affiliation information.  When the actual publication is not available to download, it is even harder to annotate its authors' affiliations.  We had to rely on other sources, such as the author's home page or CV.  For example, one paper by John B. Smith published in 1974 is listed in DBLP, but the paper is not available online.  To determine his affiliation at the time of publication, we searched the other more recent publications on his DBLP page to find out his home page.  This 1974 paper was listed in his CV, through which we could determine his affiliation.
 
 % section annotation (end)
 
@@ -101,11 +101,11 @@ $$\phi_c(x_c,y_c)=\exp\left(\sum_k \lambda_k f_k(x_c,y_c)\right).$$
 
 The model parameters $\{\lambda_k\}$ are learned from training data by
 maximum likelihood estimation.  In a CRF model, the log likelihood
-function is optimized using numerical optimization methods, such as
+function is optimized using numerical optimization methods,\todo{what did we actually use?} such as
 limited-memory BFGS or conjugate gradient method.
 
 Inference corresponds to finding the optimal assignments to the $Y$
-variables such that $p(y|x)$ is maximized.  Belief propagation is an
+variables such that $p(y|x)$ is maximized. \todo{what did we use?}  Belief propagation is an
 exact inference algorithm on tree-structured models.  Approximate
 algorithms on models with cycles include loopy belief propagation and
 MCMC methods.
@@ -170,14 +170,17 @@ same canopy.  Canopies are soft clusters that can have overlapping
 author mentions.  This approach can significantly reduce the number of
 pairs we need to compare, and the soft nature of the clusters help
 mitigate the problem that the clustering algorithm may have
-inaccurately partitioned the data set.
+inaccurately partitioned the data set.  Our canopies are defined as
+author mentions that have the same first and last name.  However,
+mentions that have different middle initials are not included in the
+same canopy. \todo{change to simple blocking?}
 
 
 \paragraph{Similarity Features} % (fold)
 \label{par:similarity_features}
 In order to perform classification we will make use of various similarity and compatibility metrics. One useful metric is string similarity. Simple Levenstein edit distance often works poorly in many of the applications in this domain such as name comparison, since names are often represented in different formats, with the ordering switched, abbreviated etc. Hybrid methods, which combine string-edit distance with token based methods, often are the best performing distance metric in similar tasks \cite{cohen2003comparison}. One such metric is SoftTFIDF. SoftTFIDF works like TFIDF, but on similar tokens instead of just matching tokens. It uses the Jaro-Winkler metric as the similarity metric for tokens. 
 
-The Jaro similarity metric for $s$ and $t$ given $s= s_1,s_2,s_3...$ and $t= t_1,t_2,t_3...$ defines a match of $s_i$ to a character $t_j$ if $s_i=t_j$ and j is $\frac{min(s,t)}{2} < |i-j|$. Define $s'$ as the characters that match in $s$ and $t'$ are the characters that match in t. Additionaly, define $T$ as half the number of elements that are not exactly matched in position and character in $s$ and in $t$ and $P$ as the maxiumum of the longest common prefix of $s$ and $t$ or 4. Jaro is then defined as:
+The Jaro similarity metric for $s$ and $t$ given $s= s_1,s_2,s_3...$ and $t= t_1,t_2,t_3...$ defines a match of $s_i$ to a character $t_j$ if $s_i=t_j$ and j\todo{what is j?} is $\frac{min(s,t)}{2} < |i-j|$. Define $s'$ as the characters that match in $s$ and $t'$ as the characters that match in t. Additionally, define $T$ as half the number of elements that are not exactly matched in position and character in $s$ and in $t$ and $P$ as the maximum of the longest common prefix of $s$ and $t$ or 4. Jaro is then defined as:
 \begin{center}
 \[
 	JARO(s,t) = \frac{1}{3}\left(\frac{|s'|}{|s|}+\frac{|t'|}{|t|}+\frac{|s'|-T}{|s'|}\right)
@@ -193,7 +196,7 @@ and Jaro-Winkler is defined as:
 
 For SoftTFIDF we need a function $CLOSE(\theta; s; s)$ which is defined as the set of words such that there is some $v \in t$ in which $dist(w; v) > \theta$. SoftTFIDF modifies regular cosine similarity by summing over all words in $CLOSE(\theta; s; t)$ the product of regular TFIDF of $s_w$, $t_w$, and $dist(w;t)$. Jaro-Winkler SoftTFIDF is implemented by using Jaro-Winkler as the distance function.
 
-Author name and affiliation similarity features can be derived from these string similarity functions. For other fields, more involved similarity features are necessary. Such fields include publication name, venue compatibility, and coauthorship compatibility.  For coauthorship compatibility we intend to make use of coauthorship graphs. An example coauthorship graph is displayed in Figure \ref{fig:coauthor}. Given an undirected graph $G=(N \cup M,E)$ where $M$ are the entity mentions of a publication, $N$ are the entities assumed to be correctly disambugated based on identical string name, each $e \in E$ implies coauthorship between the entities. The edges between the mentions being classified are coauthor mentions in the publication. There cannot be any edges between the two mentions. Our goal with this similarity metric is to determine the connectiveness of the two publication's coauthors. We determine this score by counting how many entities can be reached from both mentions. In order to prevent ambugious authors from connecting people who have simply coauthored with two authors with the same name we threshold the authors that we search for coauthors with to have less than 200 total authors they have coauthored a paper with. If $a$ is the number of coauthors of the first publication, $b$ is the number of coauthors of the second publication, and $c$ is the number of entities reachable from both mentions, our connected score is $\frac{min(c,max(a,b))}{max(a,v)}$. One example graph with only contributing entites shown can be seen in figure \ref{fig:chen}.
+Affiliation similarity features can be derived from these string similarity functions. For other fields, more involved similarity features are necessary. Such fields include publication name, venue compatibility, and coauthorship compatibility.  For coauthorship compatibility we make use of coauthorship graphs. An example coauthorship graph is displayed in Figure \ref{fig:coauthor}. Given an undirected graph $G=(N \cup M,E)$ where $M$ are the entity mentions of a publication, $N$ are the entities assumed to be correctly disambiguated based on identical string name, each $e \in E$ implies coauthorship between the entities. The edges between the mentions being classified are coauthor mentions in the publication. There cannot be any edges between the two mentions. Our goal with this similarity metric is to determine the connectiveness of the two publication's coauthors. We determine this score by counting how many entities can be reached from both mentions. \todo{I couldn't quite parse this sentence}In order to prevent ambiguous authors from connecting people who have simply coauthored with two authors with the same name we threshold the authors that we search for coauthors with to have less than 200 total authors they have coauthored a paper with. If $a$ is the number of coauthors of the first publication, $b$ is the number of coauthors of the second publication, and $c$ is the number of entities reachable from both mentions, our connected score is $\frac{min(c,max(a,b))}{max(a,b)}$. One example graph with only contributing entities shown can be seen in figure \ref{fig:chen}.
 
 \begin{figure*}
 \centering
@@ -202,7 +205,7 @@ Author name and affiliation similarity features can be derived from these string
 \label{fig:chen}
 \end{figure*}
 
-The venue similarity features represent how closely related the two venues are.  Intuitively, if the two venues are both in the field of machine learning, for example, International Conference on Machine Learning (ICML) and Journal of Machine Learning Research (JMLR), we would expect a large number of authors who publish in both of the venues.  Conversely, if the fields are less related, such as IEEE International Conference on Computer Communications (IEEE INFOCOM) and the journal Bioinformatics, we would expect very few authors publishing in both of them, hence an indicator that the two authors are probably different persons with the same name.
+The venue similarity features represent how closely related the two venues are.  Intuitively, if the two venues are both in the field of machine learning, for example, International Conference on Machine Learning (ICML) and Journal of Machine Learning Research (JMLR), we would expect that a large number of authors publish in both of the venues.  Conversely, if the fields are less related, such as IEEE International Conference on Computer Communications (IEEE INFOCOM) and the journal Bioinformatics, we would expect very few authors publishing in both of them, hence an indicator that the two authors are probably different persons with the same name.
 
 In addition, the paper ``Linking Temporal Records'' \cite{DBLP:journals/fcsc/LiDMS12} describes additional information that can be added into similarity metrics for fields. These metrics add temporal information by using the realization that over time, the fact that two fields are similar or different matters less to the task at hand. An example of such a case is affiliation information in the task of author linking in papers. Intuitively, different affiliation information for authors matters more when the papers were published close together in time in comparison to when the papers where published farther apart in time. This information is represented as the probability of the affiliation attribute changes over a time interval. The disadvantage of this approach is that labeled data is needed to learn these values.  We will also use such similarity metrics in our framework, but will be adding them as features in a CRF rather than simply using a threshold on manually weighted similarities. This should allow for better weights as well as the ability for more expressiveness in defining dependencies in our model.
 % paragraph similarity_features (end)
@@ -252,7 +255,7 @@ coreference resolution also present multiple scores for this reason.
 \label{sec:experiments}
 \subsection{Baseline} % (fold)
 \label{sub:baseline}
-Here we compare the results of setting all classifier values to false and true. In table \ref{tab:alltrue} you can see the results for all true. By setting the classifier to all true, every block is classified to be in the same cluster. This results in a perfect recall, as all publications that should be clustered togather are. The much worse score for B3 compared to MUC speaks to the superroity of B3 as a metic. All false results are available in table \ref{tab:allfalse}. Here the precision is perfect, since every publication is clustered into a singular cluster, thus no two publication that should not be clustered are clustered.
+Here we compare the results of setting all classifier values to false and true. Table \ref{tab:alltrue} shows the results for all true classifications. By setting the classifier to all true, every block is classified to be in the same cluster. This results in a perfect recall, as all publications that should be clustered together are. The much worse score for B3 compared to MUC speaks to the superiority of B3 as a metric. All false results are available in table \ref{tab:allfalse}. Here the precision is perfect, since every publication is clustered into a singular cluster, thus no two publication that should not be clustered are clustered.
 
 \begin{table}[ht]
 \centering
@@ -263,7 +266,7 @@ Training & B3 & 6.812 & 100.000 & 12.755 \\
 Testing & B3 & 6.730 & 100.000 & 12.612 \\
  & MUC & 70.440 & 100.000 & 82.657 \\
 \end{tabular}
-\caption{All classifier values set to all true}
+\caption{All classifier predictions set to all true}
 \label{tab:alltrue}
 \end{table}
 
@@ -276,18 +279,18 @@ Training & B3 & 100.000 & 24.493 & 39.348 \\
 Testing & B3 & 100.000 & 29.890 & 46.024 \\
  & MUC & 100.000 & 0.000 & 0.000 \\
 \end{tabular}
-\caption{All classifier values set to all false}
+\caption{All classifier predictions set to all false}
 \label{tab:allfalse}
 \end{table}
 
-In order to determine the contribution of each feature, we ran the classifier using only a subset of the features. Title features ended up being too sparse to have any contribution, and as such are left of the discussion. Temporal features also did not have any additional contribution when added in. This effect is probably due to the small dataset used for training, as such statistics would be sparse in a small dataset setting.
+In order to determine the contribution of each feature, we ran the classifier using only a subset of the features. Title features ended up being too sparse to have any contribution, and as such are left out of the discussion. Temporal features also did not have any additional contribution when added in. This effect is probably due to the small dataset used for training, as such statistics would be sparse in a small dataset setting.
 
 % subsection baseline (end)
 \subsection{Feature Contribution} % (fold)
 \label{sub:feature_contribution}
 \paragraph{Affiliation Feature} % (fold)
 \label{par:affiliation_feature}
-The affiliation feature set contains three discrete features. One for exact matching of the string, above a Jaro-Winker TFIDF threshold, and below the threshold. To see the advantages of using not exact string matching, we also compared just the exact string match feature to the complete feature set. The results for affiliation with just exact matchings are in table \ref{tab:exact}, and for with non-exact string matching in \ref{tab:aff}. Using non-exact string matching here improves B3 by a large margin. This is because affiliation as extracted does not always have the same format, even when referring to the same institution.
+The affiliation feature set contains three discrete features. One for exact matching of the string, above a Jaro-Winker TFIDF threshold, and below the threshold. To see the advantages of using not exact string matching, we also compared just the exact string match feature to the complete feature set. The results for affiliation with just exact matchings are in table \ref{tab:exact}, and with non-exact string matching in \ref{tab:aff}. Using non-exact string matching here improves B3 by a large margin. This is because affiliation as extracted does not always have the same format, even when referring to the same institution.
 
 \begin{table}[ht]
 \centering
@@ -319,7 +322,7 @@ Testing & B3 & 100.000 & 69.380 & 81.922 \\
 
 \paragraph{Venue Feature} % (fold)
 \label{par:venue}
-The venue feature indicates the probability that for any given author, he/she publishes in both venues.  This feature serves as a proxy to how compatible two venues are, as the more authors publish in the two venues, the more related they are.  We collected the statistics from DBLP of the number of authors that published in each pair of venues that appear in our dataset.  Figure \ref{fig:venue} shows the number of venue pairs that a particular number of authors published in.  The results using only this features is shown in Table \ref{tab:venue}.  The performance is not as good as we expected.  This is possibly in part because although our general intuition that people are less likely to publish in different fields is true, the fact that ambiguous authors in DBLP skew the distribution of our statistics, and in part the distribution of the positive and negative examples are quite similar.  Figure \ref{fig:venuedataset} shows the distributions of the frequencies of venue pairs for both the positive and negative pairs in our dataset.  Note that since the ratio of negative examples to positive examples is over 23 in our dataset, there is much variance in the distribution for the true examples.
+The venue feature indicates the probability that for any given author, he/she publishes in both venues.  This feature serves as a proxy to how compatible two venues are, as the more authors publish in the two venues, the more related they are.  We collected the statistics from DBLP of the number of authors that published in each pair of venues that appear in our dataset.  Figure \ref{fig:venue} shows the number of venue pairs that a particular number of authors published in.  The results using only this features is shown in Table \ref{tab:venue}.  The performance is not as good as we expected.  This is possibly in part because although our general intuition that people are less likely to publish in different fields is true, the fact that ambiguous authors in DBLP skew the distribution of our statistics.  The distribution of the this feature value for the positive and negative examples in our dataset are also quite similar is another reason that this feature was not powerful.  Figure \ref{fig:venuedataset} shows the distributions of the frequencies of venue pairs for both the positive and negative pairs in our dataset.  Note that since the ratio of negative examples to positive examples is over 23 in our dataset, there is much variance in the distribution for the true examples.
 \begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{venuepair}
@@ -349,9 +352,9 @@ Testing & B3 & 94.595 & 65.701 & 77.544 \\
 
 \paragraph{Coauthor feature} % (fold)
 \label{par:coauthor_feature}
-The coauthor feature is, like the affiliation feature, a high precision one. It is often the case that our assumption is true, authors are likely to publish with author publish is groups that are connected. The trend is so strong, that upon finding a publication pair with a high connected score that was marked as not the same person, it turned out to be an annotation error. However, our assumption can often fail, as many times people coauthor with a somebody disjointed from their immediate research community, for example in interdiciplinary research, or when advisors publish a small number of papers with one of their students. This makes the coauthor feature a high precision, but low recall one. This trend can be seen in the two histograms in figure \ref{fig:3figs}. The histogram over pairs of that are matched have many perfect connected score wheras in the false case, there are almost none. 
+The coauthor feature is, like the affiliation feature, a high precision one.  \todo{??}It is often the case that our assumption is true, authors are likely to publish with author publish is groups that are connected. The trend is so strong, that upon finding a publication pair with a high connected score that was marked as not the same person, it turned out to be an annotation error. However, our assumption can often fail, as many times people coauthor with somebody disjointed from their immediate research community, for example in interdisciplinary research, or when advisers publish a small number of papers with one of their students. This makes the coauthor feature a high precision, but low recall one. This trend can be seen in the two histograms in figure \ref{fig:3figs}. The histogram over pairs that are matched have many perfect connected score whereas in the false case, there are almost none. 
 
-Coauthor feature contribution can be seen in table \ref{tab:coauthor}. Coauthor features seem to work well on our testing set, but have low results on our training set. This may be due to large block sizes in our training set due to the large amounts of papers whose authors have the same exact name, which will effect the transitive closure. Working on better blocking methods for cases with identical names should help our training performance.
+Coauthor feature contribution can be seen in Table \ref{tab:coauthor}. Coauthor features seem to work well on our testing set, but have low results on our training set. This may be due to large block sizes in our training set because of the large amounts of papers whose authors have the same exact name, which will affect the transitive closure. Working on better blocking methods for cases with identical names should help our training performance.
 
 
 \begin{table}[ht]
@@ -382,7 +385,7 @@ Testing & B3 & 95.413 & 91.892 & 93.619 \\
 
 \subsection{Final Evaluation} % (fold)
 \label{sub:final_evaluation}
-Table \ref{tab:all} contain evaluation with all features enabled. Since venue features were weak, we evaluated also with only affiliation and coauthor features, which can be seen in table \ref{tab:some}. Again, the training results are very low, and better blocking methods should increase the results. 
+Table \ref{tab:all} contains evaluation with all features enabled. Since venue features were weak, we evaluated also with only affiliation and coauthor features, which can be seen in table \ref{tab:some}. Again, the training results are very low, and better blocking methods should increase the results. 
 
 \begin{table}[ht]
 \centering
@@ -406,7 +409,7 @@ Training & B3 & 37.675 & 92.109 & 53.476 \\
 Testing & B3 & 95.413 & 95.270 & 95.341\\
  & MUC & 94.444 & 91.892 & 93.151 \\
 \end{tabular}
-\caption{Final evaluation with only affiliaition and coauthor}
+\caption{Final evaluation with only affiliation and coauthor}
 \label{tab:some}
 \end{table}
 
